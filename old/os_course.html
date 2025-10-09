@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operating Systems Course</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: linear-gradient(135deg, #181c2f 0%, #23243a 60%, #1a1a2e 100%); color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; margin: 0; }
+    .course-header { font-size: 2.7rem; font-weight: bold; margin-top: 48px; text-align: center; letter-spacing: 2px; color: #e100ff; text-shadow: 0 2px 16px #000, 0 0px 2px #00d2ff; }
+    .course-desc { font-size: 1.25rem; margin: 22px auto 38px auto; max-width: 700px; text-align: center; color: #e0e0e0; background: rgba(34,36,58,0.7); border-radius: 12px; padding: 18px 24px; box-shadow: 0 2px 18px rgba(0,0,0,0.18); }
+    .lesson-list { display: flex; flex-direction: column; align-items: center; gap: 32px; margin-top: 38px; }
+    .lesson-block { background: linear-gradient(120deg, #23243a 60%, #1a1a2e 100%); border-radius: 18px; padding: 32px 28px; max-width: 700px; width: 100%; box-shadow: 0 6px 32px rgba(0,0,0,0.22); color: #e0e0e0; position: relative; border: 1px solid #222; transition: box-shadow 0.2s; }
+    .lesson-block:hover { box-shadow: 0 12px 48px #e100ff44; border-color: #e100ff; }
+    .lesson-title { font-size: 1.5rem; color: #e100ff; margin-bottom: 12px; font-weight: 700; letter-spacing: 1px; }
+    .section-title { font-size: 1.2rem; color: #00d2ff; margin-bottom: 8px; font-weight: 600; }
+    .back-btn { position: fixed; top: 24px; left: 24px; background: #23243a; color: #e100ff; border: 1px solid #e100ff; border-radius: 8px; padding: 10px 18px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s, color 0.2s; }
+    .back-btn:hover { background: #e100ff; color: #fff; }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="window.location.href='learn.html'">← Back to Courses</button>
+  <div class="course-header">Operating Systems</div>
+  <div class="course-desc">Discover how operating systems manage hardware, software, and resources.</div>
+  <div class="lesson-list">
+    <div class="lesson-block"><div class="lesson-title">What is an OS?</div><div class="section-title">Core Functions</div><p>An operating system (OS) is the software that manages hardware and software resources. It provides a user interface, controls memory, and schedules tasks.</p></div>
+    <div class="lesson-block"><div class="lesson-title">The Kernel</div><div class="section-title">System Core</div><p>The kernel is the heart of the OS, handling system calls, process management, and hardware interaction.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Processes & Threads</div><div class="section-title">Multitasking</div><p>Processes are running programs; threads are units of execution within processes. OS manages them for multitasking.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Memory Management</div><div class="section-title">RAM & Virtual Memory</div><p>OS allocates RAM and uses virtual memory to extend capacity, preventing crashes and slowdowns.</p></div>
+    <div class="lesson-block"><div class="lesson-title">File Systems</div><div class="section-title">Storing Data</div><p>File systems organize data on disks. Examples: NTFS, FAT32, ext4. OS provides access and security.</p></div>
+    <div class="lesson-block"><div class="lesson-title">User Interfaces</div><div class="section-title">CLI & GUI</div><p>OS offers command-line (CLI) and graphical (GUI) interfaces for user interaction.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Device Drivers</div><div class="section-title">Hardware Control</div><p>Drivers let OS communicate with hardware like printers, graphics cards, and USB devices.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Security & Permissions</div><div class="section-title">Protecting Data</div><p>OS enforces user permissions and security policies to protect files and processes.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Popular OS Examples</div><div class="section-title">Windows, Linux, macOS</div><p>Each OS has strengths: Windows for compatibility, Linux for flexibility, macOS for design.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Virtualization</div><div class="section-title">Running Multiple OS</div><p>Virtualization lets you run multiple OS on one machine, useful for testing and cloud computing.</p></div>
+  </div>
+  <script>
+    // Expanded info for each block
+    const expandedInfo = {
+      'What is an OS?': `<h2>What is an OS?</h2><p>The OS acts as a bridge between you and your computer's hardware. It manages resources, provides security, and makes computing user-friendly. Without an OS, you'd need to control hardware directly!</p>`,
+      'The Kernel': `<h2>The Kernel</h2><p>Kernels come in types: monolithic (all-in-one) and microkernel (modular). They handle low-level tasks and ensure stability. Linux and Windows use different kernel designs.</p>`,
+      'Processes & Threads': `<h2>Processes & Threads</h2><p>Multitasking lets you browse the web while listening to music. Threads make apps faster and more responsive. OS schedules them for efficiency.</p>`,
+      'Memory Management': `<h2>Memory Management</h2><p>Virtual memory uses disk space to extend RAM. OS prevents programs from accessing each other's memory, keeping your data safe.</p>`,
+      'File Systems': `<h2>File Systems</h2><p>File systems organize files, folders, and permissions. Modern OS support multiple file systems for flexibility and compatibility.</p>`,
+      'User Interfaces': `<h2>User Interfaces</h2><p>CLI is powerful for experts; GUI is user-friendly for everyone. OS like Linux offer both. Customization is key!</p>`,
+      'Device Drivers': `<h2>Device Drivers</h2><p>Drivers are updated for new hardware. OS automatically installs drivers for plug-and-play devices. Outdated drivers can cause issues.</p>`,
+      'Security & Permissions': `<h2>Security & Permissions</h2><p>OS uses user accounts, passwords, and encryption to protect data. Admin rights control access to system settings.</p>`,
+      'Popular OS Examples': `<h2>Popular OS Examples</h2><p>Windows dominates desktops, Linux powers servers, macOS is popular for creative work. Each has a unique ecosystem.</p>`,
+      'Virtualization': `<h2>Virtualization</h2><p>Virtual machines let you run Windows on a Mac or Linux on Windows. Cloud providers use virtualization for scalability.</p>`
+    };
+    // Create overlay for expanded info
+    function showExpanded(title) {
+      let overlay = document.getElementById('expanded-overlay');
+      if(!overlay){
+        overlay = document.createElement('div');
+        overlay.id = 'expanded-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.background = 'rgba(24,28,47,0.98)';
+        overlay.style.color = '#e0e0e0';
+        overlay.style.zIndex = 9999;
+        overlay.style.display = 'flex';
+        overlay.style.flexDirection = 'column';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.padding = '40px 16px';
+        overlay.style.fontSize = '1.15rem';
+        overlay.style.overflowY = 'auto';
+        document.body.appendChild(overlay);
+      }
+      overlay.innerHTML = `<div style='max-width:700px;background:#23243a;border-radius:18px;box-shadow:0 8px 48px #e100ff44;padding:38px 32px;position:relative;'>${expandedInfo[title] || '<h2>More Info</h2><p>No details available.</p>'}<button onclick='document.getElementById("expanded-overlay").remove()' style='position:absolute;top:18px;right:18px;background:#e100ff;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:700;cursor:pointer;'>Close</button></div>`;
+    }
+    // Attach double-click listeners to lesson blocks
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.lesson-block').forEach(block => {
+        block.addEventListener('dblclick', function(){
+          const title = block.querySelector('.lesson-title')?.textContent.trim();
+          if(title) showExpanded(title);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

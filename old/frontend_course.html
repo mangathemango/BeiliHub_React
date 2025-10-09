@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Course</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: linear-gradient(135deg, #181c2f 0%, #23243a 60%, #1a1a2e 100%); color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; margin: 0; }
+    .course-header { font-size: 2.7rem; font-weight: bold; margin-top: 48px; text-align: center; letter-spacing: 2px; color: #00d2ff; text-shadow: 0 2px 16px #000, 0 0px 2px #e100ff; }
+    .course-desc { font-size: 1.25rem; margin: 22px auto 38px auto; max-width: 700px; text-align: center; color: #e0e0e0; background: rgba(34,36,58,0.7); border-radius: 12px; padding: 18px 24px; box-shadow: 0 2px 18px rgba(0,0,0,0.18); }
+    .lesson-list { display: flex; flex-direction: column; align-items: center; gap: 32px; margin-top: 38px; }
+    .lesson-block { background: linear-gradient(120deg, #23243a 60%, #1a1a2e 100%); border-radius: 18px; padding: 32px 28px; max-width: 700px; width: 100%; box-shadow: 0 6px 32px rgba(0,0,0,0.22); color: #e0e0e0; position: relative; border: 1px solid #222; transition: box-shadow 0.2s; }
+    .lesson-block:hover { box-shadow: 0 12px 48px #00d2ff44; border-color: #00d2ff; }
+    .lesson-title { font-size: 1.5rem; color: #00d2ff; margin-bottom: 12px; font-weight: 700; letter-spacing: 1px; }
+    .section-title { font-size: 1.2rem; color: #e100ff; margin-bottom: 8px; font-weight: 600; }
+    .back-btn { position: fixed; top: 24px; left: 24px; background: #23243a; color: #00d2ff; border: 1px solid #00d2ff; border-radius: 8px; padding: 10px 18px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s, color 0.2s; }
+    .back-btn:hover { background: #00d2ff; color: #fff; }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="window.location.href='learn.html'">← Back to Courses</button>
+  <div class="course-header">Frontend</div>
+  <div class="course-desc">Master the art of building beautiful, interactive user interfaces for the web.</div>
+  <div class="lesson-list">
+    <div class="lesson-block"><div class="lesson-title">HTML Basics</div><div class="section-title">Structure of Web Pages</div><p>HTML uses tags to organize content: headings, paragraphs, links, images, and more.</p></div>
+    <div class="lesson-block"><div class="lesson-title">CSS Fundamentals</div><div class="section-title">Styling & Layout</div><p>CSS controls colors, fonts, spacing, and responsive design. It makes websites look great on any device.</p></div>
+    <div class="lesson-block"><div class="lesson-title">JavaScript Essentials</div><div class="section-title">Interactivity</div><p>JavaScript adds dynamic behavior: animations, popups, form validation, and more.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Responsive Design</div><div class="section-title">Mobile First</div><p>Media queries and flexible layouts ensure your site works on phones, tablets, and desktops.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Web Accessibility</div><div class="section-title">Inclusive Design</div><p>Accessible sites work for everyone, including people with disabilities. Use semantic HTML and ARIA roles.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Frameworks & Libraries</div><div class="section-title">React, Vue, Angular</div><p>Modern frameworks speed up development and add powerful features.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Performance Optimization</div><div class="section-title">Fast Loading</div><p>Optimize images, code, and resources for quick page loads and smooth user experience.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Browser DevTools</div><div class="section-title">Debugging</div><p>DevTools help you inspect, debug, and improve your code directly in the browser.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Version Control</div><div class="section-title">Collaboration</div><p>Tools like Git help teams work together and track changes.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Deployment</div><div class="section-title">Going Live</div><p>Deploy your site to the web using services like Netlify, Vercel, or GitHub Pages.</p></div>
+  </div>
+  <script>
+    // Expanded info for each block
+    const expandedInfo = {
+      'HTML Basics': `<h2>HTML Basics</h2><p>HTML stands for HyperText Markup Language. It is the foundation of every web page. Semantic tags like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, and <code>&lt;footer&gt;</code> improve accessibility and SEO.</p>`,
+      'CSS Fundamentals': `<h2>CSS Fundamentals</h2><p>CSS lets you style elements, create layouts, and add animations. Flexbox and Grid are powerful tools for modern layouts.</p>`,
+      'JavaScript Essentials': `<h2>JavaScript Essentials</h2><p>JavaScript can manipulate the DOM, handle events, and fetch data from APIs. ES6 introduced features like arrow functions and modules.</p>`,
+      'Responsive Design': `<h2>Responsive Design</h2><p>Use <code>@media</code> queries to adapt your site to different screen sizes. Mobile-first design is a best practice.</p>`,
+      'Web Accessibility': `<h2>Web Accessibility</h2><p>Accessible sites use alt text for images, keyboard navigation, and clear color contrast. Test with screen readers for best results.</p>`,
+      'Frameworks & Libraries': `<h2>Frameworks & Libraries</h2><p>React uses components, Vue is easy to learn, Angular is powerful for large apps. Choose the right tool for your project.</p>`,
+      'Performance Optimization': `<h2>Performance Optimization</h2><p>Minify code, lazy-load images, and use caching to speed up your site. Lighthouse can audit performance.</p>`,
+      'Browser DevTools': `<h2>Browser DevTools</h2><p>DevTools let you inspect elements, debug JavaScript, and analyze network requests. Every browser has built-in tools.</p>`,
+      'Version Control': `<h2>Version Control</h2><p>Git tracks changes and enables collaboration. Platforms like GitHub and GitLab host repositories and manage issues.</p>`,
+      'Deployment': `<h2>Deployment</h2><p>Deploying means making your site public. Continuous deployment automates updates and keeps your site fresh.</p>`
+    };
+    // Create overlay for expanded info
+    function showExpanded(title) {
+      let overlay = document.getElementById('expanded-overlay');
+      if(!overlay){
+        overlay = document.createElement('div');
+        overlay.id = 'expanded-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.background = 'rgba(24,28,47,0.98)';
+        overlay.style.color = '#e0e0e0';
+        overlay.style.zIndex = 9999;
+        overlay.style.display = 'flex';
+        overlay.style.flexDirection = 'column';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.padding = '40px 16px';
+        overlay.style.fontSize = '1.15rem';
+        overlay.style.overflowY = 'auto';
+        document.body.appendChild(overlay);
+      }
+      overlay.innerHTML = `<div style='max-width:700px;background:#23243a;border-radius:18px;box-shadow:0 8px 48px #00d2ff44;padding:38px 32px;position:relative;'>${expandedInfo[title] || '<h2>More Info</h2><p>No details available.</p>'}<button onclick='document.getElementById("expanded-overlay").remove()' style='position:absolute;top:18px;right:18px;background:#00d2ff;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:700;cursor:pointer;'>Close</button></div>`;
+    }
+    // Attach double-click listeners to lesson blocks
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.lesson-block').forEach(block => {
+        block.addEventListener('dblclick', function(){
+          const title = block.querySelector('.lesson-title')?.textContent.trim();
+          if(title) showExpanded(title);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

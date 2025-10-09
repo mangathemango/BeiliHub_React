@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Course</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: linear-gradient(135deg, #181c2f 0%, #23243a 60%, #1a1a2e 100%); color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; margin: 0; }
+    .course-header { font-size: 2.7rem; font-weight: bold; margin-top: 48px; text-align: center; letter-spacing: 2px; color: #7f00ff; text-shadow: 0 2px 16px #000, 0 0px 2px #00d2ff; }
+    .course-desc { font-size: 1.25rem; margin: 22px auto 38px auto; max-width: 700px; text-align: center; color: #e0e0e0; background: rgba(34,36,58,0.7); border-radius: 12px; padding: 18px 24px; box-shadow: 0 2px 18px rgba(0,0,0,0.18); }
+    .lesson-list { display: flex; flex-direction: column; align-items: center; gap: 32px; margin-top: 38px; }
+    .lesson-block { background: linear-gradient(120deg, #23243a 60%, #1a1a2e 100%); border-radius: 18px; padding: 32px 28px; max-width: 700px; width: 100%; box-shadow: 0 6px 32px rgba(0,0,0,0.22); color: #e0e0e0; position: relative; border: 1px solid #222; transition: box-shadow 0.2s; }
+    .lesson-block:hover { box-shadow: 0 12px 48px #7f00ff44; border-color: #7f00ff; }
+    .lesson-title { font-size: 1.5rem; color: #7f00ff; margin-bottom: 12px; font-weight: 700; letter-spacing: 1px; }
+    .section-title { font-size: 1.2rem; color: #00d2ff; margin-bottom: 8px; font-weight: 600; }
+    .back-btn { position: fixed; top: 24px; left: 24px; background: #23243a; color: #7f00ff; border: 1px solid #7f00ff; border-radius: 8px; padding: 10px 18px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s, color 0.2s; }
+    .back-btn:hover { background: #7f00ff; color: #fff; }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="window.location.href='learn.html'">← Back to Courses</button>
+  <div class="course-header">Backend</div>
+  <div class="course-desc">Explore the server-side: databases, APIs, and logic powering modern apps.</div>
+  <div class="lesson-list">
+    <div class="lesson-block"><div class="lesson-title">Intro to Backend</div><div class="section-title">What is Backend?</div><p>Backend is the part of a web app that runs on servers, handles data, and powers business logic.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Programming Languages</div><div class="section-title">Python, Node.js, Java</div><p>Popular backend languages include Python, Node.js, Java, Ruby, and PHP.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Databases</div><div class="section-title">Storing Data</div><p>Databases like MySQL, PostgreSQL, and MongoDB store and organize data for apps.</p></div>
+    <div class="lesson-block"><div class="lesson-title">APIs</div><div class="section-title">Connecting Frontend & Backend</div><p>APIs (REST, GraphQL) let frontend and backend communicate and exchange data.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Authentication</div><div class="section-title">User Security</div><p>Authentication verifies user identity. Common methods: passwords, OAuth, biometrics.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Server Architecture</div><div class="section-title">Monolith vs Microservices</div><p>Monolithic apps are single units; microservices split logic into independent services.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Performance & Scaling</div><div class="section-title">Handling Traffic</div><p>Backend must handle many users, scale up, and stay fast. Load balancers and caching help.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Security</div><div class="section-title">Protecting Data</div><p>Backend secures data with encryption, validation, and access controls.</p></div>
+    <div class="lesson-block"><div class="lesson-title">DevOps & Deployment</div><div class="section-title">CI/CD</div><p>DevOps automates testing and deployment. CI/CD pipelines keep code updated and reliable.</p></div>
+    <div class="lesson-block"><div class="lesson-title">Cloud & Hosting</div><div class="section-title">Where Apps Live</div><p>Cloud platforms (AWS, Azure, GCP) host backend services and scale globally.</p></div>
+  </div>
+  <script>
+    // Expanded info for each block
+    const expandedInfo = {
+      'Intro to Backend': `<h2>Intro to Backend</h2><p>Backend is the engine of web apps. It processes requests, stores data, and ensures everything works behind the scenes.</p>`,
+      'Programming Languages': `<h2>Programming Languages</h2><p>Python is great for rapid development, Node.js for real-time apps, Java for enterprise. Each language has strengths for different projects.</p>`,
+      'Databases': `<h2>Databases</h2><p>Relational databases use tables and SQL; NoSQL databases are flexible and scale easily. Choose based on your app's needs.</p>`,
+      'APIs': `<h2>APIs</h2><p>REST uses HTTP methods (GET, POST, etc.), GraphQL lets clients request exactly what they need. APIs are the backbone of modern apps.</p>`,
+      'Authentication': `<h2>Authentication</h2><p>OAuth lets you sign in with Google or Facebook. Two-factor authentication adds security. Always hash passwords!</p>`,
+      'Server Architecture': `<h2>Server Architecture</h2><p>Microservices make apps easier to scale and update. Monoliths are simpler to start but harder to maintain as they grow.</p>`,
+      'Performance & Scaling': `<h2>Performance & Scaling</h2><p>Use caching, load balancing, and async processing to keep apps fast. Monitor performance with tools like New Relic.</p>`,
+      'Security': `<h2>Security</h2><p>Validate all input, use HTTPS, and encrypt sensitive data. Regularly update dependencies to avoid vulnerabilities.</p>`,
+      'DevOps & Deployment': `<h2>DevOps & Deployment</h2><p>CI/CD automates testing and deployment. Docker and Kubernetes help manage containers and scale apps.</p>`,
+      'Cloud & Hosting': `<h2>Cloud & Hosting</h2><p>Cloud providers offer scalable infrastructure, backups, and global reach. Serverless functions simplify deployment.</p>`
+    };
+    // Create overlay for expanded info
+    function showExpanded(title) {
+      let overlay = document.getElementById('expanded-overlay');
+      if(!overlay){
+        overlay = document.createElement('div');
+        overlay.id = 'expanded-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.background = 'rgba(24,28,47,0.98)';
+        overlay.style.color = '#e0e0e0';
+        overlay.style.zIndex = 9999;
+        overlay.style.display = 'flex';
+        overlay.style.flexDirection = 'column';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.padding = '40px 16px';
+        overlay.style.fontSize = '1.15rem';
+        overlay.style.overflowY = 'auto';
+        document.body.appendChild(overlay);
+      }
+      overlay.innerHTML = `<div style='max-width:700px;background:#23243a;border-radius:18px;box-shadow:0 8px 48px #7f00ff44;padding:38px 32px;position:relative;'>${expandedInfo[title] || '<h2>More Info</h2><p>No details available.</p>'}<button onclick='document.getElementById("expanded-overlay").remove()' style='position:absolute;top:18px;right:18px;background:#7f00ff;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:700;cursor:pointer;'>Close</button></div>`;
+    }
+    // Attach double-click listeners to lesson blocks
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.lesson-block').forEach(block => {
+        block.addEventListener('dblclick', function(){
+          const title = block.querySelector('.lesson-title')?.textContent.trim();
+          if(title) showExpanded(title);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

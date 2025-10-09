@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LearnFlow — Login</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-grid">
+      <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden><defs><linearGradient id="g5" x1="0" x2="1"><stop offset="0" stop-color="#FF8A00"/><stop offset="1" stop-color="#E52E71"/></linearGradient></defs><rect x="6" y="6" width="88" height="88" rx="18" fill="url(#g5)"/><text x="50" y="60" text-anchor="middle" font-size="42" font-weight="700" fill="#fff">L</text></svg><span>LearnFlow</span></a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn ghost" href="login.html">Log in</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container login-page">
+    <section class="auth-card">
+      <div class="left-panel">
+        <h2>Welcome back</h2>
+        <p class="muted">Sign in to access your courses, progress, and projects.</p>
+        <form id="loginForm">
+          <input id="lEmail" type="email" placeholder="Email" required>
+          <input id="lPass" type="password" placeholder="Password" required>
+          <div class="row small">
+            <label><input type="checkbox" id="remember"> Remember me</label>
+            <a href="#" class="muted">Forgot?</a>
+          </div>
+          <button class="btn primary" type="submit">Sign in</button>
+        </form>
+      </div>
+
+      <div class="right-panel">
+        <h3>New here?</h3>
+        <p>Create an account and start learning with a free trial.</p>
+        <a href="index.html" class="btn outline">Create account</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="brand-compact"><strong>LearnFlow</strong><div class="muted">© 2025</div></div>
+      <div class="links">
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="social muted">Safe learning for everyone</div>
+    </div>
+  </footer>
+</body>
+</html>

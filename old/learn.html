@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BeiliHub — Learn</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <style>
+    /* Subtle animated background only */
+    #subtle-bg {
+      position: fixed; top:0; left:0; width:100vw; height:100vh;
+      z-index: -1; pointer-events: none;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- Minimal Animated Background -->
+  <canvas id="subtle-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+
+  <!-- Use the same navbar as other pages -->
+  <header class="site-header">
+    <div class="container header-grid">
+      <a class="brand" href="index.html">
+        <!-- ...logo svg... -->
+        <span>BeiliHub</span>
+      </a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="learn.html" class="active">Learn</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <input id="search" class="search" placeholder="Search courses, topics..." aria-label="Search">
+        <a class="btn ghost" href="login.html">Log in</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container learn-page">
+    <!-- Motivational Quote -->
+    <div style="width:100%;text-align:center;margin:32px 0 18px 0;">
+      <blockquote style="font-size:1.3rem;color:#00d2ff;font-weight:600;background:rgba(34,36,58,0.7);padding:18px 32px;border-radius:12px;box-shadow:0 2px 18px #00d2ff22;max-width:600px;margin:0 auto;">
+        "Learning never exhausts the mind." – Leonardo da Vinci
+      </blockquote>
+    </div>
+    <div id="course-select" style="margin-bottom:32px;">
+      <h2 style="color:#fff;text-align:center;margin-bottom:18px;">Choose a Course</h2>
+      <div id="course-squares" style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+        <div class="course-square" data-course="networking" style="background:linear-gradient(135deg,#00d2ff,#7f00ff);color:#fff;padding:38px 32px;border-radius:18px;box-shadow:0 8px 30px #00d2ff33;cursor:pointer;min-width:180px;text-align:center;font-size:1.3rem;font-weight:700;transition:transform .18s;">
+          Networking
+          <div class="course-progress-bar" style="height:8px;width:100%;background:#23243a;border-radius:6px;margin:10px 0 0 0;overflow:hidden;position:relative;">
+            <div id="progress-networking" style="height:100%;width:0%;background:#00d2ff;border-radius:6px;transition:width .4s;"></div>
+            <span id="progress-label-networking" style="position:absolute;right:10px;top:-22px;font-size:0.95rem;color:#00d2ff;font-weight:600;">0%</span>
+          </div>
+          <button class="start-learning-btn" style="background:#00d2ff;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:700;margin-top:14px;cursor:pointer;">Start Learning</button>
+        </div>
+        <div class="course-square" data-course="os" style="background:linear-gradient(135deg,#e100ff,#ff8a00);color:#fff;padding:38px 32px;border-radius:18px;box-shadow:0 8px 30px #e100ff33;cursor:pointer;min-width:180px;text-align:center;font-size:1.3rem;font-weight:700;transition:transform .18s;">
+          Operating System
+          <div class="course-progress-bar" style="height:8px;width:100%;background:#23243a;border-radius:6px;margin:10px 0 0 0;overflow:hidden;position:relative;">
+            <div id="progress-os" style="height:100%;width:0%;background:#e100ff;border-radius:6px;transition:width .4s;"></div>
+            <span id="progress-label-os" style="position:absolute;right:10px;top:-22px;font-size:0.95rem;color:#e100ff;font-weight:600;">0%</span>
+          </div>
+          <button class="start-learning-btn" style="background:#e100ff;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:700;margin-top:14px;cursor:pointer;">Start Learning</button>
+        </div>
+        <div class="course-square" data-course="frontend" style="background:linear-gradient(135deg,#ff8a00,#00d2ff);color:#fff;padding:38px 32px;border-radius:18px;box-shadow:0 8px 30px #ff8a0033;cursor:pointer;min-width:180px;text-align:center;font-size:1.3rem;font-weight:700;transition:transform .18s;">
+          Frontend
+          <div class="course-progress-bar" style="height:8px;width:100%;background:#23243a;border-radius:6px;margin:10px 0 0 0;overflow:hidden;position:relative;">
+            <div id="progress-frontend" style="height:100%;width:0%;background:#ff8a00;border-radius:6px;transition:width .4s;"></div>
+            <span id="progress-label-frontend" style="position:absolute;right:10px;top:-22px;font-size:0.95rem;color:#ff8a00;font-weight:600;">0%</span>
+          </div>
+          <button class="start-learning-btn" style="background:#ff8a00;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:700;margin-top:14px;cursor:pointer;">Start Learning</button>
+        </div>
+        <div class="course-square" data-course="backend" style="background:linear-gradient(135deg,#7f00ff,#e100ff);color:#fff;padding:38px 32px;border-radius:18px;box-shadow:0 8px 30px #7f00ff33;cursor:pointer;min-width:180px;text-align:center;font-size:1.3rem;font-weight:700;transition:transform .18s;">
+          Backend
+          <div class="course-progress-bar" style="height:8px;width:100%;background:#23243a;border-radius:6px;margin:10px 0 0 0;overflow:hidden;position:relative;">
+            <div id="progress-backend" style="height:100%;width:0%;background:#7f00ff;border-radius:6px;transition:width .4s;"></div>
+            <span id="progress-label-backend" style="position:absolute;right:10px;top:-22px;font-size:0.95rem;color:#7f00ff;font-weight:600;">0%</span>
+          </div>
+          <button class="start-learning-btn" style="background:#7f00ff;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:700;margin-top:14px;cursor:pointer;">Start Learning</button>
+        </div>
+      </div>
+    </div>
+  <style>
+    .course-square {
+      transition: transform .18s, box-shadow .18s;
+    }
+    .course-square.expand {
+      /* Expansion animation styles only (no JS here) */
+    }
+  </style>
+    <script>
+      // Course and lesson data
+      const courses = {
+        networking: {
+          name: 'Networking',
+          lessons: [
+            { title: 'Intro to Networking', id: 'net1', content: `<h2>Intro to Networking</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>Networking connects computers and devices to share data. Key concepts include IP addresses, protocols, and routers.</p><ul><li><b>IP Address:</b> Unique identifier for a device.</li><li><b>Protocol:</b> Rules for communication (e.g., TCP/IP).</li><li><b>Router:</b> Device that forwards data between networks.</li></ul></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#00d2ff;'>Quiz</h3><div id='quiz_net1'><p>What does a router do?</p><button class='quiz-btn' onclick="quizAnswer('quiz_net1',true)">Forwards data between networks</button><button class='quiz-btn' onclick="quizAnswer('quiz_net1',false)">Stores web pages</button></div></div>` },
+            { title: 'Protocols', id: 'net2', content: `<h2>Protocols</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>Protocols are rules for communication. Common ones are <b>TCP</b> (reliable) and <b>UDP</b> (fast, less reliable).</p></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#00d2ff;'>Quiz</h3><div id='quiz_net2'><p>Which protocol is more reliable?</p><button class='quiz-btn' onclick="quizAnswer('quiz_net2',true)">TCP</button><button class='quiz-btn' onclick="quizAnswer('quiz_net2',false)">UDP</button></div></div>` },
+            { title: 'IP Addressing', id: 'net3', content: `<h2>IP Addressing</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>IP addresses identify devices. IPv4 uses numbers (e.g., 192.168.1.1), IPv6 uses hex (e.g., 2001:0db8::1).</p></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#00d2ff;'>Quiz</h3><div id='quiz_net3'><p>Which is a valid IPv4 address?</p><button class='quiz-btn' onclick="quizAnswer('quiz_net3',true)">192.168.1.1</button><button class='quiz-btn' onclick="quizAnswer('quiz_net3',false)">2001:0db8::1</button></div></div>` }
+          ]
+        },
+        os: {
+          name: 'Operating System',
+          lessons: [
+            { title: 'What is an OS?', id: 'os1', content: `<h2>What is an OS?</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>An Operating System manages hardware and software resources. Examples: Windows, Linux, macOS.</p></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#e100ff;'>Quiz</h3><div id='quiz_os1'><p>Which is NOT an OS?</p><button class='quiz-btn' onclick="quizAnswer('quiz_os1',false)">Windows</button><button class='quiz-btn' onclick="quizAnswer('quiz_os1',true)">Microsoft Word</button></div></div>` },
+            { title: 'Processes', id: 'os2', content: `<h2>Processes</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>Processes are running programs. The OS manages their execution and resources.</p></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#e100ff;'>Quiz</h3><div id='quiz_os2'><p>What does the OS do for processes?</p><button class='quiz-btn' onclick="quizAnswer('quiz_os2',true)">Manages execution</button><button class='quiz-btn' onclick="quizAnswer('quiz_os2',false)">Deletes files</button></div></div>` },
+            { title: 'Memory Management', id: 'os3', content: `<h2>Memory Management</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>The OS allocates and frees memory for programs. Good management prevents crashes.</p></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#e100ff;'>Quiz</h3><div id='quiz_os3'><p>Why is memory management important?</p><button class='quiz-btn' onclick="quizAnswer('quiz_os3',true)">Prevents crashes</button><button class='quiz-btn' onclick="quizAnswer('quiz_os3',false)">Speeds up the internet</button></div></div>` }
+          ]
+        },
+        frontend: {
+          name: 'Frontend',
+          lessons: [
+            { title: 'HTML Basics', id: 'lesson1', content: `<h2>HTML Basics</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>HTML (<strong>HyperText Markup Language</strong>) is the backbone of every web page. It uses tags to structure content, such as headings, paragraphs, links, and images.</p><ul><li><b>Headings:</b> <code>&lt;h1&gt;...&lt;/h1&gt;</code></li><li><b>Paragraphs:</b> <code>&lt;p&gt;...&lt;/p&gt;</code></li><li><b>Links:</b> <code>&lt;a href="..."&gt;...&lt;/a&gt;</code></li><li><b>Images:</b> <code>&lt;img src="..." alt="..."&gt;</code></li></ul><p>HTML is easy to learn and essential for web development. Let's test your knowledge!</p></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#e100ff;'>Quiz 1</h3><div id='quiz1'><p>What does HTML stand for?</p><button class='quiz-btn' onclick="quizAnswer('quiz1',true)">HyperText Markup Language</button><button class='quiz-btn' onclick="quizAnswer('quiz1',false)">Home Tool Markup Language</button></div><h3 style='color:#e100ff;margin-top:18px;'>Quiz 2</h3><div id='quiz2'><p>Which tag is used for a paragraph?</p><button class='quiz-btn' onclick="quizAnswer('quiz2',true)">&lt;p&gt;</button><button class='quiz-btn' onclick="quizAnswer('quiz2',false)">&lt;h1&gt;</button></div></div>` },
+            { title: 'CSS Fundamentals', id: 'lesson2', content: `<h2>CSS Fundamentals</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>CSS (<strong>Cascading Style Sheets</strong>) lets you style and layout web pages. You can change colors, fonts, spacing, and more.</p><ul><li><b>Selectors</b> target HTML elements for styling.</li><li><b>Properties</b> define what you want to change (e.g., <code>color</code>, <code>font-size</code>).</li><li><b>Values</b> set the property (e.g., <code>color: red;</code>).</li></ul><p>Modern CSS enables responsive and beautiful designs. Try the checklist below and answer the quiz!</p></div><div style='margin-top:18px;'><h3 style='color:#7f00ff;'>Checklist</h3><ul style='list-style:none;padding:0;'><li><label><input type='checkbox' onchange='checklistUpdate(1,0)'> Read about selectors</label></li><li><label><input type='checkbox' onchange='checklistUpdate(1,1)'> Try changing a color</label></li><li><label><input type='checkbox' onchange='checklistUpdate(1,2)'> Make a box with CSS</label></li></ul><h3 style='color:#7f00ff;margin-top:18px;'>Quiz</h3><div id='quiz3'><p>Which property changes text color?</p><button class='quiz-btn' onclick="quizAnswer('quiz3',true)">color</button><button class='quiz-btn' onclick="quizAnswer('quiz3',false)">font-size</button></div><div id='quiz4' style='margin-top:12px;'><p>Which selector targets all paragraphs?</p><button class='quiz-btn' onclick="quizAnswer('quiz4',true)">p { ... }</button><button class='quiz-btn' onclick="quizAnswer('quiz4',false)">.p { ... }</button></div><button onclick="markAsRead(1)" style='background:#e100ff;color:#fff;padding:10px 18px;border-radius:8px;border:none;font-weight:700;cursor:pointer;margin-top:10px;'>Mark as Read</button></div>` },
+            { title: 'Responsive Design', id: 'lesson3', content: `<h2>Responsive Design</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>Responsive design makes your website look good on all devices. It uses flexible grids, images, and <b>media queries</b> to adapt layouts.</p><ul><li><b>Media queries</b> apply styles based on device characteristics.</li><li>Test your site on mobile, tablet, and desktop.</li></ul></div><div style='margin-top:18px;'><h3 style='color:#00d2ff;'>Flashcard</h3><div class='flashcard' onclick='flipFlashcard(this)' style='background:#222;color:#fff;padding:18px 24px;border-radius:12px;cursor:pointer;max-width:320px;margin:0 auto;'><div class='card-front'>What is a media query?</div><div class='card-back' style='display:none;'>A CSS technique to apply styles based on device characteristics.</div></div><h3 style='color:#00d2ff;margin-top:18px;'>Quiz</h3><div id='quiz5'><p>Which CSS rule makes a site responsive?</p><button class='quiz-btn' onclick="quizAnswer('quiz5',true)">@media (max-width: 600px) { ... }</button><button class='quiz-btn' onclick="quizAnswer('quiz5',false)">.responsive { ... }</button></div><button onclick="markAsRead(2)" style='background:#00d2ff;color:#001;padding:10px 18px;border-radius:8px;border:none;font-weight:700;cursor:pointer;margin-top:10px;'>Mark as Read</button></div>` }
+          ]
+        },
+        backend: {
+          name: 'Backend',
+          lessons: [
+            { title: 'Intro to Backend', id: 'back1', content: `<h2>Intro to Backend</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>The backend is the server-side of web development. It handles data, logic, and integration with databases.</p><ul><li><b>Languages:</b> Python, Node.js, Java, etc.</li><li><b>Database:</b> Stores and retrieves data.</li><li><b>API:</b> Allows communication between frontend and backend.</li></ul></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#7f00ff;'>Quiz</h3><div id='quiz_back1'><p>Which is a backend language?</p><button class='quiz-btn' onclick="quizAnswer('quiz_back1',true)">Python</button><button class='quiz-btn' onclick="quizAnswer('quiz_back1',false)">HTML</button></div></div>` },
+            { title: 'Databases', id: 'back2', content: `<h2>Databases</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>Databases store and organize data. SQL and NoSQL are common types.</p><ul><li><b>SQL:</b> Structured Query Language (e.g., MySQL, PostgreSQL).</li><li><b>NoSQL:</b> Flexible, non-tabular (e.g., MongoDB).</li></ul></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#7f00ff;'>Quiz</h3><div id='quiz_back2'><p>Which is a NoSQL database?</p><button class='quiz-btn' onclick="quizAnswer('quiz_back2',true)">MongoDB</button><button class='quiz-btn' onclick="quizAnswer('quiz_back2',false)">MySQL</button></div></div>` },
+            { title: 'APIs', id: 'back3', content: `<h2>APIs</h2><div class='teach-block' style='animation:fadeIn .7s;'><p>APIs (Application Programming Interfaces) allow different software to communicate. REST and GraphQL are popular API styles.</p><ul><li><b>REST:</b> Uses HTTP methods (GET, POST, etc.).</li><li><b>GraphQL:</b> Flexible queries for data.</li></ul></div><div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'><h3 style='color:#7f00ff;'>Quiz</h3><div id='quiz_back3'><p>Which is a REST method?</p><button class='quiz-btn' onclick="quizAnswer('quiz_back3',true)">GET</button><button class='quiz-btn' onclick="quizAnswer('quiz_back3',false)">SELECT</button></div></div>` }
+          ]
+        }
+      };
+
+      let currentCourse = null;
+      let completed = [];
+      let lessonCount = 0;
+
+      // Progress bar logic for each course
+      function updateCourseProgressBars() {
+        const courseKeys = ['networking','os','frontend','backend'];
+        courseKeys.forEach(key => {
+          let progress = 0;
+          let lessons = courses[key]?.lessons?.length || 1;
+          try {
+            const stored = localStorage.getItem('learnProgress_' + key);
+            if(stored) {
+              const arr = JSON.parse(stored);
+              progress = Math.round((arr.filter(Boolean).length / lessons) * 100);
+            }
+          } catch(e) {}
+          const bar = document.getElementById('progress-' + key);
+          const label = document.getElementById('progress-label-' + key);
+          if(bar) bar.style.width = progress + '%';
+          if(label) label.textContent = progress + '%';
+        });
+      }
+      document.addEventListener('DOMContentLoaded', function(){
+        updateCourseProgressBars();
+        // Start Learning button logic
+        document.querySelectorAll('.start-learning-btn').forEach(btn => {
+          btn.onclick = function(e){
+            e.stopPropagation();
+            btn.parentElement.click();
+          };
+        });
+      });
+
+      function selectCourse(courseKey) {
+        currentCourse = courses[courseKey];
+        lessonCount = currentCourse.lessons.length;
+        completed = JSON.parse(localStorage.getItem('learnProgress_' + courseKey) || Array(lessonCount).fill(false).toString());
+        // Add course header and description
+        const courseContent = document.getElementById('course-content');
+        let desc = '';
+        if(courseKey === 'networking') desc = 'Learn how computers and devices connect, communicate, and share data.';
+        if(courseKey === 'os') desc = 'Discover how operating systems manage hardware, software, and resources.';
+        if(courseKey === 'frontend') desc = 'Master the art of building beautiful, interactive user interfaces for the web.';
+        if(courseKey === 'backend') desc = 'Explore the server-side: databases, APIs, and logic powering modern apps.';
+        courseContent.querySelector('.course-header')?.remove();
+        courseContent.querySelector('.course-desc')?.remove();
+        const header = document.createElement('div');
+        header.className = 'course-header';
+        header.textContent = currentCourse.name;
+        const descDiv = document.createElement('div');
+        descDiv.className = 'course-desc';
+        descDiv.textContent = desc;
+        courseContent.prepend(descDiv);
+        courseContent.prepend(header);
+        renderLessons();
+        showLesson(currentCourse.lessons[0].id, document.querySelector('.lesson-chip'));
+        updateProgress();
+        if (typeof updateCourseProgressBars === 'function') updateCourseProgressBars();
+      }
+
+      function renderLessons() {
+        const aside = document.getElementById('lesson-list');
+        aside.innerHTML = '';
+        currentCourse.lessons.forEach((lesson, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'lesson-chip' + (idx === 0 ? ' active' : '');
+          btn.textContent = `Lesson ${idx+1}: ${lesson.title}`;
+          btn.onclick = function() { showLesson(lesson.id, btn); };
+          aside.appendChild(btn);
+        });
+      }
+
+      function backToCourses() {
+        document.getElementById('course-select').style.display = 'block';
+        document.getElementById('course-content').style.display = 'none';
+      }
+
+      function updateProgress() {
+        const done = completed.filter(Boolean).length;
+        document.getElementById('progress-label').textContent = `${done}/${lessonCount} lessons completed`;
+        document.getElementById('progress-bar').style.width = `${(done/lessonCount)*100}%`;
+        if(currentCourse) {
+          // Use courseKey for localStorage key
+          const key = Object.keys(courses).find(k => courses[k].name === currentCourse.name) || currentCourse.name.toLowerCase().replace(/ /g,'_');
+          localStorage.setItem('learnProgress_' + key, JSON.stringify(completed));
+          if (typeof updateCourseProgressBars === 'function') updateCourseProgressBars();
+        }
+      }
+
+      function markAsRead(idx) {
+        completed[idx] = true;
+        updateProgress();
+        if (typeof updateCourseProgressBars === 'function') updateCourseProgressBars();
+        alert('Marked as read!');
+      }
+
+      function showLesson(lessonId, btn) {
+        let lessonIdx = currentCourse.lessons.findIndex(l => l.id === lessonId);
+        const lesson = currentCourse.lessons[lessonIdx];
+        // Animation for card
+        const panel = document.getElementById('lesson-content');
+        panel.classList.remove('animated-card');
+        void panel.offsetWidth; // trigger reflow
+        panel.classList.add('animated-card');
+        panel.innerHTML = lesson.content;
+        // Highlight active lesson
+        document.querySelectorAll('.lesson-chip').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+        // Restore checklist state (for frontend lesson2)
+        if(currentCourse.name === 'Frontend' && lessonId === 'lesson2') restoreChecklist();
+      }
+
+      function showLesson(lesson, btn) {
+        const content = {
+          lesson1: `<h2>HTML Basics</h2>
+            <div class='teach-block' style='animation:fadeIn .7s;'>
+              <p>HTML (<strong>HyperText Markup Language</strong>) is the backbone of every web page. It uses tags to structure content, such as headings, paragraphs, links, and images.</p>
+              <ul>
+                <li><b>Headings:</b> <code>&lt;h1&gt;...&lt;/h1&gt;</code></li>
+                <li><b>Paragraphs:</b> <code>&lt;p&gt;...&lt;/p&gt;</code></li>
+                <li><b>Links:</b> <code>&lt;a href="..."&gt;...&lt;/a&gt;</code></li>
+                <li><b>Images:</b> <code>&lt;img src="..." alt="..."&gt;</code></li>
+              </ul>
+              <p>HTML is easy to learn and essential for web development. Let's test your knowledge!</p>
+            </div>
+            <div class='quiz-block' style='margin-top:28px;animation:fadeIn .7s;'>
+              <h3 style='color:#e100ff;'>Quiz 1</h3>
+              <div id='quiz1'>
+                <p>What does HTML stand for?</p>
+                <button class='quiz-btn' onclick="quizAnswer('quiz1',true)">HyperText Markup Language</button>
+                <button class='quiz-btn' onclick="quizAnswer('quiz1',false)">Home Tool Markup Language</button>
+              </div>
+              <h3 style='color:#e100ff;margin-top:18px;'>Quiz 2</h3>
+              <div id='quiz2'>
+                <p>Which tag is used for a paragraph?</p>
+                <button class='quiz-btn' onclick="quizAnswer('quiz2',true)">&lt;p&gt;</button>
+                <button class='quiz-btn' onclick="quizAnswer('quiz2',false)">&lt;h1&gt;</button>
+              </div>
+            </div>
+            <div style='margin-top:24px;'><button onclick="markAsRead(0)" style='background:#7f00ff;color:#fff;padding:10px 18px;border-radius:8px;border:none;font-weight:700;cursor:pointer;'>Mark as Read</button></div>
+          `,
+          lesson2: `<h2>CSS Fundamentals</h2>
+            <div class='teach-block' style='animation:fadeIn .7s;'>
+              <p>CSS (<strong>Cascading Style Sheets</strong>) lets you style and layout web pages. You can change colors, fonts, spacing, and more.</p>
+              <ul>
+                <li><b>Selectors</b> target HTML elements for styling.</li>
+                <li><b>Properties</b> define what you want to change (e.g., <code>color</code>, <code>font-size</code>).</li>
+                <li><b>Values</b> set the property (e.g., <code>color: red;</code>).</li>
+              </ul>
+              <p>Modern CSS enables responsive and beautiful designs. Try the checklist below and answer the quiz!</p>
+            </div>
+            <div style='margin-top:18px;'>
+              <h3 style='color:#7f00ff;'>Checklist</h3>
+              <ul style='list-style:none;padding:0;'>
+                <li><label><input type='checkbox' onchange='checklistUpdate(1,0)'> Read about selectors</label></li>
+                <li><label><input type='checkbox' onchange='checklistUpdate(1,1)'> Try changing a color</label></li>
+                <li><label><input type='checkbox' onchange='checklistUpdate(1,2)'> Make a box with CSS</label></li>
+              </ul>
+              <h3 style='color:#7f00ff;margin-top:18px;'>Quiz</h3>
+              <div id='quiz3'>
+                <p>Which property changes text color?</p>
+                <button class='quiz-btn' onclick="quizAnswer('quiz3',true)">color</button>
+                <button class='quiz-btn' onclick="quizAnswer('quiz3',false)">font-size</button>
+              </div>
+              <div id='quiz4' style='margin-top:12px;'>
+                <p>Which selector targets all paragraphs?</p>
+                <button class='quiz-btn' onclick="quizAnswer('quiz4',true)">p { ... }</button>
+                <button class='quiz-btn' onclick="quizAnswer('quiz4',false)">.p { ... }</button>
+              </div>
+              <button onclick="markAsRead(1)" style='background:#e100ff;color:#fff;padding:10px 18px;border-radius:8px;border:none;font-weight:700;cursor:pointer;margin-top:10px;'>Mark as Read</button>
+            </div>
+          `,
+          lesson3: `<h2>Responsive Design</h2>
+            <div class='teach-block' style='animation:fadeIn .7s;'>
+              <p>Responsive design makes your website look good on all devices. It uses flexible grids, images, and <b>media queries</b> to adapt layouts.</p>
+              <ul>
+                <li><b>Media queries</b> apply styles based on device characteristics.</li>
+                <li>Test your site on mobile, tablet, and desktop.</li>
+              </ul>
+            </div>
+            <div style='margin-top:18px;'>
+              <h3 style='color:#00d2ff;'>Flashcard</h3>
+              <div class='flashcard' onclick='flipFlashcard(this)' style='background:#222;color:#fff;padding:18px 24px;border-radius:12px;cursor:pointer;max-width:320px;margin:0 auto;'>
+                <div class='card-front'>What is a media query?</div>
+                <div class='card-back' style='display:none;'>A CSS technique to apply styles based on device characteristics.</div>
+              </div>
+              <h3 style='color:#00d2ff;margin-top:18px;'>Quiz</h3>
+              <div id='quiz5'>
+                <p>Which CSS rule makes a site responsive?</p>
+                <button class='quiz-btn' onclick="quizAnswer('quiz5',true)">@media (max-width: 600px) { ... }</button>
+                <button class='quiz-btn' onclick="quizAnswer('quiz5',false)">.responsive { ... }</button>
+              </div>
+              <button onclick="markAsRead(2)" style='background:#00d2ff;color:#001;padding:10px 18px;border-radius:8px;border:none;font-weight:700;cursor:pointer;margin-top:10px;'>Mark as Read</button>
+            </div>
+          `
+        };
+        // Animation for card
+        const panel = document.getElementById('lesson-content');
+        panel.classList.remove('animated-card');
+        void panel.offsetWidth; // trigger reflow
+        panel.classList.add('animated-card');
+        panel.innerHTML = content[lesson] || '<h2>Lesson not found</h2>';
+        // Highlight active lesson
+        document.querySelectorAll('.lesson-chip').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+        // Restore checklist state
+        if(lesson === 'lesson2') restoreChecklist();
+      }
+
+      function quizAnswer(id, correct) {
+        const quiz = document.getElementById(id);
+        quiz.innerHTML = `<span class="quiz-feedback" style="display:inline-block;animation:pop .5s;${correct ? 'color:#00d200;' : 'color:#ff0033;'}font-weight:700;">${correct ? 'Correct! 🎉' : 'Try again!'}</span>`;
+      }
+      // Animation for quiz feedback
+      const style = document.createElement('style');
+      style.innerHTML = `@keyframes pop {0%{transform:scale(0.7);}60%{transform:scale(1.2);}100%{transform:scale(1);}}`;
+      document.head.appendChild(style);
+
+      // Checklist interactivity for lesson 2
+      function checklistUpdate(lessonIdx, itemIdx) {
+        let checklist = JSON.parse(localStorage.getItem('checklist2') || '[false,false,false]');
+        checklist[itemIdx] = true;
+        localStorage.setItem('checklist2', JSON.stringify(checklist));
+      }
+      function restoreChecklist() {
+        let checklist = JSON.parse(localStorage.getItem('checklist2') || '[false,false,false]');
+        document.querySelectorAll('input[type=checkbox]').forEach((cb, i) => {
+          cb.checked = checklist[i];
+        });
+      }
+
+      // Flashcard interactivity for lesson 3
+      function flipFlashcard(card) {
+        const front = card.querySelector('.card-front');
+        const back = card.querySelector('.card-back');
+        if(back.style.display === 'none') {
+          front.style.display = 'none';
+          back.style.display = 'block';
+        } else {
+          front.style.display = 'block';
+          back.style.display = 'none';
+        }
+      }
+
+      window.onload = function() {
+        document.getElementById('course-select').style.display = 'block';
+        document.getElementById('course-content').style.display = 'none';
+      };
+
+      function quizAnswer(id, correct) {
+        const quiz = document.getElementById(id);
+        quiz.innerHTML = correct ? '<span style="color:#00d200;font-weight:700;">Correct! 🎉</span>' : '<span style="color:#ff0033;font-weight:700;">Try again!</span>';
+      }
+
+      window.onload = function() {
+        showLesson('lesson1', document.querySelector('.lesson-chip'));
+        updateProgress();
+      };
+
+      // Minimal subtle background animation
+        window.addEventListener('DOMContentLoaded', function() {
+          const canvas = document.getElementById('subtle-bg');
+          if (!canvas) return;
+          function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          }
+          resize();
+          window.addEventListener('resize', resize);
+          const ctx = canvas.getContext('2d');
+          let dots = [];
+          for (let i = 0; i < 30; i++) {
+            dots.push({
+              x: Math.random()*canvas.width,
+              y: Math.random()*canvas.height,
+              r: Math.random()*1.5+0.8,
+              dx: (Math.random()-0.5)*0.1,
+              dy: (Math.random()-0.5)*0.1,
+              phase: Math.random()*Math.PI*2
+            });
+          }
+          function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let dot of dots) {
+              dot.x += dot.dx;
+              dot.y += dot.dy;
+              if (dot.x < 0) dot.x = canvas.width;
+              if (dot.x > canvas.width) dot.x = 0;
+              if (dot.y < 0) dot.y = canvas.height;
+              if (dot.y > canvas.height) dot.y = 0;
+              ctx.save();
+              ctx.globalAlpha = 0.5 + 0.5*Math.sin(Date.now()/700 + dot.phase);
+              ctx.beginPath();
+              ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI*2);
+              ctx.fillStyle = '#fff';
+              ctx.shadowColor = '#e52e71';
+              ctx.shadowBlur = 8;
+              ctx.fill();
+              ctx.restore();
+            }
+            requestAnimationFrame(animate);
+          }
+          animate();
+        });
+
+      // Immersive course entry animation
+      document.getElementById('course-squares').addEventListener('click', function(e) {
+        const el = e.target.closest('.course-square');
+        if(!el) return;
+        const courseKey = el.getAttribute('data-course');
+        if(courseKey === 'networking') {
+          window.location.href = 'networking_course.html';
+          return;
+        }
+        if(courseKey === 'os') {
+          window.location.href = 'os_course.html';
+          return;
+        }
+        if(courseKey === 'frontend') {
+          window.location.href = 'frontend_course.html';
+          return;
+        }
+        if(courseKey === 'backend') {
+          window.location.href = 'backend_course.html';
+          return;
+        }
+        // Get bounding rect for animation
+        const rect = el.getBoundingClientRect();
+        const clone = el.cloneNode(true);
+        clone.classList.add('expand');
+        clone.style.left = rect.left + 'px';
+        clone.style.top = rect.top + 'px';
+        clone.style.width = rect.width + 'px';
+        clone.style.height = rect.height + 'px';
+        clone.style.position = 'fixed';
+        clone.style.margin = '0';
+        document.body.appendChild(clone);
+        setTimeout(() => {
+          clone.style.left = '0';
+          clone.style.top = '0';
+          clone.style.width = '100vw';
+          clone.style.height = '100vh';
+        }, 10);
+        setTimeout(() => {
+          clone.remove();
+          document.getElementById('course-select').style.display = 'none';
+          const courseContent = document.getElementById('course-content');
+          courseContent.style.display = 'block';
+          courseContent.classList.add('animated');
+          selectCourse(courseKey);
+          setTimeout(() => courseContent.classList.remove('animated'), 700);
+        }, 700);
+      });
+    </script>
+  </body>
+</html>
