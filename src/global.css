@@ -8,10 +8,12 @@
     --accent2: #e100ff;
     --accent3: #00d2ff;
     --white: #ffffff;
+    --white-6: rgba(255, 255, 255, 0.06);
+    --white-20: rgba(255, 255, 255, 0.2);
     --max-width: 1100px;
     --radius: 14px;
     --glass-border: rgba(255, 255, 255, 0.06);
-}
+}   
 
 * {
     box-sizing: border-box;

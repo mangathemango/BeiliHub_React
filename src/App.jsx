@@ -10,6 +10,7 @@ import Login from './pages/Login/Login';
 import NetworkingCourse from './pages/NetworkingCourse/NetworkingCourse';
 import Lesson from './pages/Lesson/Lesson';
 import './global.css';
+import Question from './pages/Lesson/components/Question/Question';
 
 function App() {
   return (

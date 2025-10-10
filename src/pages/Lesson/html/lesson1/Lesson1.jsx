@@ -1,9 +1,8 @@
 import "./Lesson1.css"
-                    
+import Question from "../../components/Question/Question"
 const Lesson1 = () => {
-    return <div>
-        <p>This is lesson 1 from html</p>
-        <p>This lesson is probably not done yet</p>
+    return <div style={{ height: "400px" }}>
+        <Question></Question>
     </div>
 }
 
