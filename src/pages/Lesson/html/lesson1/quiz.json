@@ -1,0 +1,66 @@
+{
+  "title": "HTML Basics Quiz",
+  "description": "Test your knowledge of HTML fundamentals",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does <!DOCTYPE html> do?",
+      "choices": [
+        "Creates the <html> element",
+        "Tells the browser this is HTML5",
+        "Adds metadata to the page",
+        "Can be skipped safely"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It tells the browser to render in HTML5 standards mode."
+    },
+    {
+      "id": 2,
+      "question": "Which section controls what appears in the browser tab?",
+      "choices": [
+        "<body>",
+        "<meta>",
+        "<title>",
+        "<h1>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The <title> element in the <head> section determines what text appears in the browser tab."
+    },
+    {
+      "id": 3,
+      "question": "Where does the main visible content go?",
+      "choices": [
+        "<head>",
+        "<body>",
+        "<meta>",
+        "<footer>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The <body> element contains all the visible content that appears on the webpage."
+    },
+    {
+      "id": 4,
+      "question": "How many heading levels exist in HTML?",
+      "choices": [
+        "3",
+        "6",
+        "Unlimited",
+        "10"
+      ],
+      "correctAnswer": 1,
+      "explanation": "HTML has 6 heading levels: <h1> through <h6>, where <h1> is the largest and <h6> is the smallest."
+    },
+    {
+      "id": 5,
+      "question": "What's the correct way to write a paragraph element?",
+      "choices": [
+        "<p>Hello<p>",
+        "<paragraph>Hello</paragraph>",
+        "<p>Hello</p>",
+        "<para>Hello</para>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The correct syntax for a paragraph element is <p>content</p> with both opening and closing tags."
+    }
+  ]
+}

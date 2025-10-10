@@ -1,11 +1,11 @@
 import "./Lesson2.css"
+import Question from "../../components/Question/Question"
+import quizData from "./quiz.json"
                     
 const Lesson2 = () => {
-    return <div>
-        <p>This is lesson 2 from html</p>
-        <p>This lesson is probably not done yet</p>
+    return <div style={{ height: "400px" }}>
+        <Question quizData={quizData}></Question>
     </div>
 }
 
 export default Lesson2;
-            

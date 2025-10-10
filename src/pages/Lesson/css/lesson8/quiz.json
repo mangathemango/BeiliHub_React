@@ -1,0 +1,66 @@
+{
+  "title": "CSS Transitions & Animations Quiz",
+  "description": "Test your knowledge of CSS transitions and keyframe animations",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does the transition property do?",
+      "choices": [
+        "Animates elements continuously",
+        "Smoothly changes a property when it changes",
+        "Immediately changes the property",
+        "Only works with colors"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Smoothly changes a property when it changes — Used for hover, focus, or class-based changes."
+    },
+    {
+      "id": 2,
+      "question": "Which property defines keyframe animations?",
+      "choices": [
+        "transition-property",
+        "@keyframes",
+        "animation-fill",
+        "transform"
+      ],
+      "correctAnswer": 1,
+      "explanation": "@keyframes — Defines the sequence of frames for an animation."
+    },
+    {
+      "id": 3,
+      "question": "How do you make an animation repeat indefinitely?",
+      "choices": [
+        "animation-duration: infinite",
+        "animation-iteration-count: infinite",
+        "animation-delay: infinite",
+        "repeat: true"
+      ],
+      "correctAnswer": 1,
+      "explanation": "animation-iteration-count: infinite — Loops the animation endlessly."
+    },
+    {
+      "id": 4,
+      "question": "Which shorthand combines name, duration, and timing for an animation?",
+      "choices": [
+        "animation: moveBox 2s ease;",
+        "transition: moveBox 2s;",
+        "@keyframes moveBox 2s",
+        "animate: moveBox;"
+      ],
+      "correctAnswer": 0,
+      "explanation": "animation: moveBox 2s ease; — Combines animation-name, animation-duration, and animation-timing-function."
+    },
+    {
+      "id": 5,
+      "question": "Why use transitions instead of keyframes for hover effects?",
+      "choices": [
+        "Transitions are simpler for changes triggered by user actions like hover or focus",
+        "Transitions are faster to load",
+        "Keyframes don't work in Chrome",
+        "Transitions cannot animate colors"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Transitions are simpler for changes triggered by user actions like hover or focus — Keyframes are better for continuous or complex animations."
+    }
+  ]
+}

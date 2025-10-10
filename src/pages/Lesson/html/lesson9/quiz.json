@@ -1,0 +1,66 @@
+{
+  "title": "HTML Metadata & SEO Quiz",
+  "description": "Test your knowledge of HTML metadata and search engine optimization",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Where does metadata go in an HTML document?",
+      "choices": [
+        "<body>",
+        "<footer>",
+        "<head>",
+        "Anywhere"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Metadata always belongs inside <head>."
+    },
+    {
+      "id": 2,
+      "question": "Which meta tag is essential for supporting international characters like emojis 🥭?",
+      "choices": [
+        "<meta name=\"description\">",
+        "<meta charset=\"UTF-8\">",
+        "<meta name=\"viewport\">",
+        "<title>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "charset=\"UTF-8\" ensures all characters are correctly displayed."
+    },
+    {
+      "id": 3,
+      "question": "What's the main purpose of <meta name=\"description\">?",
+      "choices": [
+        "Defines the author",
+        "Tells browsers about CSS",
+        "Summarizes the page for search engines",
+        "Adds keywords"
+      ],
+      "correctAnswer": 2,
+      "explanation": "It provides the snippet you often see in search engine results."
+    },
+    {
+      "id": 4,
+      "question": "Does <meta name=\"keywords\"> still boost SEO today?",
+      "choices": [
+        "Yes, absolutely",
+        "No, most search engines ignore it",
+        "Only if you have exactly 5 keywords",
+        "Only for images"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Google and others ignore it because people abused it."
+    },
+    {
+      "id": 5,
+      "question": "Why is <meta name=\"viewport\"> important?",
+      "choices": [
+        "It makes your site load faster",
+        "It controls how the site scales on mobile",
+        "It adds a description",
+        "It adds an author"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Without it, mobile pages look zoomed-out and tiny."
+    }
+  ]
+}

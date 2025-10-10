@@ -1,0 +1,66 @@
+{
+  "title": "HTML Media & Images Quiz",
+  "description": "Test your knowledge of HTML images, media elements, and embedding",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which attribute defines where an image file is stored?",
+      "choices": [
+        "src",
+        "alt",
+        "href",
+        "file"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The src attribute specifies the source (file path) of the image to display."
+    },
+    {
+      "id": 2,
+      "question": "What happens if the file path in src is wrong?",
+      "choices": [
+        "The browser guesses the file",
+        "The image won't load",
+        "The browser replaces it with a random cat",
+        "The page won't render at all"
+      ],
+      "correctAnswer": 1,
+      "explanation": "If the file path is incorrect or the file doesn't exist, the image will not load and typically shows a broken image icon."
+    },
+    {
+      "id": 3,
+      "question": "Which path is correct if index.html and photo.jpg are in the same folder?",
+      "choices": [
+        "<img src=\"./photo.jpg\">",
+        "<img src=\"../photo.jpg\">",
+        "<img src=\"images/photo.jpg\">",
+        "<img src=\"/photo.jpg\">"
+      ],
+      "correctAnswer": 0,
+      "explanation": "When files are in the same folder, you can use './filename' or just 'filename' to reference them."
+    },
+    {
+      "id": 4,
+      "question": "What attribute is required to make <audio> or <video> usable for humans?",
+      "choices": [
+        "controls",
+        "alt",
+        "src",
+        "loop"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The controls attribute adds play, pause, volume and other controls that users need to interact with media."
+    },
+    {
+      "id": 5,
+      "question": "Which element is typically used to embed a YouTube video?",
+      "choices": [
+        "<media>",
+        "<iframe>",
+        "<video>",
+        "<a>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<iframe> allows you to embed external content like YouTube videos into your webpage."
+    }
+  ]
+}
