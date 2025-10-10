@@ -9,6 +9,7 @@ import Contact from './pages/Contact/Contact';
 import Login from './pages/Login/Login';
 import NetworkingCourse from './pages/NetworkingCourse/NetworkingCourse';
 import Lesson from './pages/Lesson/Lesson';
+import Exercise from './pages/Lesson/Exercise';
 import './global.css';
 import Question from './pages/Lesson/components/Question/Question';
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/networking-course" element={<NetworkingCourse />} />
           <Route path="/lesson/:category/:id" element={<Lesson />} />
+          <Route path="/lesson/:category/:id/exercise" element={<Exercise />} />
         </Routes>
       </Layout>
     </Router>
