@@ -1,14 +1,66 @@
 /* Header component specific styles */
-.header {
-    position: fixed;
+.site-header {
+    backdrop-filter: blur(6px);
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgba(6, 6, 20, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.3s ease;
+    z-index: 60;
+}
+
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+}
+
+/* brand */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.brand .logo {
+    width: 44px;
+    height: 44px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 18px;
+}
+
+.main-nav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all .18s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--white);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent);
+}
+
+/* search & actions */
+.nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.search {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--white);
+    min-width: 200px;
 }
 
 .header.scrolled {

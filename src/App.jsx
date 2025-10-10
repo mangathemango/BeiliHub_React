@@ -8,7 +8,7 @@ import Learn from './pages/Learn/Learn';
 import Contact from './pages/Contact/Contact';
 import Login from './pages/Login/Login';
 import NetworkingCourse from './pages/NetworkingCourse/NetworkingCourse';
-import './styles/variables.css';
+import './global.css';
 
 function App() {
   return (
