@@ -8,6 +8,7 @@ import Learn from './pages/Learn/Learn';
 import Contact from './pages/Contact/Contact';
 import Login from './pages/Login/Login';
 import NetworkingCourse from './pages/NetworkingCourse/NetworkingCourse';
+import Lesson from './pages/Lesson/Lesson';
 import './global.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/networking-course" element={<NetworkingCourse />} />
+          <Route path="/lesson/:category/:id" element={<Lesson />} />
         </Routes>
       </Layout>
     </Router>
