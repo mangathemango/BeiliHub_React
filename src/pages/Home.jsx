@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import CosmicBackground from '../components/CosmicBackground';
 import CourseCard from '../components/CourseCard';
@@ -8,7 +8,7 @@ import { sampleCourses } from '../data/courses';
 const Home = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
-    const [featuredCardRef, setFeaturedCardRef] = useState(null);
+    const featuredCardRef = useRef(null);
 
     useEffect(() => {
         // Animate featured card periodically
@@ -26,7 +26,7 @@ const Home = () => {
 
             return () => clearInterval(intervalId);
         }
-    }, [featuredCardRef]);
+    }, []);
 
     const handlePreview = (course) => {
         setSelectedCourse(course);
@@ -71,7 +71,7 @@ const Home = () => {
                         <div
                             className="player-card"
                             id="featured-card"
-                            ref={setFeaturedCardRef}
+                            ref={featuredCardRef}
                         >
                             <div className="cover" aria-hidden="true">
                                 <svg viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
