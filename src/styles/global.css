@@ -1036,3 +1036,21 @@ select:focus {
         gap: 12px
     }
 }
+
+@keyframes floatCard {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.floating-card {
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+/* Optional: Pause animation on hover for better UX */
+.floating-card:hover {
+    animation-play-state: paused;
+}
