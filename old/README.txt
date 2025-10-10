@@ -1,1 +1,0 @@
-Unzip and open index.html in your browser. This project is pure HTML/CSS/JS (no build step).
