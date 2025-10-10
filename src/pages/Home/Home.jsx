@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CosmicBackground from '../components/CosmicBackground';
-import CourseCard from '../components/CourseCard';
-import Modal from '../components/Modal';
-import { sampleCourses } from '../data/courses';
+import CosmicBackground from '../../components/CosmicBackground/CosmicBackground';
+import CourseCard from '../../components/CourseCard/CourseCard';
+import Modal from '../../components/Modal/Modal';
+import { sampleCourses } from '../../data/courses';
+import './Home.css';
 
 const Home = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
-
 
     const handlePreview = (course) => {
         setSelectedCourse(course);
@@ -50,10 +50,7 @@ const Home = () => {
 
                 <div className="hero-right">
                     <div className="device">
-                        <div
-                            className="player-card floating-card"
-                            id="featured-card"
-                        >
+                        <div className="player-card floating-card">
                             <div className="cover" aria-hidden="true">
                                 <svg viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                                     <defs>

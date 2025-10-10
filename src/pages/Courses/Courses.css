@@ -1,0 +1,139 @@
+/* Courses page specific styles */
+.courses-hero {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.courses-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+/* Filters section */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+.chip-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chip:hover,
+.chip.active {
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    color: var(--white);
+    border-color: transparent;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort label {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.sort select {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--white);
+    padding: 8px 12px;
+}
+
+/* Search input */
+.search {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--white);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Course grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 14px;
+}
+
+/* Pagination */
+.pager {
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.pager button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pager button:hover,
+.pager button.active {
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    border-color: transparent;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .chip-group {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .courses-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pager {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import './CosmicBackground.css';
 
 const CosmicBackground = ({ variant = 'full' }) => {
     const canvasRef = useRef(null);
@@ -169,7 +170,7 @@ const CosmicBackground = ({ variant = 'full' }) => {
     }, [variant]);
 
     return (
-        <>
+        <div className="cosmic-background">
             <div
                 ref={nebulaRef}
                 className="nebula-bg"
@@ -177,17 +178,9 @@ const CosmicBackground = ({ variant = 'full' }) => {
             />
             <canvas
                 ref={canvasRef}
-                style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    zIndex: -3,
-                    pointerEvents: 'none'
-                }}
+                className="cosmic-canvas"
             />
-        </>
+        </div>
     );
 };
 

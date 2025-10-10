@@ -1,0 +1,36 @@
+/* Layout component specific styles */
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.main-content {
+    flex: 1;
+    padding-top: 80px;
+    /* Account for fixed header */
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Ensure consistent spacing for all pages */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 70px;
+    }
+
+    .page-container {
+        padding: 1rem;
+    }
+}

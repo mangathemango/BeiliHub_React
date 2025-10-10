@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import CourseCard from '../components/CourseCard';
-import Modal from '../components/Modal';
-import CosmicBackground from '../components/CosmicBackground';
-import { sampleCourses } from '../data/courses';
+import CourseCard from '../../components/CourseCard/CourseCard';
+import Modal from '../../components/Modal/Modal';
+import CosmicBackground from '../../components/CosmicBackground/CosmicBackground';
+import { sampleCourses } from '../../data/courses';
+import './Courses.css';
 
 const Courses = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -124,7 +125,6 @@ const Courses = () => {
                         placeholder="Search courses..."
                         value={searchQuery}
                         onChange={handleSearchChange}
-                        style={{ width: '100%', maxWidth: '400px' }}
                     />
                 </div>
 
@@ -153,7 +153,7 @@ const Courses = () => {
                 )}
 
                 {filteredCourses.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '40px', color: 'var(--muted)' }}>
+                    <div className="empty-state">
                         <p>No courses found matching your criteria.</p>
                     </div>
                 )}

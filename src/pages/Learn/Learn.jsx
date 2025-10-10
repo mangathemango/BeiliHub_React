@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { lessons } from '../data/courses';
+import { lessons } from '../../data/courses';
+import './Learn.css';
 
 const Learn = () => {
     const [currentLessonId, setCurrentLessonId] = useState(lessons[0]?.id);
@@ -114,16 +115,14 @@ const Learn = () => {
             <div className="lesson-panel">
                 <div className="lesson-header">
                     <div>
-                        <h2 id="lessonTitle" style={{ margin: 0, color: 'var(--white)' }}>
-                            {currentLesson.title}
-                        </h2>
-                        <div id="lessonMeta" className="muted">
+                        <h2>{currentLesson.title}</h2>
+                        <div className="muted">
                             {currentLesson.topic} • {currentLesson.level}
                         </div>
                     </div>
                 </div>
 
-                <div id="lessonBody">
+                <div>
                     {/* Reading Card */}
                     <div className="read-card">
                         <div
@@ -154,7 +153,10 @@ const Learn = () => {
 
                     {/* Flashcard */}
                     <div className={`flashcard ${isFlipped ? 'flipped' : ''}`}>
-                        <div className="card-front">Quick fact</div>
+                        <div className="card-front">
+                            <h4>Quick Fact</h4>
+                            <p>Click flip to see the content</p>
+                        </div>
                         <div className="card-back">
                             <div dangerouslySetInnerHTML={{ __html: currentLesson.content }} />
                         </div>
@@ -201,10 +203,10 @@ const Learn = () => {
                 </div>
 
                 <div className="lesson-controls">
-                    <button id="prevLesson" className="btn outline" onClick={goToPrevLesson}>
+                    <button className="btn outline" onClick={goToPrevLesson}>
                         ← Previous
                     </button>
-                    <button id="nextLesson" className="btn outline" onClick={goToNextLesson}>
+                    <button className="btn outline" onClick={goToNextLesson}>
                         Next →
                     </button>
                 </div>

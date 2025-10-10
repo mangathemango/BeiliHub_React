@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import './About.css';
 
 const About = () => {
     const canvasRef = useRef(null);
@@ -103,15 +104,7 @@ const About = () => {
         <>
             <canvas
                 ref={canvasRef}
-                style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    zIndex: -1,
-                    pointerEvents: 'none'
-                }}
+                className="star-canvas"
             />
 
             <div className="container about-page">
@@ -144,9 +137,7 @@ const About = () => {
                                 }}
                             />
                             <h3>{member.name}</h3>
-                            <p className="muted" style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '8px' }}>
-                                {member.role}
-                            </p>
+                            <p>{member.role}</p>
                             <a
                                 href={member.profileUrl}
                                 className="btn primary"
