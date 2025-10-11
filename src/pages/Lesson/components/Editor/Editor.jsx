@@ -6,9 +6,8 @@ import './Editor.css';
 
 const Editor = ({ children }) => {
     const [layout, setLayout] = useState({
-        code: { width: 33.33 },
-        description: { width: 33.33 },
-        preview: { width: 33.33 }
+        leftWidth: 50,  // Left side (code + description)
+        codeHeight: 60  // Code takes 60% of left side height
     });
 
     const containerRef = useRef(null);
@@ -22,34 +21,31 @@ const Editor = ({ children }) => {
         if (!isResizing || !containerRef.current) return;
 
         const containerRect = containerRef.current.getBoundingClientRect();
-        const mouseX = e.clientX - containerRect.left;
-        const containerWidth = containerRect.width;
-        const percentage = (mouseX / containerWidth) * 100;
 
-        if (isResizing === 'code-description') {
-            const newCodeWidth = Math.max(20, Math.min(60, percentage));
-            const remainingWidth = 100 - newCodeWidth;
-            const previewRatio = layout.preview.width / (layout.description.width + layout.preview.width);
+        if (isResizing === 'vertical') {
+            // Vertical resizer between left and right
+            const mouseX = e.clientX - containerRect.left;
+            const containerWidth = containerRect.width;
+            const percentage = (mouseX / containerWidth) * 100;
+            const newLeftWidth = Math.max(30, Math.min(70, percentage));
 
             setLayout(prev => ({
                 ...prev,
-                code: { width: newCodeWidth },
-                description: { width: remainingWidth * (1 - previewRatio) },
-                preview: { width: remainingWidth * previewRatio }
+                leftWidth: newLeftWidth
             }));
-        } else if (isResizing === 'description-preview') {
-            const codeWidth = layout.code.width;
-            const availableWidth = 100 - codeWidth;
-            const descriptionWidth = Math.max(15, Math.min(availableWidth - 15, percentage - codeWidth));
-            const previewWidth = availableWidth - descriptionWidth;
+        } else if (isResizing === 'horizontal') {
+            // Horizontal resizer between code and description
+            const mouseY = e.clientY - containerRect.top;
+            const containerHeight = containerRect.height;
+            const percentage = (mouseY / containerHeight) * 100;
+            const newCodeHeight = Math.max(30, Math.min(70, percentage));
 
             setLayout(prev => ({
                 ...prev,
-                description: { width: descriptionWidth },
-                preview: { width: previewWidth }
+                codeHeight: newCodeHeight
             }));
         }
-    }, [isResizing, layout]);
+    }, [isResizing]);
 
     const handleMouseUp = useCallback(() => {
         setIsResizing(null);
@@ -68,33 +64,44 @@ const Editor = ({ children }) => {
 
     return (
         <div className="editor-container" ref={containerRef}>
-            <div
-                className="editor-panel code-panel"
-                style={{ width: `${layout.code.width}%` }}
+            {/* Left side container */}
+            <div 
+                className="left-container" 
+                style={{ width: `${layout.leftWidth}%` }}
             >
-                {React.Children.toArray(children).find(child => child.type?.name === 'CodeBlock')}
+                {/* Code editor on top */}
+                <div
+                    className="editor-panel code-panel"
+                    style={{ height: `${layout.codeHeight}%` }}
+                >
+                    {React.Children.toArray(children).find(child => child.type?.name === 'CodeBlock')}
+                </div>
+
+                {/* Horizontal resizer between code and description */}
+                <div
+                    className="resizer horizontal-resizer"
+                    onMouseDown={() => handleMouseDown('horizontal')}
+                />
+
+                {/* Description on bottom */}
+                <div
+                    className="editor-panel description-panel"
+                    style={{ height: `${100 - layout.codeHeight}%` }}
+                >
+                    {React.Children.toArray(children).find(child => child.type?.name === 'DescriptionBlock')}
+                </div>
             </div>
 
+            {/* Vertical resizer between left and right */}
             <div
                 className="resizer vertical-resizer"
-                onMouseDown={() => handleMouseDown('code-description')}
+                onMouseDown={() => handleMouseDown('vertical')}
             />
 
-            <div
-                className="editor-panel description-panel"
-                style={{ width: `${layout.description.width}%` }}
-            >
-                {React.Children.toArray(children).find(child => child.type?.name === 'DescriptionBlock')}
-            </div>
-
-            <div
-                className="resizer vertical-resizer"
-                onMouseDown={() => handleMouseDown('description-preview')}
-            />
-
+            {/* Preview on the entire right side */}
             <div
                 className="editor-panel preview-panel"
-                style={{ width: `${layout.preview.width}%` }}
+                style={{ width: `${100 - layout.leftWidth}%` }}
             >
                 {React.Children.toArray(children).find(child => child.type?.name === 'PreviewBlock')}
             </div>

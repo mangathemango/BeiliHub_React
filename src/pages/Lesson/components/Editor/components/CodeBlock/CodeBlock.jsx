@@ -247,45 +247,21 @@ const CodeBlock = ({
         return highlightedCode;
     };
 
-    // Calculate line numbers for all segments
+    // Simple line numbering - each rendered segment gets exactly one line number
     const getLineNumbers = () => {
-        let currentLine = 1;
         const lineNumbers = [];
+        let currentLine = 1;
 
         codeSegments.forEach((segment) => {
-            if (segment.type === 'inline-group') {
-                // For inline groups, count the combined content
-                const combinedContent = segment.segments.map(s => s.content).join('');
-                const lines = combinedContent.split('\n');
-                const segmentLines = [];
-
-                lines.forEach(() => {
-                    segmentLines.push(currentLine++);
-                });
-
-                lineNumbers.push({
-                    segmentId: segment.id,
-                    lines: segmentLines
-                });
-            } else {
-                const lines = segment.content.split('\n');
-                const segmentLines = [];
-
-                lines.forEach(() => {
-                    segmentLines.push(currentLine++);
-                });
-
-                lineNumbers.push({
-                    segmentId: segment.id,
-                    lines: segmentLines
-                });
-            }
+            // Every segment gets exactly one line number, regardless of content
+            lineNumbers.push({
+                segmentId: segment.id,
+                lines: [currentLine++]
+            });
         });
 
         return lineNumbers;
-    };
-
-    const renderSegment = (segment) => {
+    }; const renderSegment = (segment) => {
         const baseClasses = `code-segment segment-${segment.type}`;
         const isHighlighted = highlightedRegions.includes(segment.name);
         const classes = `${baseClasses} ${isHighlighted ? 'highlighted' : ''}`;
@@ -377,13 +353,13 @@ const CodeBlock = ({
                     </div>
                 );
 
-            case 'inline-group':
+            case 'inline-group': {
+                // Force inline groups to always show just one line number
+                const firstLineNum = segmentLineNumbers[0] || 1;
                 return (
                     <div key={segment.id} className={`code-line-container ${classes}`}>
                         <div className="segment-line-numbers">
-                            {segmentLineNumbers.map(lineNum => (
-                                <div key={lineNum} className="line-number">{lineNum}</div>
-                            ))}
+                            <div className="line-number">{firstLineNum}</div>
                         </div>
                         <div className="inline-group-content">
                             {segment.segments.map((inlineSegment) => {
@@ -398,7 +374,7 @@ const CodeBlock = ({
                                                 spellCheck={false}
                                                 autoComplete="off"
                                                 placeholder="Edit..."
-                                                style={{ width: `${Math.max(inlineSegment.content.length * 0.6, 3)}ch` }}
+                                                style={{ width: `${Math.max(inlineSegment.content.length + 1, 8)}ch` }}
                                             />
                                             <span className="inline-syntax-highlight" aria-hidden="true">
                                                 <span dangerouslySetInnerHTML={{
@@ -420,6 +396,7 @@ const CodeBlock = ({
                         </div>
                     </div>
                 );
+            }
 
             case 'highlightable':
                 return (
