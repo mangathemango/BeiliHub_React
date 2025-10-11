@@ -69,55 +69,48 @@ export default function Question({ quizData }) {
     };
 
     return (
-        <div className="question-container">
-            <button 
-                className="nav-btn prev-btn side-btn" 
-                onClick={handlePrevious}
-                disabled={currentQuestion === 0}
-            >
-                ←
-            </button>
-
-            <div className="question-card">
-
-                <div className="question-box">
-                    <h2 className="question-title">Question {currentQuestion + 1}</h2>
-                    <p className="question-text">
-                        {quizData.questions[currentQuestion].question}
-                    </p>
-                </div>
-                
-                <div className="options">
-                    {quizData.questions[currentQuestion].choices.map((choice, index) => (
-                        <button
-                            key={index}
-                            className={`option-btn ${selected === index ? "selected" : ""}`}
-                            onClick={() => setSelected(index)}
-                        >
-                            <span className="option-num">{index + 1}</span>
-                            {choice}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="question-indicators">
-                    {Array.from({ length: totalQuestions }, (_, index) => (
-                        <div
-                            key={index}
-                            className={`indicator-dot ${index === currentQuestion ? 'active' : ''}`}
-                        />
-                    ))}
-                </div>
-            </div>
-
-            {currentQuestion === totalQuestions - 1 ? (
+        <>
+            <div className="question-container">
                 <button 
-                    className="nav-btn submit-btn side-btn" 
-                    onClick={handleSubmit}
+                    className="nav-btn prev-btn side-btn" 
+                    onClick={handlePrevious}
+                    disabled={currentQuestion === 0}
                 >
-                    Submit
+                    ←
                 </button>
-            ) : (
+
+                <div className="question-card">
+
+                    <div className="question-box">
+                        <h2 className="question-title">Question {currentQuestion + 1}</h2>
+                        <p className="question-text">
+                            {quizData.questions[currentQuestion].question}
+                        </p>
+                    </div>
+                    
+                    <div className="options">
+                        {quizData.questions[currentQuestion].choices.map((choice, index) => (
+                            <button
+                                key={index}
+                                className={`option-btn ${selected === index ? "selected" : ""}`}
+                                onClick={() => setSelected(index)}
+                            >
+                                <span className="option-num">{index + 1}</span>
+                                {choice}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="question-indicators">
+                        {Array.from({ length: totalQuestions }, (_, index) => (
+                            <div
+                                key={index}
+                                className={`indicator-dot ${index === currentQuestion ? 'active' : ''}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
                 <button 
                     className="nav-btn next-btn side-btn" 
                     onClick={handleNext}
@@ -125,7 +118,17 @@ export default function Question({ quizData }) {
                 >
                     →
                 </button>
-            )}
-        </div>
+            </div>
+
+            {/* Separate Submit Button Container */}
+            <div className={`external-submit-container ${currentQuestion === totalQuestions - 1 ? 'visible' : ''}`}>
+                <button 
+                    className="submit-btn-external" 
+                    onClick={handleSubmit}
+                >
+                    Submit Quiz
+                </button>
+            </div>
+        </>
     );
 }
