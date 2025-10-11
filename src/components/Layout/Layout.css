@@ -9,7 +9,7 @@
 
 .main-content {
     flex: 1;
-    padding-top: 80px;
+    padding-top: 10px;
     /* Account for fixed header */
     position: relative;
     overflow-x: hidden;
@@ -17,19 +17,15 @@
 
 /* Ensure consistent spacing for all pages */
 .page-container {
-    max-width: 1200px;
+    width: 95%;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0;
     position: relative;
     z-index: 1;
 }
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
-    .main-content {
-        padding-top: 70px;
-    }
-
     .page-container {
         padding: 1rem;
     }

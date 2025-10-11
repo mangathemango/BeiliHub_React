@@ -1,7 +1,7 @@
 /* Editor container and layout */
 .editor-container {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 90px);
     width: 100%;
     background: var(--bg-primary);
     color: var(--white);

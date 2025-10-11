@@ -16,28 +16,51 @@ const DescriptionBlock = ({ children }) => {
 
     return (
         <div className="description-block">
-            <div className="description-tabs">
-                <button
-                    className={activeTab === 'lesson' ? 'active' : ''}
-                    onClick={() => setActiveTab('lesson')}
-                >Lesson</button>
-                {taskChild && (
+            <div className="panel-header">
+                <h3>Learning Content</h3>
+                <div className="tab-navigation">
                     <button
-                        className={activeTab === 'task' ? 'active' : ''}
-                        onClick={() => setActiveTab('task')}
-                    >Task</button>
-                )}
-                {quizChild && (
-                    <button
-                        className={activeTab === 'quiz' ? 'active' : ''}
-                        onClick={() => setActiveTab('quiz')}
-                    >Quiz</button>
-                )}
+                        className={`tab-btn ${activeTab === 'lesson' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('lesson')}
+                    >
+                        📚 Lesson
+                    </button>
+                    {taskChild && (
+                        <button
+                            className={`tab-btn ${activeTab === 'task' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('task')}
+                        >
+                            🎯 Task
+                        </button>
+                    )}
+                    {quizChild && (
+                        <button
+                            className={`tab-btn ${activeTab === 'quiz' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('quiz')}
+                        >
+                            🧠 Quiz
+                        </button>
+                    )}
+                </div>
             </div>
-            <div className="description-content">
-                {activeTab === 'lesson' && lessonChild && lessonChild.props.children}
-                {activeTab === 'task' && taskChild}
-                {activeTab === 'quiz' && quizChild}
+            <div className="panel-content">
+                <div className="description-content">
+                    {activeTab === 'lesson' && lessonChild && (
+                        <div className="lesson-content">
+                            {lessonChild.props.children}
+                        </div>
+                    )}
+                    {activeTab === 'task' && taskChild && (
+                        <div className="task-content">
+                            {taskChild}
+                        </div>
+                    )}
+                    {activeTab === 'quiz' && quizChild && (
+                        <div className="quiz-content">
+                            {quizChild}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
