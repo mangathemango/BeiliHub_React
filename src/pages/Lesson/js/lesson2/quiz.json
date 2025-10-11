@@ -1,0 +1,66 @@
+{
+  "title": "Functions & Events Quiz",
+  "description": "Test your knowledge of JavaScript functions and events",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does a function do in JavaScript?",
+      "choices": [
+        "Changes the background color",
+        "Groups reusable code that can be executed later",
+        "Only stores text values",
+        "Runs automatically"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Functions let you reuse logic instead of repeating it."
+    },
+    {
+      "id": 2,
+      "question": "What is the correct way to define a function named sayHi?",
+      "choices": [
+        "def sayHi() {}",
+        "function sayHi() {}",
+        "func sayHi() {}",
+        "sayHi = new Function()"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Use function to define named functions."
+    },
+    {
+      "id": 3,
+      "question": "What does this code do?\nbutton.addEventListener(\"click\", changeColor);",
+      "choices": [
+        "Runs changeColor immediately",
+        "Runs changeColor only when the button is clicked",
+        "Deletes the button",
+        "Creates a loop"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The listener waits for a \"click\" event."
+    },
+    {
+      "id": 4,
+      "question": "Which of the following defines an arrow function correctly?",
+      "choices": [
+        "let greet => { console.log(\"Hi\"); }",
+        "function => greet() {}",
+        "const greet = () => { console.log(\"Hi\"); };",
+        "arrow greet() {}"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Arrow functions use => between parameters and body."
+    },
+    {
+      "id": 5,
+      "question": "What does document.getElementById(\"btn\") return?",
+      "choices": [
+        "The name of the variable",
+        "The HTML element with that ID",
+        "A string \"btn\"",
+        "The button text"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It returns the DOM element so you can attach events or modify it."
+    }
+  ]
+}
