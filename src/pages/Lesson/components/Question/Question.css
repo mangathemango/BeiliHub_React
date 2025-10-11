@@ -74,10 +74,6 @@
     padding: 2px;
     background: linear-gradient(90deg, var(--accent1), var(--accent2));
     border-radius: 8px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
     z-index: -1;
 }
 
@@ -218,7 +214,7 @@
 }
 
 .indicator-dot.active {
-    background-color: var(--muted-6);
+    background-color: rgb(90, 10, 218);
     border: 2px solid rgb(90, 10, 218);
     box-shadow: 0 0 8px rgb(90, 10, 218);
     transform: scale(1.2);
