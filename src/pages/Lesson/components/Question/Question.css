@@ -161,3 +161,29 @@
     color: white;
     font-size: 1.1rem;
 }
+
+/* Question Indicators */
+.question-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--muted-6);
+    border: 2px var(--white-6) solid;
+    transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+    background-color: var(--muted-6);
+    border: 2px solid rgb(90, 10, 218);
+    box-shadow: 0 0 8px rgb(90, 10, 218);
+    transform: scale(1.2);
+}

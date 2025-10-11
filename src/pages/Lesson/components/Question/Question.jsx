@@ -99,6 +99,15 @@ export default function Question({ quizData }) {
                         </button>
                     ))}
                 </div>
+
+                <div className="question-indicators">
+                    {Array.from({ length: totalQuestions }, (_, index) => (
+                        <div
+                            key={index}
+                            className={`indicator-dot ${index === currentQuestion ? 'active' : ''}`}
+                        />
+                    ))}
+                </div>
             </div>
 
             {currentQuestion === totalQuestions - 1 ? (

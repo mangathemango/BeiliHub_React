@@ -10,6 +10,7 @@
     --white: #ffffff;
     --white-6: rgba(255, 255, 255, 0.06);
     --white-20: rgba(255, 255, 255, 0.2);
+    --muted-6: rgba(148, 163, 184, 0.06);
     --max-width: 1100px;
     --radius: 14px;
     --glass-border: rgba(255, 255, 255, 0.06);
