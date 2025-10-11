@@ -58,15 +58,12 @@ const Results = () => {
                 </div>
 
                 <div className="score-summary">
-                    <div className="score-circle" style={{ borderColor: getScoreColor(percentage) }}>
-                        <span className="score-text" style={{ color: getScoreColor(percentage) }}>
+                    <div className="score-circle" style={{ borderColor: getScoreColor(percentage), display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        <span className="score-text" style={{ color: getScoreColor(percentage), fontSize: '2.5rem', fontWeight: 'bold', textAlign: 'center', margin: '0 auto' }}>
                             {score}/{totalQuestions}
                         </span>
-                        <span className="percentage-text" style={{ color: getScoreColor(percentage) }}>
-                            {percentage}%
-                        </span>
                     </div>
-                    <p className="score-message" style={{ color: getScoreColor(percentage) }}>
+                    <p className="score-message" style={{ color: getScoreColor(percentage), textAlign: 'center' }}>
                         {getScoreMessage(percentage)}
                     </p>
                 </div>
