@@ -1,0 +1,172 @@
+/* Code Block Styles */
+.code-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.code-editor {
+    display: flex;
+    height: 100%;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.line-numbers {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 16px 8px;
+    border-right: 1px solid var(--glass-border);
+    user-select: none;
+    min-width: 50px;
+    text-align: right;
+}
+
+.line-number {
+    color: var(--text-muted);
+    font-size: 12px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+}
+
+.code-input-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.code-textarea {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: transparent;
+    caret-color: var(--white);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 16px;
+    resize: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+}
+
+.syntax-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    pointer-events: none;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    color: var(--white);
+    z-index: 1;
+}
+
+/* Syntax highlighting colors */
+.syntax-highlight .tag {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.syntax-highlight .attribute {
+    color: #4ecdc4;
+}
+
+.syntax-highlight .string {
+    color: #95e1d3;
+}
+
+.syntax-highlight .comment {
+    color: #6c7686;
+    font-style: italic;
+}
+
+.syntax-highlight .keyword {
+    color: #bb86fc;
+    font-weight: 600;
+}
+
+.syntax-highlight .selector {
+    color: #ffd93d;
+}
+
+.syntax-highlight .property {
+    color: #4ecdc4;
+}
+
+.syntax-highlight .value {
+    color: #95e1d3;
+}
+
+/* Custom scrollbar for code editor */
+.code-textarea::-webkit-scrollbar,
+.syntax-highlight::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.code-textarea::-webkit-scrollbar-track,
+.syntax-highlight::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.code-textarea::-webkit-scrollbar-thumb,
+.syntax-highlight::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+.code-textarea::-webkit-scrollbar-thumb:hover,
+.syntax-highlight::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Button states */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .code-editor {
+        font-size: 12px;
+    }
+
+    .line-numbers {
+        min-width: 40px;
+        padding: 12px 6px;
+    }
+
+    .code-textarea,
+    .syntax-highlight {
+        padding: 12px;
+    }
+}

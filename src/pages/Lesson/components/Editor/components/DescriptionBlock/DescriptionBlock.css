@@ -1,0 +1,343 @@
+/* Description Block Styles */
+.description-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-navigation {
+    display: flex;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.tab-btn.active {
+    background: var(--accent1);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(127, 0, 255, 0.3);
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+}
+
+/* Content sections */
+.lesson-content,
+.task-content,
+.quiz-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lesson-content h2,
+.task-content h2,
+.quiz-content h2 {
+    color: var(--white);
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+}
+
+.lesson-content h3,
+.task-content h3,
+.quiz-content h3 {
+    color: var(--white);
+    margin: 24px 0 12px 0;
+    font-size: 1.1rem;
+}
+
+.lesson-content p,
+.task-content p,
+.quiz-content p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* Interactive elements */
+.highlightable-text {
+    color: var(--accent1);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.highlightable-text:hover {
+    background: rgba(127, 0, 255, 0.2);
+    color: var(--white);
+}
+
+.interactive-code-block {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    margin: 16px 0;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.code-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.language-tag {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn.small {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+}
+
+.code-content {
+    padding: 16px;
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--white);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.code-content:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.code-output {
+    border-top: 1px solid var(--glass-border);
+}
+
+.output-header {
+    background: rgba(0, 200, 100, 0.1);
+    color: #00c864;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.output-content {
+    padding: 12px;
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 12px;
+    color: #00c864;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.lesson-tip {
+    background: linear-gradient(135deg, rgba(127, 0, 255, 0.1), rgba(255, 0, 127, 0.05));
+    border: 1px solid rgba(127, 0, 255, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+}
+
+.lesson-tip h4 {
+    margin: 0 0 8px 0;
+    color: var(--accent1);
+    font-size: 0.9rem;
+}
+
+.lesson-tip p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Task content styles */
+.task-objective {
+    background: rgba(255, 200, 0, 0.1);
+    border: 1px solid rgba(255, 200, 0, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.task-objective h3 {
+    color: #ffd93d;
+    margin-top: 0;
+}
+
+.task-objective ul {
+    margin: 12px 0 0 0;
+    padding-left: 20px;
+}
+
+.task-objective li {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.task-requirements {
+    margin-bottom: 20px;
+}
+
+.requirement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.requirement-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    color: var(--text-muted);
+}
+
+.requirement-status {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.task-hints {
+    background: rgba(0, 200, 255, 0.1);
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.task-hints h3 {
+    color: #4ecdc4;
+    margin-top: 0;
+}
+
+.hint-item {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.hint-item strong {
+    color: #4ecdc4;
+}
+
+/* Quiz content styles */
+.quiz-preview {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid var(--glass-border);
+}
+
+.quiz-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent1);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quiz-topics h4 {
+    color: var(--white);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.quiz-topics ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.quiz-topics li {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.btn.large {
+    padding: 14px 28px;
+    font-size: 1rem;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .tab-navigation {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .tab-btn {
+        text-align: center;
+    }
+
+    .quiz-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .code-content {
+        font-size: 12px;
+        padding: 12px;
+    }
+}

@@ -1,0 +1,137 @@
+/* Editor container and layout */
+.editor-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: var(--bg-primary);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.editor-panel {
+    height: 100%;
+    min-width: 200px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.code-panel {
+    border-radius: 12px 0 0 12px;
+}
+
+.description-panel {
+    border-left: none;
+    border-right: none;
+}
+
+.preview-panel {
+    border-radius: 0 12px 12px 0;
+    border-left: none;
+}
+
+/* Resizer styles */
+.resizer {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: col-resize;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.vertical-resizer {
+    width: 4px;
+    height: 100%;
+}
+
+.resizer:hover {
+    background: var(--accent1);
+}
+
+.resizer:active {
+    background: var(--accent2);
+}
+
+/* Panel headers */
+.panel-header {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--glass-border);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+}
+
+.panel-header h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.panel-content {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+}
+
+/* Custom scrollbar */
+.panel-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .editor-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .editor-panel {
+        width: 100% !important;
+        height: auto;
+        min-height: 400px;
+        border-radius: 12px;
+        margin-bottom: 16px;
+    }
+
+    .resizer {
+        display: none;
+    }
+}
+
+/* Loading and error states */
+.panel-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-muted);
+}
+
+.panel-error {
+    padding: 16px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 8px;
+    color: #ff6b6b;
+    margin: 16px;
+}
