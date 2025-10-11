@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './DescriptionBlock.css';
-const DescriptionBlock = ({ children }) => {
+
+const DescriptionBlock = ({ children, codeEditorRef, currentCode, onCodeChange }) => {
     const [activeTab, setActiveTab] = useState('lesson');
+    const [_customizationOptions, setCustomizationOptions] = useState({});
 
     // Find children by type
     const lessonChild = React.Children.toArray(children).find(
@@ -11,8 +13,38 @@ const DescriptionBlock = ({ children }) => {
         child => child.type?.name === 'Task'
     );
     const quizChild = React.Children.toArray(children).find(
-        child => child.type?.name === 'Quiz'
+        child => child.type?.name === 'Quiz' || child.type?.name === 'Exercise'
     );
+
+    // Handle highlighting elements in the code editor
+    const handleHighlight = useCallback((target, action) => {
+        if (codeEditorRef?.current) {
+            // This would integrate with the CodeBlock component
+            // to highlight specific elements based on the target
+            console.log('Highlighting:', target, action);
+
+            // Example: highlight specific code patterns
+            const codeElement = codeEditorRef.current;
+            if (action === 'highlight') {
+                // Add highlighting logic here
+                codeElement.style.outline = '2px solid var(--accent1)';
+            } else if (action === 'unhighlight') {
+                // Remove highlighting logic here
+                codeElement.style.outline = 'none';
+            }
+        }
+    }, [codeEditorRef]);
+
+    // Handle customization changes from Task component
+    const handleCustomizationChange = useCallback((options) => {
+        setCustomizationOptions(options);
+        // Apply customization to the preview or code editor
+        if (onCodeChange) {
+            // This could modify the code with custom CSS variables
+            console.log('Customization applied:', options);
+            // You could inject this CSS into the preview
+        }
+    }, [onCodeChange]);
 
     return (
         <div className="description-block">
@@ -25,39 +57,52 @@ const DescriptionBlock = ({ children }) => {
                     >
                         📚 Lesson
                     </button>
-                    {taskChild && (
-                        <button
-                            className={`tab-btn ${activeTab === 'task' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('task')}
-                        >
-                            🎯 Task
-                        </button>
-                    )}
-                    {quizChild && (
-                        <button
-                            className={`tab-btn ${activeTab === 'quiz' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('quiz')}
-                        >
-                            🧠 Quiz
-                        </button>
-                    )}
+                    <button
+                        className={`tab-btn ${activeTab === 'task' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('task')}
+                    >
+                        🎯 Task
+                    </button>
+                    <button
+                        className={`tab-btn ${activeTab === 'quiz' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('quiz')}
+                    >
+                        🧠 Quiz
+                    </button>
                 </div>
             </div>
             <div className="panel-content">
                 <div className="description-content">
-                    {activeTab === 'lesson' && lessonChild && (
+                    {activeTab === 'lesson' && (
                         <div className="lesson-content">
-                            {lessonChild.props.children}
+                            {lessonChild
+                                ? React.cloneElement(lessonChild, {
+                                    onHighlight: handleHighlight,
+                                    codeEditorRef,
+                                    ...lessonChild.props
+                                })
+                                : <div className="empty-tab">No lesson content yet.</div>
+                            }
                         </div>
                     )}
-                    {activeTab === 'task' && taskChild && (
+                    {activeTab === 'task' && (
                         <div className="task-content">
-                            {taskChild}
+                            {taskChild
+                                ? React.cloneElement(taskChild, {
+                                    currentCode,
+                                    onCustomizationChange: handleCustomizationChange,
+                                    ...taskChild.props
+                                })
+                                : <div className="empty-tab">No task for this lesson yet.</div>
+                            }
                         </div>
                     )}
-                    {activeTab === 'quiz' && quizChild && (
+                    {activeTab === 'quiz' && (
                         <div className="quiz-content">
-                            {quizChild}
+                            {quizChild
+                                ? quizChild
+                                : <div className="empty-tab">No quiz for this lesson yet.</div>
+                            }
                         </div>
                     )}
                 </div>
