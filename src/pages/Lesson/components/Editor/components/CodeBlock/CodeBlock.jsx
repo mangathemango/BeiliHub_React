@@ -8,28 +8,11 @@ const CodeBlock = ({
     onSubmit,
     children
 }) => {
-    // Parse children: everything is readonly unless wrapped in <Editable>
-
-    // Helper: Convert JSX element to code string
+    // Simple JSX to string converter (for unsupported elements)
     const jsxToString = (element) => {
         if (typeof element === 'string') return element;
         if (!React.isValidElement(element)) return '';
-        const type = typeof element.type === 'string' ? element.type : (element.type?.name || 'Component');
-        let propsStr = '';
-        if (element.props) {
-            propsStr = Object.entries(element.props)
-                .filter(([key]) => key !== 'children')
-                .map(([key, value]) => ` ${key}="${value}"`).join('');
-        }
-        let childrenStr = '';
-        if (element.props && element.props.children) {
-            if (Array.isArray(element.props.children)) {
-                childrenStr = element.props.children.map(jsxToString).join('');
-            } else {
-                childrenStr = jsxToString(element.props.children);
-            }
-        }
-        return `<${type}${propsStr}>${childrenStr}</${type}>`;
+        return `<${element.type || 'div'}>${element.props?.children || ''}</${element.type || 'div'}>`;
     };
 
     const parseChildren = () => {
@@ -95,7 +78,6 @@ const CodeBlock = ({
     };
 
     const [codeSegments, setCodeSegments] = useState(parseChildren());
-    const [highlightedRegions, setHighlightedRegions] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Get the full code by combining all segments
@@ -113,21 +95,6 @@ const CodeBlock = ({
         const newFullCode = getFullCode();
         onCodeChange?.(newFullCode);
     }, [getFullCode, onCodeChange]);
-
-    // Listen for highlight events from DescriptionBlock
-    useEffect(() => {
-        const handleHighlight = (event) => {
-            const { target, action } = event.detail;
-            if (action === 'highlight') {
-                setHighlightedRegions(prev => [...prev, target]);
-            } else if (action === 'unhighlight') {
-                setHighlightedRegions(prev => prev.filter(item => item !== target));
-            }
-        };
-
-        window.addEventListener('highlightCode', handleHighlight);
-        return () => window.removeEventListener('highlightCode', handleHighlight);
-    }, []);
 
     const handleSegmentChange = (segmentId, newContent) => {
         setCodeSegments(prev =>
@@ -219,31 +186,6 @@ const CodeBlock = ({
                 .replace(/(["'`])[^"'`]*\1/g, '<span class="string">$&</span>');
         }
 
-        // Apply highlighting for regions
-        highlightedRegions.forEach(target => {
-            if (target === 'tags') {
-                highlightedCode = highlightedCode.replace(
-                    /<span class="tag">([^<]*)<\/span>/g,
-                    '<span class="tag highlighted">$1</span>'
-                );
-            } else if (target === 'attributes') {
-                highlightedCode = highlightedCode.replace(
-                    /<span class="attribute">([^<]*)<\/span>/g,
-                    '<span class="attribute highlighted">$1</span>'
-                );
-            } else if (target === 'head') {
-                highlightedCode = highlightedCode.replace(
-                    /(&lt;head[^&]*&gt;[\s\S]*?&lt;\/head&gt;)/gi,
-                    '<span class="highlighted-region">$1</span>'
-                );
-            } else if (target === 'body') {
-                highlightedCode = highlightedCode.replace(
-                    /(&lt;body[^&]*&gt;[\s\S]*?&lt;\/body&gt;)/gi,
-                    '<span class="highlighted-region">$1</span>'
-                );
-            }
-        });
-
         return highlightedCode;
     };
 
@@ -261,10 +203,11 @@ const CodeBlock = ({
         });
 
         return lineNumbers;
-    }; const renderSegment = (segment) => {
+    };
+
+    const renderSegment = (segment) => {
         const baseClasses = `code-segment segment-${segment.type}`;
-        const isHighlighted = highlightedRegions.includes(segment.name);
-        const classes = `${baseClasses} ${isHighlighted ? 'highlighted' : ''}`;
+        const classes = baseClasses;
 
         const lineNumbers = getLineNumbers();
         const segmentLineNumbers = lineNumbers.find(ln => ln.segmentId === segment.id)?.lines || [];
@@ -326,33 +269,6 @@ const CodeBlock = ({
                     </div>
                 );
 
-            case 'inline-editable':
-                return (
-                    <div key={segment.id} className={`code-line-container ${classes}`}>
-                        <div className="segment-line-numbers">
-                            {segmentLineNumbers.map(lineNum => (
-                                <div key={lineNum} className="line-number">{lineNum}</div>
-                            ))}
-                        </div>
-                        <div className="inline-editable-wrapper">
-                            <input
-                                type="text"
-                                className="inline-editable-content"
-                                value={segment.content}
-                                onChange={(e) => handleSegmentChange(segment.id, e.target.value)}
-                                spellCheck={false}
-                                autoComplete="off"
-                                placeholder="Edit..."
-                            />
-                            <span className="inline-syntax-overlay" aria-hidden="true">
-                                <span dangerouslySetInnerHTML={{
-                                    __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
-                                }} />
-                            </span>
-                        </div>
-                    </div>
-                );
-
             case 'inline-group': {
                 // Force inline groups to always show just one line number
                 const firstLineNum = segmentLineNumbers[0] || 1;
@@ -397,22 +313,6 @@ const CodeBlock = ({
                     </div>
                 );
             }
-
-            case 'highlightable':
-                return (
-                    <div key={segment.id} className={`code-line-container ${classes}`} data-name={segment.name}>
-                        <div className="segment-line-numbers">
-                            {segmentLineNumbers.map(lineNum => (
-                                <div key={lineNum} className="line-number">{lineNum}</div>
-                            ))}
-                        </div>
-                        <pre className="code-content highlightable-content">
-                            <code dangerouslySetInnerHTML={{
-                                __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
-                            }} />
-                        </pre>
-                    </div>
-                );
 
             default:
                 return (
