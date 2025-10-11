@@ -210,3 +210,125 @@
         padding: 12px;
     }
 }
+
+/* Segmented Code Editor Styles */
+.code-editor.segmented {
+    flex-direction: column;
+    padding: 16px;
+    gap: 0;
+}
+
+.code-segment {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    border: none;
+    outline: none;
+}
+
+.code-segment.segment-readonly {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-muted);
+    padding: 0;
+}
+
+.code-segment.segment-readonly pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
+.code-segment.segment-readonly code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+.code-segment.segment-editable {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 24px;
+    transition: all 0.2s ease;
+}
+
+.code-segment.segment-editable:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.2);
+}
+
+.code-segment.segment-highlightable {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid transparent;
+    padding: 4px 8px;
+    transition: all 0.2s ease;
+}
+
+.code-segment.segment-highlightable.highlighted {
+    background: rgba(var(--accent-primary-rgb), 0.1);
+    border-left-color: var(--accent-primary);
+}
+
+.code-segment.segment-highlightable pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
+.code-segment.segment-highlightable code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+/* Syntax highlighting for segments */
+.code-segment .tag {
+    color: #e06c75;
+    font-weight: 600;
+}
+
+.code-segment .attribute {
+    color: #d19a66;
+    font-style: italic;
+}
+
+.code-segment .string {
+    color: #98c379;
+}
+
+.code-segment .comment {
+    color: #5c6370;
+    font-style: italic;
+}
+
+.code-segment .keyword {
+    color: #c678dd;
+    font-weight: 600;
+}
+
+.code-segment .selector {
+    color: #e06c75;
+}
+
+.code-segment .property {
+    color: #61afef;
+}
+
+.code-segment .value {
+    color: #98c379;
+}
+
+.code-segment .doctype {
+    color: #c678dd;
+    font-weight: 600;
+}
+
+.code-segment .bracket {
+    color: #abb2bf;
+    font-weight: 600;
+}

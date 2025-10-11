@@ -2,28 +2,19 @@ import React from "react";
 import "./Lesson1.css";
 import Editor from "../../components/Editor/editor";
 import { CodeBlock, DescriptionBlock, PreviewBlock } from "../../components/Editor";
-import { ReadOnly, Editable, Highlightable, Template, StartCode } from "../../components/Editor/components/CodeBlock/components";
-import { CodeSnippet, Highlight, Tip, Section, Task, Quiz } from "../../components/Editor/components/DescriptionBlock/components";
-
-// Lesson, Task, Quiz wrapper components for DescriptionBlock
-const Lesson = ({ children }) => <div data-lesson>{children}</div>;
-const TaskWrapper = ({ children }) => <div data-task>{children}</div>;
-const QuizWrapper = ({ children }) => <div data-quiz>{children}</div>;
-
-Lesson.displayName = 'Lesson';
-TaskWrapper.displayName = 'Task';
-QuizWrapper.displayName = 'Quiz';
+import { ReadOnly, Editable, Highlightable, Template } from "../../components/Editor/components/CodeBlock/components";
+import { CodeSnippet, Highlight, Tip, Section, Task, Quiz, Lesson, TaskWrapper, QuizWrapper } from "../../components/Editor/components/DescriptionBlock/components";
 
 const Lesson1 = () => {
     return (
         <Editor>
             <CodeBlock>
-                <Template>
+                <ReadOnly>
                     {`<!DOCTYPE html>
 <html>
   <head>
     <title>`}
-                </Template>
+                </ReadOnly>
                 <Editable>Change me!</Editable>
                 <Template>
                     {`</title>
