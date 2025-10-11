@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Question.css";
 
 export default function Question({ quizData }) {
     const [selected, setSelected] = useState(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [userAnswers, setUserAnswers] = useState({});
+    const navigate = useNavigate();
 
     // Default to empty array if no quiz data is provided
     if (!quizData || !quizData.questions) {
@@ -14,16 +17,55 @@ export default function Question({ quizData }) {
 
     const handlePrevious = () => {
         if (currentQuestion > 0) {
+            // Save current answer before moving
+            if (selected !== null) {
+                setUserAnswers(prev => ({ ...prev, [currentQuestion]: selected }));
+            }
             setCurrentQuestion(currentQuestion - 1);
-            setSelected(null); // Reset selection for new question
+            // Load previous answer if it exists
+            setSelected(userAnswers[currentQuestion - 1] ?? null);
         }
     };
 
     const handleNext = () => {
         if (currentQuestion < totalQuestions - 1) {
+            // Save current answer before moving
+            if (selected !== null) {
+                setUserAnswers(prev => ({ ...prev, [currentQuestion]: selected }));
+            }
             setCurrentQuestion(currentQuestion + 1);
-            setSelected(null); // Reset selection for new question
+            // Load next answer if it exists
+            setSelected(userAnswers[currentQuestion + 1] ?? null);
         }
+    };
+
+    const handleSubmit = () => {
+        // Save final answer
+        const finalAnswers = { ...userAnswers };
+        if (selected !== null) {
+            finalAnswers[currentQuestion] = selected;
+        }
+
+        // Calculate score
+        let score = 0;
+        const answersArray = [];
+        
+        for (let i = 0; i < totalQuestions; i++) {
+            const userAnswer = finalAnswers[i];
+            answersArray.push(userAnswer);
+            if (userAnswer !== undefined && userAnswer === quizData.questions[i].correctAnswer) {
+                score++;
+            }
+        }
+
+        // Navigate to results page with data
+        navigate('/results', {
+            state: {
+                quizData,
+                userAnswers: answersArray,
+                score
+            }
+        });
     };
 
     return (
@@ -59,13 +101,22 @@ export default function Question({ quizData }) {
                 </div>
             </div>
 
-            <button 
-                className="nav-btn next-btn side-btn" 
-                onClick={handleNext}
-                disabled={currentQuestion === totalQuestions - 1}
-            >
-                →
-            </button>
+            {currentQuestion === totalQuestions - 1 ? (
+                <button 
+                    className="nav-btn submit-btn side-btn" 
+                    onClick={handleSubmit}
+                >
+                    Submit
+                </button>
+            ) : (
+                <button 
+                    className="nav-btn next-btn side-btn" 
+                    onClick={handleNext}
+                    disabled={currentQuestion === totalQuestions - 1}
+                >
+                    →
+                </button>
+            )}
         </div>
     );
 }
