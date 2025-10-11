@@ -211,124 +211,374 @@
     }
 }
 
-/* Segmented Code Editor Styles */
-.code-editor.segmented {
+/* Unified Segmented Code Editor Styles */
+.code-editor.segmented.unified {
     flex-direction: column;
-    padding: 16px;
+    padding: 0;
     gap: 0;
+    background: var(--bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.code-segment {
+/* Code line container - unified appearance */
+.code-line-container {
+    display: flex;
+    align-items: stretch;
+    min-height: 21px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 14px;
     line-height: 1.5;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+}
+
+.code-line-container:last-child {
+    border-bottom: none;
+}
+
+/* Line numbers for each segment */
+.segment-line-numbers {
+    background: rgba(255, 255, 255, 0.03);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0 12px 0 8px;
+    user-select: none;
+    min-width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.line-number {
+    color: var(--text-muted);
+    font-size: 12px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    opacity: 0.7;
+}
+
+/* Code content base styles */
+.code-content {
+    flex: 1;
+    padding: 0px;
     margin: 0;
+    background: none;
+    display: flex;
+    align-items: flex-start;
+    min-height: 21px;
+}
+
+.code-content code {
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    width: 100%;
+}
+
+.code-content pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+}
+
+/* Readonly sections - dimmed */
+.segment-readonly {
+    background: rgba(255, 255, 255, 0.02);
+    opacity: 0.7;
+}
+
+.segment-readonly .segment-line-numbers {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.readonly-content {
+    color: var(--text-muted);
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+/* Editable sections - brighter */
+.segment-editable {
+    background: rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+
+.segment-editable:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Inline editable sections */
+.segment-inline-editable {
+    background: rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+
+.segment-inline-editable:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.segment-editable .segment-line-numbers {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.editable-content-wrapper {
+    flex: 1;
+    position: relative;
+    padding: 0 16px;
+}
+
+.editable-content {
+    width: 100%;
+    background: transparent;
     border: none;
     outline: none;
+    color: transparent;
+    caret-color: var(--white);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 2px 0;
+    resize: none;
+    position: relative;
+    z-index: 2;
+    white-space: pre;
+    overflow: hidden;
+    min-height: 17px;
 }
 
-.code-segment.segment-readonly {
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--text-muted);
-    padding: 0;
-}
-
-.code-segment.segment-readonly pre {
+.syntax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2px 0;
+    pointer-events: none;
+    white-space: pre;
+    color: var(--white);
+    z-index: 1;
     margin: 0;
-    padding: 0;
     background: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
-.code-segment.segment-readonly code {
+.syntax-overlay code {
     background: none;
     padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
     color: inherit;
 }
 
-.code-segment.segment-editable {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
-    padding: 8px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    resize: vertical;
-    min-height: 24px;
+/* Highlightable sections */
+.segment-highlightable {
+    background: rgba(255, 255, 255, 0.04);
     transition: all 0.2s ease;
 }
 
-.code-segment.segment-editable:focus {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.2);
-}
-
-.code-segment.segment-highlightable {
-    background: rgba(255, 255, 255, 0.03);
-    border-left: 3px solid transparent;
-    padding: 4px 8px;
-    transition: all 0.2s ease;
-}
-
-.code-segment.segment-highlightable.highlighted {
+.segment-highlightable.highlighted {
     background: rgba(var(--accent-primary-rgb), 0.1);
-    border-left-color: var(--accent-primary);
+    border-left: 3px solid var(--accent-primary);
 }
 
-.code-segment.segment-highlightable pre {
-    margin: 0;
-    padding: 0;
-    background: none;
+.segment-highlightable .segment-line-numbers {
+    background: rgba(255, 255, 255, 0.02);
 }
 
-.code-segment.segment-highlightable code {
-    background: none;
-    padding: 0;
-    color: inherit;
+.highlightable-content {
+    color: var(--text-primary);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    cursor: pointer;
 }
 
-/* Syntax highlighting for segments */
-.code-segment .tag {
+/* Inline group content */
+.inline-group-content {
+    flex: 1;
+    padding: 2px 16px;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    white-space: pre;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.inline-readonly-content {
+    display: inline;
+    white-space: pre;
+}
+
+.inline-editable-wrapper {
+    position: relative;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin: 0 1px;
+}
+
+.inline-editable-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: transparent;
+    caret-color: var(--white);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 1px 3px;
+    position: relative;
+    z-index: 2;
+    white-space: pre;
+    min-width: 3ch;
+    max-width: 50ch;
+}
+
+.inline-syntax-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1px 3px;
+    pointer-events: none;
+    white-space: pre;
+    color: var(--white);
+    z-index: 1;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/* Legacy inline editable styles (for backward compatibility) */
+.inline-editable-content {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: transparent;
+    caret-color: var(--white);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 2px 4px;
+    position: relative;
+    z-index: 2;
+    white-space: pre;
+    min-width: 60px;
+    width: auto;
+    display: inline-block;
+}
+
+.inline-syntax-overlay {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    padding: 2px 4px;
+    pointer-events: none;
+    white-space: pre;
+    color: var(--white);
+    z-index: 1;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    display: inline-block;
+}
+
+/* Focus states for editable sections */
+.segment-editable:focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.segment-editable:focus-within .segment-line-numbers {
+    background: rgba(255, 255, 255, 0.06);
+    border-right-color: rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.segment-inline-editable:focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.segment-inline-editable:focus-within .segment-line-numbers {
+    background: rgba(255, 255, 255, 0.06);
+    border-right-color: rgba(var(--accent-primary-rgb), 0.3);
+}
+
+/* Syntax highlighting colors for all segments */
+.code-line-container .tag {
     color: #e06c75;
     font-weight: 600;
 }
 
-.code-segment .attribute {
+.code-line-container .attribute {
     color: #d19a66;
     font-style: italic;
 }
 
-.code-segment .string {
+.code-line-container .string {
     color: #98c379;
 }
 
-.code-segment .comment {
+.code-line-container .comment {
     color: #5c6370;
     font-style: italic;
 }
 
-.code-segment .keyword {
+.code-line-container .keyword {
     color: #c678dd;
     font-weight: 600;
 }
 
-.code-segment .selector {
+.code-line-container .selector {
     color: #e06c75;
 }
 
-.code-segment .property {
+.code-line-container .property {
     color: #61afef;
 }
 
-.code-segment .value {
+.code-line-container .value {
     color: #98c379;
 }
 
-.code-segment .doctype {
+.code-line-container .doctype {
     color: #c678dd;
     font-weight: 600;
 }
 
-.code-segment .bracket {
+.code-line-container .bracket {
     color: #abb2bf;
     font-weight: 600;
+}
+
+/* Smooth transitions */
+.code-line-container * {
+    transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-editor.segmented.unified {
+        font-size: 12px;
+    }
+
+    .segment-line-numbers {
+        min-width: 40px;
+        padding: 0 8px 0 4px;
+    }
 }

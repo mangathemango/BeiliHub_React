@@ -8,37 +8,88 @@ const CodeBlock = ({
     onSubmit,
     children
 }) => {
-    // Parse children to create code segments
+    // Parse children: everything is readonly unless wrapped in <Editable>
+
+    // Helper: Convert JSX element to code string
+    const jsxToString = (element) => {
+        if (typeof element === 'string') return element;
+        if (!React.isValidElement(element)) return '';
+        const type = typeof element.type === 'string' ? element.type : (element.type?.name || 'Component');
+        let propsStr = '';
+        if (element.props) {
+            propsStr = Object.entries(element.props)
+                .filter(([key]) => key !== 'children')
+                .map(([key, value]) => ` ${key}="${value}"`).join('');
+        }
+        let childrenStr = '';
+        if (element.props && element.props.children) {
+            if (Array.isArray(element.props.children)) {
+                childrenStr = element.props.children.map(jsxToString).join('');
+            } else {
+                childrenStr = jsxToString(element.props.children);
+            }
+        }
+        return `<${type}${propsStr}>${childrenStr}</${type}>`;
+    };
+
     const parseChildren = () => {
         if (!children) return [{ type: 'editable', content: initialCode, id: 'main' }];
 
         const segments = [];
         let segmentId = 0;
+        let currentLineSegments = [];
+
+        const flushCurrentLine = () => {
+            if (currentLineSegments.length > 0) {
+                if (currentLineSegments.length === 1 && currentLineSegments[0].type === 'editable') {
+                    // Single block editable - keep as separate line
+                    segments.push(currentLineSegments[0]);
+                } else {
+                    // Multiple segments or inline segments - group as inline line
+                    segments.push({
+                        type: 'inline-group',
+                        segments: currentLineSegments,
+                        id: `line-${segmentId++}`
+                    });
+                }
+                currentLineSegments = [];
+            }
+        };
 
         React.Children.forEach(children, (child) => {
             if (React.isValidElement(child)) {
-                const childType = child.type?.name || child.type?.displayName;
-                const content = typeof child.props.children === 'string' ? child.props.children : '';
-
-                switch (childType) {
-                    case 'ReadOnly':
-                        segments.push({ type: 'readonly', content, id: `segment-${segmentId++}` });
-                        break;
-                    case 'Template':
-                        segments.push({ type: 'readonly', content, id: `segment-${segmentId++}` });
-                        break;
-                    case 'Editable':
-                        segments.push({ type: 'editable', content, id: `segment-${segmentId++}` });
-                        break;
-                    case 'Highlightable':
-                        segments.push({ type: 'highlightable', content, id: `segment-${segmentId++}`, name: child.props.name });
-                        break;
-                    default:
-                        // If it's just text or unknown component, treat as readonly
-                        segments.push({ type: 'readonly', content, id: `segment-${segmentId++}` });
+                // If it's <Editable>, flush current line and add as block
+                if (child.type?.name === 'Editable' || child.type?.displayName === 'Editable') {
+                    flushCurrentLine();
+                    const content = typeof child.props.children === 'string' ? child.props.children : jsxToString(child.props.children);
+                    segments.push({ type: 'editable', content, id: `segment-${segmentId++}` });
                 }
+                // If it's <InlineEditable>, add to current line
+                else if (child.type?.name === 'InlineEditable' || child.type?.displayName === 'InlineEditable') {
+                    const content = typeof child.props.children === 'string' ? child.props.children : jsxToString(child.props.children);
+                    currentLineSegments.push({ type: 'inline-editable', content, id: `segment-${segmentId++}` });
+                } else {
+                    // Otherwise, add as readonly to current line
+                    currentLineSegments.push({ type: 'readonly', content: jsxToString(child), id: `segment-${segmentId++}` });
+                }
+            } else if (typeof child === 'string') {
+                // Split string by lines and add each line separately
+                const lines = child.split('\n');
+                lines.forEach((line, index) => {
+                    if (line || index === 0) {
+                        currentLineSegments.push({ type: 'readonly', content: line, id: `segment-${segmentId++}` });
+                    }
+                    if (index < lines.length - 1) {
+                        // End of line - flush current segments
+                        currentLineSegments[currentLineSegments.length - 1].content += '\n';
+                        flushCurrentLine();
+                    }
+                });
             }
         });
+
+        // Flush any remaining segments
+        flushCurrentLine();
 
         return segments.length > 0 ? segments : [{ type: 'editable', content: initialCode, id: 'main' }];
     };
@@ -49,7 +100,12 @@ const CodeBlock = ({
 
     // Get the full code by combining all segments
     const getFullCode = useCallback(() => {
-        return codeSegments.map(segment => segment.content).join('');
+        return codeSegments.map(segment => {
+            if (segment.type === 'inline-group') {
+                return segment.segments.map(s => s.content).join('');
+            }
+            return segment.content;
+        }).join('');
     }, [codeSegments]);
 
     // Update full code when segments change
@@ -75,11 +131,20 @@ const CodeBlock = ({
 
     const handleSegmentChange = (segmentId, newContent) => {
         setCodeSegments(prev =>
-            prev.map(segment =>
-                segment.id === segmentId
-                    ? { ...segment, content: newContent }
-                    : segment
-            )
+            prev.map(segment => {
+                if (segment.id === segmentId) {
+                    return { ...segment, content: newContent };
+                } else if (segment.type === 'inline-group') {
+                    // Check if the segment ID is within this inline group
+                    const updatedSegments = segment.segments.map(inlineSegment =>
+                        inlineSegment.id === segmentId
+                            ? { ...inlineSegment, content: newContent }
+                            : inlineSegment
+                    );
+                    return { ...segment, segments: updatedSegments };
+                }
+                return segment;
+            })
         );
     };
 
@@ -182,52 +247,189 @@ const CodeBlock = ({
         return highlightedCode;
     };
 
+    // Calculate line numbers for all segments
+    const getLineNumbers = () => {
+        let currentLine = 1;
+        const lineNumbers = [];
+
+        codeSegments.forEach((segment) => {
+            if (segment.type === 'inline-group') {
+                // For inline groups, count the combined content
+                const combinedContent = segment.segments.map(s => s.content).join('');
+                const lines = combinedContent.split('\n');
+                const segmentLines = [];
+
+                lines.forEach(() => {
+                    segmentLines.push(currentLine++);
+                });
+
+                lineNumbers.push({
+                    segmentId: segment.id,
+                    lines: segmentLines
+                });
+            } else {
+                const lines = segment.content.split('\n');
+                const segmentLines = [];
+
+                lines.forEach(() => {
+                    segmentLines.push(currentLine++);
+                });
+
+                lineNumbers.push({
+                    segmentId: segment.id,
+                    lines: segmentLines
+                });
+            }
+        });
+
+        return lineNumbers;
+    };
+
     const renderSegment = (segment) => {
         const baseClasses = `code-segment segment-${segment.type}`;
         const isHighlighted = highlightedRegions.includes(segment.name);
         const classes = `${baseClasses} ${isHighlighted ? 'highlighted' : ''}`;
 
+        const lineNumbers = getLineNumbers();
+        const segmentLineNumbers = lineNumbers.find(ln => ln.segmentId === segment.id)?.lines || [];
+
         switch (segment.type) {
             case 'readonly':
                 return (
-                    <pre key={segment.id} className={classes}>
-                        <code dangerouslySetInnerHTML={{
-                            __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
-                        }} />
-                    </pre>
+                    <div key={segment.id} className={`code-line-container ${classes}`}>
+                        <div className="segment-line-numbers">
+                            {segmentLineNumbers.map(lineNum => (
+                                <div key={lineNum} className="line-number">{lineNum}</div>
+                            ))}
+                        </div>
+                        <pre className="code-content readonly-content">
+                            <code dangerouslySetInnerHTML={{
+                                __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+                            }} />
+                        </pre>
+                    </div>
                 );
 
             case 'editable':
                 return (
-                    <textarea
-                        key={segment.id}
-                        className={`${classes} editable-segment`}
-                        value={segment.content}
-                        onChange={(e) => handleSegmentChange(segment.id, e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Tab') {
-                                e.preventDefault();
-                                const textarea = e.target;
-                                const start = textarea.selectionStart;
-                                const end = textarea.selectionEnd;
-                                const newContent = segment.content.substring(0, start) + '  ' + segment.content.substring(end);
-                                handleSegmentChange(segment.id, newContent);
-                                setTimeout(() => {
-                                    textarea.selectionStart = textarea.selectionEnd = start + 2;
-                                }, 0);
-                            }
-                        }}
-                        spellCheck={false}
-                        autoComplete="off"
-                        placeholder="Enter your code here..."
-                        rows={segment.content.split('\n').length || 1}
-                    />
+                    <div key={segment.id} className={`code-line-container ${classes}`}>
+                        <div className="segment-line-numbers">
+                            {segmentLineNumbers.map(lineNum => (
+                                <div key={lineNum} className="line-number">{lineNum}</div>
+                            ))}
+                        </div>
+                        <div className="editable-content-wrapper">
+                            <textarea
+                                className="editable-content"
+                                value={segment.content}
+                                onChange={(e) => handleSegmentChange(segment.id, e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Tab') {
+                                        e.preventDefault();
+                                        const textarea = e.target;
+                                        const start = textarea.selectionStart;
+                                        const end = textarea.selectionEnd;
+                                        const newContent = segment.content.substring(0, start) + '  ' + segment.content.substring(end);
+                                        handleSegmentChange(segment.id, newContent);
+                                        setTimeout(() => {
+                                            textarea.selectionStart = textarea.selectionEnd = start + 2;
+                                        }, 0);
+                                    }
+                                }}
+                                spellCheck={false}
+                                autoComplete="off"
+                                placeholder="Enter your code here..."
+                                rows={segment.content.split('\n').length || 1}
+                            />
+                            <pre className="syntax-overlay" aria-hidden="true">
+                                <code dangerouslySetInnerHTML={{
+                                    __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+                                }} />
+                            </pre>
+                        </div>
+                    </div>
+                );
+
+            case 'inline-editable':
+                return (
+                    <div key={segment.id} className={`code-line-container ${classes}`}>
+                        <div className="segment-line-numbers">
+                            {segmentLineNumbers.map(lineNum => (
+                                <div key={lineNum} className="line-number">{lineNum}</div>
+                            ))}
+                        </div>
+                        <div className="inline-editable-wrapper">
+                            <input
+                                type="text"
+                                className="inline-editable-content"
+                                value={segment.content}
+                                onChange={(e) => handleSegmentChange(segment.id, e.target.value)}
+                                spellCheck={false}
+                                autoComplete="off"
+                                placeholder="Edit..."
+                            />
+                            <span className="inline-syntax-overlay" aria-hidden="true">
+                                <span dangerouslySetInnerHTML={{
+                                    __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+                                }} />
+                            </span>
+                        </div>
+                    </div>
+                );
+
+            case 'inline-group':
+                return (
+                    <div key={segment.id} className={`code-line-container ${classes}`}>
+                        <div className="segment-line-numbers">
+                            {segmentLineNumbers.map(lineNum => (
+                                <div key={lineNum} className="line-number">{lineNum}</div>
+                            ))}
+                        </div>
+                        <div className="inline-group-content">
+                            {segment.segments.map((inlineSegment) => {
+                                if (inlineSegment.type === 'inline-editable') {
+                                    return (
+                                        <span key={inlineSegment.id} className="inline-editable-wrapper">
+                                            <input
+                                                type="text"
+                                                className="inline-editable-input"
+                                                value={inlineSegment.content}
+                                                onChange={(e) => handleSegmentChange(inlineSegment.id, e.target.value)}
+                                                spellCheck={false}
+                                                autoComplete="off"
+                                                placeholder="Edit..."
+                                                style={{ width: `${Math.max(inlineSegment.content.length * 0.6, 3)}ch` }}
+                                            />
+                                            <span className="inline-syntax-highlight" aria-hidden="true">
+                                                <span dangerouslySetInnerHTML={{
+                                                    __html: applySyntaxHighlighting(inlineSegment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+                                                }} />
+                                            </span>
+                                        </span>
+                                    );
+                                } else {
+                                    return (
+                                        <span key={inlineSegment.id} className="inline-readonly-content">
+                                            <span dangerouslySetInnerHTML={{
+                                                __html: applySyntaxHighlighting(inlineSegment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+                                            }} />
+                                        </span>
+                                    );
+                                }
+                            })}
+                        </div>
+                    </div>
                 );
 
             case 'highlightable':
                 return (
-                    <div key={segment.id} className={classes} data-name={segment.name}>
-                        <pre>
+                    <div key={segment.id} className={`code-line-container ${classes}`} data-name={segment.name}>
+                        <div className="segment-line-numbers">
+                            {segmentLineNumbers.map(lineNum => (
+                                <div key={lineNum} className="line-number">{lineNum}</div>
+                            ))}
+                        </div>
+                        <pre className="code-content highlightable-content">
                             <code dangerouslySetInnerHTML={{
                                 __html: applySyntaxHighlighting(segment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
                             }} />
@@ -237,8 +439,15 @@ const CodeBlock = ({
 
             default:
                 return (
-                    <div key={segment.id} className={classes}>
-                        {segment.content}
+                    <div key={segment.id} className={`code-line-container ${classes}`}>
+                        <div className="segment-line-numbers">
+                            {segmentLineNumbers.map(lineNum => (
+                                <div key={lineNum} className="line-number">{lineNum}</div>
+                            ))}
+                        </div>
+                        <div className="code-content">
+                            {segment.content}
+                        </div>
                     </div>
                 );
         }
@@ -259,7 +468,7 @@ const CodeBlock = ({
                 </div>
             </div>
             <div className="panel-content">
-                <div className="code-editor segmented">
+                <div className="code-editor segmented unified">
                     {codeSegments.map(renderSegment)}
                 </div>
             </div>

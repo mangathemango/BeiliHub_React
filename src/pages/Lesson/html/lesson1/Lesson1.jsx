@@ -2,37 +2,23 @@ import React from "react";
 import "./Lesson1.css";
 import Editor from "../../components/Editor/editor";
 import { CodeBlock, DescriptionBlock, PreviewBlock } from "../../components/Editor";
-import { ReadOnly, Editable, Highlightable, Template } from "../../components/Editor/components/CodeBlock/components";
+import { Editable, InlineEditable } from "../../components/Editor/components/CodeBlock/components";
 import { CodeSnippet, Highlight, Tip, Section, Task, Quiz, Lesson, TaskWrapper, QuizWrapper } from "../../components/Editor/components/DescriptionBlock/components";
 
 const Lesson1 = () => {
     return (
         <Editor>
             <CodeBlock>
-                <ReadOnly>
-                    {`<!DOCTYPE html>
+                {`<!DOCTYPE html>
 <html>
-  <head>
-    <title>`}
-                </ReadOnly>
-                <Editable>Change me!</Editable>
-                <Template>
-                    {`</title>
-  </head>
-  <body>
-    <h1>`}
-                </Template>
-                <Editable>Hello, world!</Editable>
-                <Template>
-                    {`</h1>
-    <p>`}
-                </Template>
-                <Editable>This is my first webpage.</Editable>
-                <Template>
-                    {`</p>
-  </body>
+    <head>
+        <title>`}<InlineEditable>Change me!</InlineEditable>{`</title>
+    </head>
+    <body>
+        <h1>`}<InlineEditable>Hello, world!</InlineEditable>{`</h1>
+        <p>`}<InlineEditable>This is my first webpage.</InlineEditable>{`</p>
+    </body>
 </html>`}
-                </Template>
             </CodeBlock>
 
             <DescriptionBlock>
