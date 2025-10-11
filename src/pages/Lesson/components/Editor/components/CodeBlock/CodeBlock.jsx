@@ -4,12 +4,30 @@ import './CodeBlock.css';
 const CodeBlock = ({
     initialCode = '',
     language = 'html',
-    readOnlyRegions = [],
     onCodeChange,
-    onSubmit
+    onSubmit,
+    children
 }) => {
-    const [code, setCode] = useState(initialCode);
+    // Extract initial code from children if provided
+    const getInitialCodeFromChildren = () => {
+        if (!children) return initialCode;
+
+        const startCodeChild = React.Children.toArray(children).find(
+            child => child.type?.name === 'StartCode'
+        );
+
+        if (startCodeChild) {
+            return typeof startCodeChild.props.children === 'string'
+                ? startCodeChild.props.children
+                : initialCode;
+        }
+
+        return initialCode;
+    };
+
+    const [code, setCode] = useState(getInitialCodeFromChildren());
     const [lineNumbers, setLineNumbers] = useState([]);
+    const [highlightedRegions, setHighlightedRegions] = useState([]);
     const textareaRef = useRef(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -17,6 +35,21 @@ const CodeBlock = ({
         const lines = code.split('\n');
         setLineNumbers(lines.map((_, index) => index + 1));
     }, [code]);
+
+    // Listen for highlight events from DescriptionBlock
+    useEffect(() => {
+        const handleHighlight = (event) => {
+            const { target, action } = event.detail;
+            if (action === 'highlight') {
+                setHighlightedRegions(prev => [...prev, target]);
+            } else if (action === 'unhighlight') {
+                setHighlightedRegions(prev => prev.filter(item => item !== target));
+            }
+        };
+
+        window.addEventListener('highlightCode', handleHighlight);
+        return () => window.removeEventListener('highlightCode', handleHighlight);
+    }, []);
 
     const handleCodeChange = (e) => {
         const newCode = e.target.value;
@@ -52,25 +85,54 @@ const CodeBlock = ({
     };
 
     const applySyntaxHighlighting = (code) => {
+        let highlightedCode = code;
+
+        // Apply syntax highlighting
         if (language === 'html') {
-            return code
+            highlightedCode = highlightedCode
                 .replace(/(&lt;\/?)([a-zA-Z][a-zA-Z0-9]*)/g, '$1<span class="tag">$2</span>')
                 .replace(/(\s)([a-zA-Z-]+)(=)/g, '$1<span class="attribute">$2</span>$3')
                 .replace(/(=)"([^"]*)"/g, '$1<span class="string">"$2"</span>')
                 .replace(/(&lt;!--.*?--&gt;)/g, '<span class="comment">$1</span>');
         } else if (language === 'css') {
-            return code
+            highlightedCode = highlightedCode
                 .replace(/([.#]?[a-zA-Z-]+)(\s*{)/g, '<span class="selector">$1</span>$2')
                 .replace(/([a-zA-Z-]+)(\s*:)/g, '<span class="property">$1</span>$2')
                 .replace(/(:\s*)([^;{}]+)/g, '$1<span class="value">$2</span>')
                 .replace(/(\/\*.*?\*\/)/g, '<span class="comment">$1</span>');
         } else if (language === 'javascript') {
-            return code
+            highlightedCode = highlightedCode
                 .replace(/\b(function|var|let|const|if|else|for|while|return|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
                 .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>')
                 .replace(/(["'])[^"']*\1/g, '<span class="string">$&</span>');
         }
-        return code;
+
+        // Apply highlighting for regions
+        highlightedRegions.forEach(target => {
+            if (target === 'tags') {
+                highlightedCode = highlightedCode.replace(
+                    /<span class="tag">([^<]*)<\/span>/g,
+                    '<span class="tag highlighted">$1</span>'
+                );
+            } else if (target === 'attributes') {
+                highlightedCode = highlightedCode.replace(
+                    /<span class="attribute">([^<]*)<\/span>/g,
+                    '<span class="attribute highlighted">$1</span>'
+                );
+            } else if (target === 'head') {
+                highlightedCode = highlightedCode.replace(
+                    /(&lt;head[^&]*&gt;[\s\S]*?&lt;\/head&gt;)/gi,
+                    '<span class="highlighted-region">$1</span>'
+                );
+            } else if (target === 'body') {
+                highlightedCode = highlightedCode.replace(
+                    /(&lt;body[^&]*&gt;[\s\S]*?&lt;\/body&gt;)/gi,
+                    '<span class="highlighted-region">$1</span>'
+                );
+            }
+        });
+
+        return highlightedCode;
     };
 
     return (

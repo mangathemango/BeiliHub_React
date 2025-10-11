@@ -120,6 +120,46 @@
     color: #95e1d3;
 }
 
+/* Highlighting effects */
+.syntax-highlight .tag.highlighted,
+.syntax-highlight .attribute.highlighted {
+    background: rgba(127, 0, 255, 0.3);
+    border-radius: 3px;
+    padding: 1px 2px;
+    animation: highlightPulse 1s ease-in-out;
+}
+
+.syntax-highlight .highlighted-region {
+    background: rgba(127, 0, 255, 0.2);
+    border-radius: 3px;
+    padding: 1px 2px;
+    animation: highlightPulse 1s ease-in-out;
+}
+
+@keyframes highlightPulse {
+    0% {
+        background: rgba(127, 0, 255, 0.1);
+    }
+
+    50% {
+        background: rgba(127, 0, 255, 0.4);
+    }
+
+    100% {
+        background: rgba(127, 0, 255, 0.3);
+    }
+}
+
+/* Highlightable regions */
+.highlightable-region {
+    transition: background-color 0.2s ease;
+}
+
+.highlightable-region:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
 /* Custom scrollbar for code editor */
 .code-textarea::-webkit-scrollbar,
 .syntax-highlight::-webkit-scrollbar {

@@ -94,6 +94,21 @@
     color: var(--white);
 }
 
+.highlight-trigger {
+    color: var(--accent1);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    border-bottom: 1px dashed var(--accent1);
+}
+
+.highlight-trigger:hover {
+    background: rgba(127, 0, 255, 0.2);
+    color: var(--white);
+    border-bottom-color: var(--white);
+}
+
 .interactive-code-block {
     background: var(--bg-secondary);
     border-radius: 8px;
