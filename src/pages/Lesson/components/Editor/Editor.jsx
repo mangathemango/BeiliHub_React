@@ -13,6 +13,7 @@ const Editor = ({ children }) => {
     // State for managing code and preview
     const [currentCode, setCurrentCode] = useState('');
     const codeEditorRef = useRef(null);
+    const taskRef = useRef(null);
 
     // Get initial code from CodeBlock children
     React.useEffect(() => {
@@ -83,6 +84,14 @@ const Editor = ({ children }) => {
         console.log(newCode);
     }, []);
 
+    // Handle code submission from CodeBlock
+    const handleCodeSubmit = useCallback(() => {
+        // Find the Task component and trigger its validation
+        if (taskRef.current && taskRef.current.handleSubmit) {
+            taskRef.current.handleSubmit();
+        }
+    }, []);
+
     React.useEffect(() => {
         if (isResizing) {
             document.addEventListener('mousemove', handleMouseMove);
@@ -115,6 +124,7 @@ const Editor = ({ children }) => {
                             ),
                             {
                                 onCodeChange: handleCodeChange,
+                                onSubmit: handleCodeSubmit,
                                 ref: codeEditorRef
                             }
                         )
@@ -142,7 +152,8 @@ const Editor = ({ children }) => {
                             {
                                 codeEditorRef,
                                 currentCode,
-                                onCodeChange: handleCodeChange
+                                onCodeChange: handleCodeChange,
+                                taskRef
                             }
                         )
                     }

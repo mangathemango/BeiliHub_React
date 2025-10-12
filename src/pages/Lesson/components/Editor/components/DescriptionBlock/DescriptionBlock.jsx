@@ -8,18 +8,47 @@ const DescriptionBlock = ({
     currentCode,
     onCodeChange,
     category = 'html',
-    lessonId = '1'
+    lessonId = '1',
+    taskRef
 }) => {
     const [activeTab, setActiveTab] = useState('lesson');
     const [_customizationOptions, setCustomizationOptions] = useState({});
 
-    // Find children by type
+    // Find children by type (with more robust detection for forwardRef components)
     const lessonChild = React.Children.toArray(children).find(
-        child => child.type?.name === 'Lesson'
+        child => child.type?.name === 'Lesson' || child.type?.displayName === 'Lesson'
     );
     const taskChild = React.Children.toArray(children).find(
-        child => child.type?.name === 'Task'
+        child => {
+            // Check multiple ways a Task component might be identified
+            const isTask = child.type?.name === 'Task' ||
+                child.type?.displayName === 'Task' ||
+                (child.props && 'validations' in child.props && 'objective' in child.props);
+            return isTask;
+        }
     );
+
+    // Debug logging
+    console.log('DescriptionBlock children:', React.Children.toArray(children).map(child => ({
+        type: child.type?.name,
+        displayName: child.type?.displayName,
+        props: Object.keys(child.props || {}),
+        actualType: child.type
+    })));
+    console.log('Found taskChild:', taskChild ? 'YES' : 'NO');
+    console.log('All children types:', React.Children.toArray(children).map(child => child.type));
+
+    // More detailed check for Task component
+    const allChildren = React.Children.toArray(children);
+    allChildren.forEach((child, index) => {
+        console.log(`Child ${index}:`, {
+            type: child.type,
+            typeName: child.type?.name,
+            displayName: child.type?.displayName,
+            isTask: child.type?.name === 'Task' || child.type?.displayName === 'Task',
+            props: child.props
+        });
+    });
 
     // Handle highlighting elements in the code editor
     const handleHighlight = useCallback((target, action) => {
@@ -98,6 +127,7 @@ const DescriptionBlock = ({
                                     currentCode,
                                     onCustomizationChange: handleCustomizationChange,
                                     onCodeChange,
+                                    ref: taskRef,
                                     ...taskChild.props
                                 })
                                 : <div className="empty-tab">No task for this lesson yet.</div>
