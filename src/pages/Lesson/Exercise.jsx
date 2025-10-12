@@ -14,7 +14,7 @@ const Exercise = () => {
         return <div>Loading quiz...</div>;
     }
     
-    return <div style={{ height: "400px" }}>
+    return <div style={{}}>
         <Question quizData={quizData}></Question>
     </div>
 }
