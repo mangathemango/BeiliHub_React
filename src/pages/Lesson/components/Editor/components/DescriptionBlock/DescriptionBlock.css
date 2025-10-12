@@ -989,8 +989,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--glass-border);
 }
 
@@ -1374,10 +1374,12 @@
     background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 152, 0, 0.08));
     border: 1px solid rgba(255, 193, 7, 0.3);
     border-radius: 12px;
-    padding: 20px;
-    margin: 24px 0;
+    padding: 10px 20px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .task-objective::before {
@@ -1392,11 +1394,12 @@
 
 .task-objective h3 {
     color: #ffc107;
-    margin: 0 0 16px 0;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0;
+    margin-top: 10px;
 }
 
 .task-objective ol {

@@ -60,10 +60,6 @@ const Task = forwardRef(({
 
     return (
         <div className={`task-container ${className}`} data-task>
-            <div className="task-header">
-                <h2>🎯 Your Task</h2>
-            </div>
-
             {objective && (
                 <div className="task-objective">
                     <h3>🎯 Objective</h3>
@@ -76,7 +72,7 @@ const Task = forwardRef(({
                 <div className="task-requirements">
                     <h3>📋 Requirements</h3>
                     <p className="requirements-note">
-                        Complete these requirements, then click "Check My Work!" to validate your solution:
+                        Complete these requirements, then click "Submit" to validate your solution:
                     </p>
                     <div className="requirement-list">
                         {/* Show validations with submission-based validation status */}

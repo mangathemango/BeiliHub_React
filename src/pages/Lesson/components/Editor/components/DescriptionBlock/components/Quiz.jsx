@@ -11,6 +11,13 @@ const Quiz = ({ children, moduleId, lessonId, questions = 5, duration = 3, passP
             <h2>Test Your Knowledge</h2>
             <p>Ready to test what you've learned? Take a quick quiz to reinforce your understanding.</p>
 
+            <button
+                className="btn primary large"
+                onClick={handleStartQuiz}
+            >
+                Start Quiz
+            </button>
+
             <div className="quiz-preview">
                 <h3>Quiz Preview</h3>
                 <div className="quiz-stats">
@@ -35,13 +42,6 @@ const Quiz = ({ children, moduleId, lessonId, questions = 5, duration = 3, passP
                     </div>
                 )}
             </div>
-
-            <button
-                className="btn primary large"
-                onClick={handleStartQuiz}
-            >
-                Start Quiz →
-            </button>
         </div>
     );
 };
