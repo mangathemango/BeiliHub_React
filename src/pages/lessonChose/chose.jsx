@@ -132,7 +132,7 @@ const LessonChose = () => {
         : phases;
 
     const handleLessonClick = (phaseType, lessonId) => {
-        navigate(`/lesson/${phaseType}/lesson${lessonId}`);
+        navigate(`/lesson/${phaseType}/${lessonId}`);
     };
 
     // Images are now imported above
