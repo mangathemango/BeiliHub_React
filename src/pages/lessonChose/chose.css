@@ -186,6 +186,10 @@
   color: #fff;
 }
 
+.tab-btn.selected i {
+    color: black;
+}
+
 @media (max-width: 600px) {
   .lesson-chose-title {
     font-size: 2rem;

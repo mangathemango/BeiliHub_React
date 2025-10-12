@@ -149,6 +149,7 @@ const LessonChose = () => {
                                                         onClick={() => handleTabClick(tab.type)}
                                                 >
                                                         <span className="phase-logo">
+                                                            {tab.type === "project" ? <i className="fa-solid fa-book"></i> :
                                                             <img 
                                                                 src={
                                                                     tab.type === 'html' ? htmlLogo :
@@ -158,7 +159,7 @@ const LessonChose = () => {
                                                                 }
                                                                 alt={tab.label + " logo"}
                                                                 style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }} 
-                                                            />
+                                                            />}
                                                         </span>
                                                 </button>
                                         ))}
