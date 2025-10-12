@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CosmicBackground from '../../components/CosmicBackground/CosmicBackground';
 import CourseCard from '../../components/CourseCard/CourseCard';
 import Modal from '../../components/Modal/Modal';
 import './Home.css';
 
+// Correct relative imports from src/assets (two levels up from src/pages/Home)
+import HtmlPng from '../../assets/HTML5.png';
+import CssPng from '../../assets/CSS.png';
+import JsPng from '../../assets/JS.png';
+
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const navigate = useNavigate();
-
-  const sampleCourse = {
-    id: 1,
-    title: 'Frontend Development',
-    desc: 'Learn how to build modern, responsive web interfaces.',
-    duration: '20h',
-    level: 'Beginner',
-    instructor: 'Team Learn',
-  };
 
   const openPreview = (course) => {
     setSelectedCourse(course);
@@ -30,11 +26,8 @@ export default function Home() {
   };
 
   // Navigate straight to the CSS lesson folder inside Lesson
-  // Adjust the path string below if your router uses a different casing or route naming.
   const goToCssLesson = () => {
-    navigate('/Lesson/css');
-    // If your router uses lowercase paths, use: navigate('/lesson/css');
-    // If you want to pass state: navigate('/Lesson/css', { state: { from: 'home' } });
+    navigate('/Lesson/css'); // adjust path casing if your router uses lowercase
   };
 
   return (
@@ -66,25 +59,15 @@ export default function Home() {
           <div className="hero-right" aria-hidden="false" role="region" aria-label="Technologies">
             <div className="logo-card">
               <div className="logo-tile html" title="HTML5" aria-hidden="true">
-                <svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <path d="M12 4h40l-4.5 50L32 60 16.5 54z" fill="#E44D26" />
-                  <path d="M22 24h20v4H22z" fill="#fff" opacity="0.95" />
-                  <text x="32" y="44" fontSize="18" fill="#fff" textAnchor="middle" fontFamily="sans-serif" fontWeight="700">5</text>
-                </svg>
+                < img src={HtmlPng} alt="HTML5 logo" loading="lazy" />
               </div>
 
               <div className="logo-tile css" title="CSS3" aria-hidden="true">
-                <svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <rect x="6" y="6" width="52" height="52" rx="10" fill="#6E2CF6" />
-                  <text x="32" y="40" fontSize="16" fill="#fff" textAnchor="middle" fontFamily="sans-serif" fontWeight="700">CSS</text>
-                </svg>
+                < img src={CssPng} alt="CSS3 logo" loading="lazy" />
               </div>
 
               <div className="logo-tile js" title="JavaScript" aria-hidden="true">
-                <svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                  <rect x="6" y="6" width="52" height="52" rx="6" fill="#F0DB4F" />
-                  <text x="32" y="40" fontSize="20" fill="#111" textAnchor="middle" fontFamily="sans-serif" fontWeight="800">JS</text>
-                </svg>
+                < img src={JsPng} alt="JavaScript logo" loading="lazy" />
               </div>
             </div>
           </div>
@@ -112,7 +95,7 @@ export default function Home() {
             </div>
             <p className="feature-desc">
               Follow a guided path through HTML, CSS, and JavaScript, designed to build your skills in the right order.
-            </p>
+            </p >
           </article>
 
           <article className="feature-card" tabIndex="0" aria-labelledby="f2-title">
@@ -120,12 +103,12 @@ export default function Home() {
             <div className="feature-thumb editor-thumb" aria-hidden="true">
               <div className="editor-sim">
                 <div className="code-pane"> &lt;!-- code editor --&gt; </div>
-                <div className="preview-pane"> <img alt="preview" src="" style={{opacity:0.02}} /> </div>
+                <div className="preview-pane"> < img alt="preview" src="" style={{opacity:0.02}} /> </div>
               </div>
             </div>
             <p className="feature-desc">
               Write and test code directly in your browser with instant feedback.
-            </p>
+            </p >
           </article>
 
           <article className="feature-card" tabIndex="0" aria-labelledby="f3-title">
@@ -139,7 +122,7 @@ export default function Home() {
             </div>
             <p className="feature-desc">
               Focus only on what you need — HTML, CSS, or JavaScript — and learn at your own pace.
-            </p>
+            </p >
           </article>
         </section>
       </main>
