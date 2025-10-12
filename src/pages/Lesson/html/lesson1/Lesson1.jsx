@@ -110,10 +110,28 @@ const Lesson1 = () => {
 
                 <Task
                     objective="Create your first personalized webpage"
-                    requirements={[
-                        'The <title> says "My Awesome Website"',
-                        'The <h1> contains your name',
-                        'The <p> says "I\'m learning HTML!"'
+                    validations={[
+                        {
+                            requirement: 'The <title> says "My Awesome Website"',
+                            validator: (doc) => {
+                                const title = doc.querySelector('title');
+                                return title && title.textContent.trim() === 'My Awesome Website';
+                            }
+                        },
+                        {
+                            requirement: 'The <h1> contains your name',
+                            validator: (doc) => {
+                                const h1 = doc.querySelector('h1');
+                                return h1 && h1.textContent.trim().length > 0 && h1.textContent.trim() !== 'Hello, world!';
+                            }
+                        },
+                        {
+                            requirement: 'The <p> says "I\'m learning HTML!"',
+                            validator: (doc) => {
+                                const p = doc.querySelector('p');
+                                return p && p.textContent.trim() === "I'm learning HTML!";
+                            }
+                        }
                     ]}
                     hints={[
                         'Edit only the text between the tags, not the tags themselves',
@@ -121,32 +139,7 @@ const Lesson1 = () => {
                         'Make sure to keep the quotes around attribute values'
                     ]}
                 >
-                    <h2>🛠️ Your Mission</h2>
-                    <p>
-                        Time to get your hands dirty! You've learned the basics of HTML structure,
-                        now let's make it personal. Look at the code editor on the left — notice how
-                        some parts are highlighted in blue? Those are the <strong>editable zones</strong>.
-                    </p>
 
-                    <p>Your task is simple but important:</p>
-
-                    <div className="task-objective">
-                        <h3>🎯 What You Need to Do:</h3>
-                        <ol>
-                            <li>
-                                <strong>Change the title:</strong> Make the <code>&lt;title&gt;</code>
-                                say "My Awesome Website" (this shows up in the browser tab)
-                            </li>
-                            <li>
-                                <strong>Add your name:</strong> Replace "Hello, world!" in the
-                                <code>&lt;h1&gt;</code> with your actual name
-                            </li>
-                            <li>
-                                <strong>Update the paragraph:</strong> Change the <code>&lt;p&gt;</code>
-                                text to "I'm learning HTML!"
-                            </li>
-                        </ol>
-                    </div>
                 </Task>
 
                 <Exercise
