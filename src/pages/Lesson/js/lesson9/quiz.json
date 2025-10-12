@@ -1,0 +1,66 @@
+{
+  "title": "ES6 Features Quiz",
+  "description": "Test your knowledge of modern JavaScript ES6 features",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which symbol defines a template literal?",
+      "choices": [
+        "\" \"",
+        "' '",
+        "` ` (backticks)",
+        "~ ~"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Template literals use backticks for string interpolation."
+    },
+    {
+      "id": 2,
+      "question": "What is the main advantage of arrow functions?",
+      "choices": [
+        "They're faster",
+        "Shorter syntax for writing functions",
+        "They automatically log values",
+        "They only work with objects"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Shorter syntax for writing functions."
+    },
+    {
+      "id": 3,
+      "question": "What does destructuring do?",
+      "choices": [
+        "Deletes object properties",
+        "Unpacks values from arrays/objects into variables",
+        "Creates a deep copy",
+        "Converts arrays into strings"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Unpacks values from arrays/objects into variables."
+    },
+    {
+      "id": 4,
+      "question": "Which line correctly destructures an object?\nconst user = { name: \"Luna\", age: 19 };",
+      "choices": [
+        "const name = user.name;",
+        "const { name, age } = user;",
+        "const user(name, age);",
+        "let [name, age] = user;"
+      ],
+      "correctAnswer": 1,
+      "explanation": "This extracts both properties directly."
+    },
+    {
+      "id": 5,
+      "question": "What will this output?\nconst greet = name => `Hi, ${name}!`;\nconsole.log(greet(\"Leo\"));",
+      "choices": [
+        "Hi, ${name}!",
+        "Hi, Leo!",
+        "undefined",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Variable interpolation replaces ${name} with \"Leo\"."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "title": "CSS Responsive Design Quiz",
+  "description": "Test your knowledge of media queries and mobile-first responsive design",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the mobile-first approach?",
+      "choices": [
+        "Styling desktop first, then mobile",
+        "Styling mobile devices first, then adding styles for larger screens",
+        "Only styling mobile devices",
+        "Ignoring mobile design"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Styling mobile devices first, then adding styles for larger screens — Ensures the site works on smaller screens by default."
+    },
+    {
+      "id": 2,
+      "question": "Which CSS rule applies styles for screens wider than 768px?",
+      "choices": [
+        "@media (max-width: 768px)",
+        "@media (min-width: 768px)",
+        "@media screen:768px",
+        "@media width=768px"
+      ],
+      "correctAnswer": 1,
+      "explanation": "@media (min-width: 768px) — Targets screens that are at least 768px wide."
+    },
+    {
+      "id": 3,
+      "question": "How do you create a range for tablets only (600px–1023px)?",
+      "choices": [
+        "@media (min-width: 600px)",
+        "@media (min-width: 600px) and (max-width: 1023px)",
+        "@media (width: 600px–1023px)",
+        "@media screen and 600-1023px"
+      ],
+      "correctAnswer": 1,
+      "explanation": "@media (min-width: 600px) and (max-width: 1023px) — Limits the styles to screens within that width range."
+    },
+    {
+      "id": 4,
+      "question": "Why use @media queries?",
+      "choices": [
+        "To apply styles conditionally based on screen size",
+        "To animate elements",
+        "To set colors",
+        "To hide content permanently"
+      ],
+      "correctAnswer": 0,
+      "explanation": "To apply styles conditionally based on screen size — This is the foundation of responsive design."
+    },
+    {
+      "id": 5,
+      "question": "What is the advantage of mobile-first design?",
+      "choices": [
+        "Ensures small screens get styled first, reducing overrides and improving performance",
+        "Makes desktop design faster",
+        "Ignores tablet users",
+        "Only works with Flexbox"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Ensures small screens get styled first, reducing overrides and improving performance — It guarantees a solid base for mobile users."
+    }
+  ]
+}

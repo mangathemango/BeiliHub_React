@@ -1,0 +1,66 @@
+{
+  "title": "Local Storage Quiz",
+  "description": "Test your knowledge of JavaScript Local Storage",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What type of data does localStorage store?",
+      "choices": [
+        "Numbers",
+        "Strings",
+        "Objects",
+        "Files"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Everything is saved as text."
+    },
+    {
+      "id": 2,
+      "question": "What method removes all data in localStorage?",
+      "choices": [
+        "localStorage.remove()",
+        "localStorage.clearItem()",
+        "localStorage.clear()",
+        "delete localStorage"
+      ],
+      "correctAnswer": 2,
+      "explanation": "localStorage.clear() removes all stored data."
+    },
+    {
+      "id": 3,
+      "question": "What happens if you try to store an array without JSON.stringify()?",
+      "choices": [
+        "It throws an error",
+        "It stores \"[object Object]\"",
+        "It stores correctly",
+        "It deletes your data"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Not readable as array."
+    },
+    {
+      "id": 4,
+      "question": "Which function retrieves a saved item?",
+      "choices": [
+        "localStorage.fetchItem()",
+        "localStorage.getItem()",
+        "localStorage.read()",
+        "localStorage.load()"
+      ],
+      "correctAnswer": 1,
+      "explanation": "localStorage.getItem() retrieves stored data."
+    },
+    {
+      "id": 5,
+      "question": "Why do we call JSON.parse() when loading?",
+      "choices": [
+        "To make text uppercase",
+        "To convert string data back into arrays or objects",
+        "To delete old data",
+        "To log to the console"
+      ],
+      "correctAnswer": 1,
+      "explanation": "To convert string data back into arrays or objects."
+    }
+  ]
+}

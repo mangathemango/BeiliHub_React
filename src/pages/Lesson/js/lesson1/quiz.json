@@ -1,0 +1,66 @@
+{
+  "title": "JavaScript Basics Quiz",
+  "description": "Test your knowledge of JavaScript fundamentals",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which keyword should you use for a variable that won't change?",
+      "choices": [
+        "let",
+        "const",
+        "var",
+        "static"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Declares constants that cannot be reassigned."
+    },
+    {
+      "id": 2,
+      "question": "What is the correct way to print something to the console?",
+      "choices": [
+        "print(\"Hello\")",
+        "console.log(\"Hello\")",
+        "log.console(\"Hello\")",
+        "output(\"Hello\")"
+      ],
+      "correctAnswer": 1,
+      "explanation": "console.log() is the standard output method."
+    },
+    {
+      "id": 3,
+      "question": "What will typeof 42 return?",
+      "choices": [
+        "\"number\"",
+        "\"integer\"",
+        "\"value\"",
+        "\"NaN\""
+      ],
+      "correctAnswer": 0,
+      "explanation": "typeof returns the data type as a string."
+    },
+    {
+      "id": 4,
+      "question": "Which operator is used for string concatenation?",
+      "choices": [
+        "*",
+        "+",
+        "&",
+        "%"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The plus operator joins strings in JavaScript."
+    },
+    {
+      "id": 5,
+      "question": "What does this print?\nlet name = \"Bob\";\nlet age = 30;\nconsole.log(`Name: ${name}, Age: ${age}`);",
+      "choices": [
+        "Name: ${name}, Age: ${age}",
+        "Name: Bob, Age: 30",
+        "Name: Bob Age: 30",
+        "undefined"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Template literals evaluate variables inside ${}."
+    }
+  ]
+}

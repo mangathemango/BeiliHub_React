@@ -1,0 +1,66 @@
+{
+  "title": "HTML Canvas Quiz",
+  "description": "Test your knowledge of HTML Canvas element and graphics programming",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the default size of <canvas> if no width/height is given?",
+      "choices": [
+        "100×100",
+        "300×150",
+        "500×500",
+        "Full page"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Default dimensions are 300px wide, 150px tall."
+    },
+    {
+      "id": 2,
+      "question": "What does getContext(\"2d\") do?",
+      "choices": [
+        "Creates a new canvas",
+        "Gives access to 2D drawing methods",
+        "Enables 3D rendering",
+        "Sets background color"
+      ],
+      "correctAnswer": 1,
+      "explanation": "getContext('2d') returns the 2D rendering context, which provides methods for drawing shapes, text, and images."
+    },
+    {
+      "id": 3,
+      "question": "Which method draws a filled rectangle?",
+      "choices": [
+        "drawRect()",
+        "fillRect()",
+        "rectFill()",
+        "square()"
+      ],
+      "correctAnswer": 1,
+      "explanation": "fillRect() draws a rectangle filled with the current fillStyle color or pattern."
+    },
+    {
+      "id": 4,
+      "question": "What is required for <canvas> to actually show graphics?",
+      "choices": [
+        "CSS",
+        "JavaScript",
+        "Meta tags",
+        "A <span>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Canvas requires JavaScript to draw anything - the element itself is just a blank drawing surface."
+    },
+    {
+      "id": 5,
+      "question": "Which is not something you can draw on <canvas>?",
+      "choices": [
+        "Rectangles",
+        "Circles",
+        "Text",
+        "HTML elements"
+      ],
+      "correctAnswer": 3,
+      "explanation": "<canvas> is for graphics only, not HTML structure."
+    }
+  ]
+}

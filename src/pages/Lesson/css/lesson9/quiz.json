@@ -1,0 +1,66 @@
+{
+  "title": "CSS Pseudo-classes & Pseudo-elements Quiz",
+  "description": "Test your knowledge of CSS pseudo-classes and pseudo-elements",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does :hover do?",
+      "choices": [
+        "Styles the element when clicked",
+        "Styles an element when the mouse is over it",
+        "Styles only input fields",
+        "Adds content"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Styles an element when the mouse is over it — Common for links and buttons."
+    },
+    {
+      "id": 2,
+      "question": "Which pseudo-class selects every other list item?",
+      "choices": [
+        ":hover",
+        ":nth-child(odd)",
+        "::before",
+        "::after"
+      ],
+      "correctAnswer": 1,
+      "explanation": ":nth-child(odd) — Targets all odd-numbered elements."
+    },
+    {
+      "id": 3,
+      "question": "What does ::after do?",
+      "choices": [
+        "Changes the text of an element",
+        "Selects the next sibling element",
+        "Adds content after an element without changing the HTML",
+        "Adds a border"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Adds content after an element without changing the HTML — Often used for tooltips or decorative content."
+    },
+    {
+      "id": 4,
+      "question": "How do you combine a pseudo-class and pseudo-element?",
+      "choices": [
+        ".element:hover:before",
+        ".element:hover::after",
+        ".element::after:hover",
+        ".element:after:hover"
+      ],
+      "correctAnswer": 1,
+      "explanation": ".element:hover::after — Apply pseudo-element only on certain states like hover."
+    },
+    {
+      "id": 5,
+      "question": "Why use pseudo-elements?",
+      "choices": [
+        "To insert content or styling without changing HTML",
+        "To animate elements automatically",
+        "To create a flex container",
+        "Only for forms"
+      ],
+      "correctAnswer": 0,
+      "explanation": "To insert content or styling without changing HTML — Keeps HTML clean while adding visuals."
+    }
+  ]
+}

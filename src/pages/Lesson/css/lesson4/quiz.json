@@ -1,0 +1,66 @@
+{
+  "title": "CSS Positioning Quiz",
+  "description": "Test your knowledge of CSS positioning: relative, absolute, fixed, and sticky",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does position: relative; do?",
+      "choices": [
+        "Removes the element from normal flow",
+        "Moves it relative to its normal position",
+        "Keeps it fixed on screen",
+        "Centers it"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Relative offsets the element but keeps its space in the layout."
+    },
+    {
+      "id": 2,
+      "question": "When you use position: absolute;, what is the element positioned relative to?",
+      "choices": [
+        "The nearest ancestor with a positioning context (non-static)",
+        "The viewport",
+        "The next sibling element",
+        "The document root"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Absolute positioning positions relative to the nearest positioned ancestor, or the document if none exists."
+    },
+    {
+      "id": 3,
+      "question": "Which property keeps an element visible while scrolling, but only after reaching a threshold?",
+      "choices": [
+        "fixed",
+        "sticky",
+        "absolute",
+        "relative"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Sticky positioning switches between relative and fixed based on scroll position and defined thresholds."
+    },
+    {
+      "id": 4,
+      "question": "position: fixed; is most useful for:",
+      "choices": [
+        "Elements like floating buttons or headers that must stay visible",
+        "Making elements responsive",
+        "Aligning inline content",
+        "Creating boxes inside boxes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Fixed positioning keeps elements in the same viewport position regardless of scrolling, perfect for persistent UI elements."
+    },
+    {
+      "id": 5,
+      "question": "Why might position: sticky; not work?",
+      "choices": [
+        "Its parent container has no scrollable overflow",
+        "It's not in the <head> tag",
+        "It's missing z-index",
+        "It's inside a <footer>"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Sticky positioning requires a scrolling container to function - without scrollable overflow, there's no scroll threshold to trigger the behavior."
+    }
+  ]
+}

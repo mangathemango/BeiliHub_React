@@ -12,6 +12,8 @@ import Lesson from './pages/Lesson/Lesson';
 import Exercise from './pages/Lesson/Exercise';
 import './global.css';
 import Question from './pages/Lesson/components/Question/Question';
+import Results from './pages/Results/Results';
+import LessonChose from './pages/lessonChose/chose';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/networking-course" element={<NetworkingCourse />} />
           <Route path="/lesson/:category/:id" element={<Lesson />} />
           <Route path="/lesson/:category/:id/exercise" element={<Exercise />} />
+          <Route path="/results" element={<Results />} />
+          <Route path="/lesson-chose" element={<LessonChose />} />
         </Routes>
       </Layout>
     </Router>
