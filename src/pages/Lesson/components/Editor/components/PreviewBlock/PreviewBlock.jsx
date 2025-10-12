@@ -14,6 +14,13 @@ const PreviewBlock = ({
     const timeoutRef = useRef(null);
 
     const generateHTML = (htmlCode, cssCode = '', jsCode = '') => {
+        // If htmlCode already contains a full HTML document, use it as-is
+        if (htmlCode.trim().toLowerCase().startsWith('<!doctype html>') ||
+            htmlCode.trim().toLowerCase().startsWith('<html')) {
+            return htmlCode;
+        }
+
+        // Otherwise, wrap it in a proper HTML structure
         return `
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +32,23 @@ const PreviewBlock = ({
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 20px;
-            background: #f5f5f5;
+            background: #fff;
             color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
         ${cssCode}
     </style>
@@ -34,21 +56,35 @@ const PreviewBlock = ({
 <body>
     ${htmlCode}
     <script>
-        // Prevent alerts and confirms from blocking
-        window.alert = function(msg) { console.log('Alert:', msg); };
-        window.confirm = function(msg) { console.log('Confirm:', msg); return true; };
+        // Prevent alerts and confirms from blocking the UI
+        window.alert = function(msg) { 
+            console.log('Alert:', msg);
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:#333;color:white;padding:10px;border-radius:5px;z-index:9999;max-width:300px;';
+            alertDiv.textContent = 'Alert: ' + msg;
+            document.body.appendChild(alertDiv);
+            setTimeout(() => alertDiv.remove(), 3000);
+        };
         
-        // Capture console logs and display them
-        const originalLog = console.log;
-        console.log = function(...args) {
-            originalLog.apply(console, args);
-            // Could send logs to parent window if needed
+        window.confirm = function(msg) { 
+            console.log('Confirm:', msg);
+            return true;
+        };
+        
+        // Enhanced error handling
+        window.onerror = function(msg, url, line, col, error) {
+            console.error('Script Error:', msg, 'at line', line);
+            return false;
         };
         
         try {
             ${jsCode}
         } catch (error) {
             console.error('JavaScript Error:', error.message);
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = 'background:#f8d7da;color:#721c24;padding:10px;margin:10px 0;border-radius:5px;border:1px solid #f5c6cb;';
+            errorDiv.textContent = 'JavaScript Error: ' + error.message;
+            document.body.appendChild(errorDiv);
         }
     </script>
 </body>
@@ -185,9 +221,10 @@ const PreviewBlock = ({
                             <iframe
                                 ref={iframeRef}
                                 srcDoc={previewContent}
-                                className="preview-iframe"
+                                className={`preview-iframe ${isLoading ? 'loading' : ''}`}
                                 title="Code Preview"
                                 sandbox="allow-scripts allow-same-origin allow-forms"
+                                onLoad={() => setIsLoading(false)}
                             />
                         ) : (
                             <div className="preview-placeholder">

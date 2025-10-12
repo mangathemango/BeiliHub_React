@@ -67,12 +67,14 @@ const InteractiveCodeBlock = ({
 
     // Handle hover preview for HTML/CSS
     const handleMouseEnter = () => {
+        console.log('Mouse enter on code block:', language, hoverable, !!onCodePreview);
         if (hoverable && (language === 'html' || language === 'css')) {
             onCodePreview?.(code, language);
         }
     };
 
     const handleMouseLeave = () => {
+        console.log('Mouse leave on code block:', hoverable, !!onCodePreviewEnd);
         if (hoverable) {
             onCodePreviewEnd?.();
         }

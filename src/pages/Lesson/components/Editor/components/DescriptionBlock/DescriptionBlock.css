@@ -799,18 +799,18 @@
 
 /* Interactive Code Blocks */
 .code-preview-tooltip {
-    position: fixed;
-    top: 50%;
+    position: absolute;
+    top: 20px;
     right: 20px;
-    transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.95);
     border: 1px solid var(--accent1);
     border-radius: 12px;
     padding: 16px;
-    max-width: 300px;
+    max-width: 280px;
     z-index: 1000;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    animation: slideInRight 0.3s ease;
 }
 
 .preview-header {
@@ -1395,4 +1395,10 @@
         padding: 16px;
         margin: 16px 0;
     }
+}
+
+/* Lesson container positioning */
+.lesson-container {
+    position: relative;
+    height: 100%;
 }

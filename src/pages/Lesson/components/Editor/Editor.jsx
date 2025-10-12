@@ -10,6 +10,29 @@ const Editor = ({ children }) => {
         codeHeight: 60  // Code takes 60% of left side height
     });
 
+    // State for managing code and preview
+    const [currentCode, setCurrentCode] = useState('');
+    const codeEditorRef = useRef(null);
+
+    // Get initial code from CodeBlock children
+    React.useEffect(() => {
+        const codeBlockChild = React.Children.toArray(children).find(child => child.type?.name === 'CodeBlock');
+        if (codeBlockChild && codeBlockChild.props.children) {
+            // Extract initial code from CodeBlock
+            let initialCode = '';
+            React.Children.forEach(codeBlockChild.props.children, (child) => {
+                if (typeof child === 'string') {
+                    initialCode += child;
+                } else if (React.isValidElement(child) && child.props.children) {
+                    initialCode += child.props.children;
+                }
+            });
+            if (initialCode && !currentCode) {
+                setCurrentCode(initialCode);
+            }
+        }
+    }, [children, currentCode]);
+
     const containerRef = useRef(null);
     const [isResizing, setIsResizing] = useState(null);
 
@@ -51,6 +74,11 @@ const Editor = ({ children }) => {
         setIsResizing(null);
     }, []);
 
+    // Handle code changes from CodeBlock
+    const handleCodeChange = useCallback((newCode) => {
+        setCurrentCode(newCode);
+    }, []);
+
     React.useEffect(() => {
         if (isResizing) {
             document.addEventListener('mousemove', handleMouseMove);
@@ -65,8 +93,8 @@ const Editor = ({ children }) => {
     return (
         <div className="editor-container" ref={containerRef}>
             {/* Left side container */}
-            <div 
-                className="left-container" 
+            <div
+                className="left-container"
                 style={{ width: `${layout.leftWidth}%` }}
             >
                 {/* Code editor on top */}
@@ -74,7 +102,15 @@ const Editor = ({ children }) => {
                     className="editor-panel code-panel"
                     style={{ height: `${layout.codeHeight}%` }}
                 >
-                    {React.Children.toArray(children).find(child => child.type?.name === 'CodeBlock')}
+                    {React.Children.toArray(children).find(child => child.type?.name === 'CodeBlock') &&
+                        React.cloneElement(
+                            React.Children.toArray(children).find(child => child.type?.name === 'CodeBlock'),
+                            {
+                                onCodeChange: handleCodeChange,
+                                ref: codeEditorRef
+                            }
+                        )
+                    }
                 </div>
 
                 {/* Horizontal resizer between code and description */}
@@ -88,7 +124,16 @@ const Editor = ({ children }) => {
                     className="editor-panel description-panel"
                     style={{ height: `${100 - layout.codeHeight}%` }}
                 >
-                    {React.Children.toArray(children).find(child => child.type?.name === 'DescriptionBlock')}
+                    {React.Children.toArray(children).find(child => child.type?.name === 'DescriptionBlock') &&
+                        React.cloneElement(
+                            React.Children.toArray(children).find(child => child.type?.name === 'DescriptionBlock'),
+                            {
+                                codeEditorRef,
+                                currentCode,
+                                onCodeChange: handleCodeChange
+                            }
+                        )
+                    }
                 </div>
             </div>
 
@@ -103,7 +148,17 @@ const Editor = ({ children }) => {
                 className="editor-panel preview-panel"
                 style={{ width: `${100 - layout.leftWidth}%` }}
             >
-                {React.Children.toArray(children).find(child => child.type?.name === 'PreviewBlock')}
+                {React.Children.toArray(children).find(child => child.type?.name === 'PreviewBlock') ?
+                    React.cloneElement(
+                        React.Children.toArray(children).find(child => child.type?.name === 'PreviewBlock'),
+                        {
+                            code: currentCode,
+                            language: 'html',
+                            autoRefresh: true
+                        }
+                    ) :
+                    <PreviewBlock code={currentCode} language="html" autoRefresh={true} />
+                }
             </div>
         </div>
     );

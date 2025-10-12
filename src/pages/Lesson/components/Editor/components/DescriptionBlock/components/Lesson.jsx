@@ -13,12 +13,14 @@ const Lesson = ({ children, onHighlight, codeEditorRef }) => {
 
     // Handle HTML/CSS preview on hover
     const handleCodePreview = useCallback((code, language) => {
+        console.log('Code preview triggered:', language, code.substring(0, 50) + '...');
         if (language === 'html' || language === 'css') {
             setHoveredElement({ code, language });
         }
     }, []);
 
     const handleCodePreviewEnd = useCallback(() => {
+        console.log('Code preview ended');
         setHoveredElement(null);
     }, []);
 
@@ -38,7 +40,7 @@ const Lesson = ({ children, onHighlight, codeEditorRef }) => {
     });
 
     return (
-        <div className="lesson-container" data-lesson>
+        <div className="lesson-container" data-lesson style={{ position: 'relative' }}>
             {enhancedChildren}
 
             {/* Floating preview for HTML/CSS */}
