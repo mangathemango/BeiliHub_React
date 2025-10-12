@@ -1,66 +1,66 @@
 {
-  "title": "HTML Lists & Tables Quiz",
-  "description": "Test your knowledge of HTML lists and table structures",
+  "title": "HTML Forms Quiz",
+  "description": "Test your knowledge of HTML forms and input elements",
   "questions": [
     {
       "id": 1,
-      "question": "Which element is used to define a table row?",
+      "question": "What does the <form> tag do in HTML?",
       "choices": [
-        "<td>",
-        "<tr>",
-        "<th>",
-        "<table>"
+        "Displays text on the page",
+        "Wraps input elements and handles data submission",
+        "Creates a table layout",
+        "Adds styling to buttons"
       ],
       "correctAnswer": 1,
-      "explanation": "<tr> = table row."
+      "explanation": "The <form> element is the container that defines where user input goes and how it’s submitted (via action and method)."
     },
     {
       "id": 2,
-      "question": "Which element creates a bullet-point list?",
+      "question": "What’s the difference between the ‘get’ and ‘post’ methods?",
       "choices": [
-        "<ol>",
-        "<ul>",
-        "<li>",
-        "<dl>"
+        "‘get’ hides data, ‘post’ shows data in the URL",
+        "‘get’ shows data in the URL, ‘post’ hides it in the request body",
+        "Both hide data",
+        "Both send data as email"
       ],
       "correctAnswer": 1,
-      "explanation": "<ul> = unordered list."
+      "explanation": "Use ‘get’ for public searches (non-sensitive), and ‘post’ for private info like passwords."
     },
     {
       "id": 3,
-      "question": "What's the difference between <td> and <th>?",
+      "question": "Which input type hides characters as you type (e.g., for passwords)?",
       "choices": [
-        "<td> is bold, <th> is plain",
-        "<th> is for headers, <td> is for normal cells",
-        "They're interchangeable",
-        "<td> = table definition"
+        "<input type=\"text\">",
+        "<input type=\"password\">",
+        "<input type=\"hidden\">",
+        "<input type=\"secure\">"
       ],
       "correctAnswer": 1,
-      "explanation": "Headers vs data."
+      "explanation": "type=\"password\" masks characters visually — but remember, real security happens on the server."
     },
     {
       "id": 4,
-      "question": "Which attribute merges table cells horizontally?",
+      "question": "What’s the main difference between radio buttons and checkboxes?",
       "choices": [
-        "colspan",
-        "rowspan",
-        "merge",
-        "span"
+        "Radio buttons are bigger",
+        "Radio buttons allow one choice; checkboxes allow multiple",
+        "Checkboxes send data faster",
+        "They are the same"
       ],
-      "correctAnswer": 0,
-      "explanation": "\"col\" = columns."
+      "correctAnswer": 1,
+      "explanation": "When multiple radio buttons share the same name, only one can be selected — perfect for ‘choose one’ options."
     },
     {
       "id": 5,
-      "question": "Which list type is best for definitions like \"HTML = language of the web\"?",
+      "question": "What does the <label> tag do in a form?",
       "choices": [
-        "<ol>",
-        "<ul>",
-        "<dl>",
-        "<li>"
+        "Makes input values bold",
+        "Connects readable text to an input (and makes it clickable)",
+        "Sends data to the server",
+        "Displays placeholder text"
       ],
-      "correctAnswer": 2,
-      "explanation": "<dl> = description list."
+      "correctAnswer": 1,
+      "explanation": "Labels improve accessibility — clicking the text focuses the input it’s linked to via for=\"id\"."
     }
   ]
 }

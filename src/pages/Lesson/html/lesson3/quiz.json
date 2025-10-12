@@ -1,0 +1,66 @@
+{
+  "title": "🧩 Quiz: Links & Navigation",
+  "description": "Test your knowledge of HTML links and navigation elements",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which tag is used to create a link?",
+      "choices": [
+        "<link>",
+        "<a>",
+        "<href>",
+        "<nav>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<a> – The anchor tag defines hyperlinks."
+    },
+    {
+      "id": 2,
+      "question": "What does target=\"_blank\" do?",
+      "choices": [
+        "Opens link in same tab",
+        "Opens link in new tab",
+        "Changes font style",
+        "Creates an internal link"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Opens link in new tab – Adds a new browser tab or window."
+    },
+    {
+      "id": 3,
+      "question": "What’s the difference between relative and absolute links?",
+      "choices": [
+        "None",
+        "Relative links point to local files; absolute links include full URLs",
+        "Absolute links are faster",
+        "Relative links are insecure"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Relative links point to local files; absolute links include full URLs – Used for internal vs external pages."
+    },
+    {
+      "id": 4,
+      "question": "Which attribute is used for internal navigation?",
+      "choices": [
+        "src",
+        "href=\"#idname\"",
+        "alt",
+        "title"
+      ],
+      "correctAnswer": 1,
+      "explanation": "href=\"#idname\" – Links to an element with that ID on the same page."
+    },
+    {
+      "id": 5,
+      "question": "Why use a <nav> element?",
+      "choices": [
+        "It adds animations",
+        "It semantically groups navigation links",
+        "It changes link color",
+        "It replaces <a> tags"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It semantically groups navigation links – Improves accessibility and structure."
+    }
+  ]
+}
