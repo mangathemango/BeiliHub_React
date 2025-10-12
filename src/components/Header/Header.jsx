@@ -19,16 +19,7 @@ const Header = () => {
         <header className="site-header">
             <div className="container header-grid">
                 <Link className="brand" to="/">
-                    <svg className="logo" viewBox="0 0 100 100" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="g" x1="0" x2="1">
-                                <stop offset="0" stopColor="#FF8A00" />
-                                <stop offset="1" stopColor="#E52E71" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="6" y="6" width="88" height="88" rx="18" fill="url(#g)" />
-                        <text x="50" y="60" textAnchor="middle" fontSize="42" fontWeight="700" fill="#fff">L</text>
-                    </svg>
+                    <img className="logo" src="/images/icons/logo.png" alt="BeiliHub Logo" />
                     <span>BeiliHub</span>
                 </Link>
 
