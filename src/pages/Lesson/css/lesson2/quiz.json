@@ -1,0 +1,66 @@
+{
+  "title": "CSS Colors & Typography Quiz",
+  "description": "Test your knowledge of CSS color formats and typography properties",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which of the following is NOT a valid CSS color format?",
+      "choices": [
+        "rgb(255, 255, 255)",
+        "#fff",
+        "hsl(100, 50%, 50%)",
+        "color(blue)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "There's no color() syntax — CSS uses named colors or numeric systems like RGB and HSL."
+    },
+    {
+      "id": 2,
+      "question": "What does the A stand for in RGBA?",
+      "choices": [
+        "Alignment",
+        "Alpha (transparency)",
+        "Alternate",
+        "Aspect"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It controls opacity — 1 is fully opaque, 0 is fully transparent."
+    },
+    {
+      "id": 3,
+      "question": "Which Google Fonts import method is correct?",
+      "choices": [
+        "<font src=\"google.com/roboto.css\">",
+        "<link href=\"https://fonts.googleapis.com/css2?family=Roboto&display=swap\" rel=\"stylesheet\">",
+        "@import fonts.google.com/Roboto;",
+        "<script src=\"googlefonts.com/Roboto.js\"></script>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "You link Google Fonts via the <link> element inside the <head>."
+    },
+    {
+      "id": 4,
+      "question": "Why should you include multiple font names in a font-family list?",
+      "choices": [
+        "It loads fonts faster",
+        "It allows browser to choose the best style",
+        "It provides fallback fonts if one fails to load",
+        "It's required by CSS"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Fallback fonts ensure text still displays properly if the preferred font isn't available."
+    },
+    {
+      "id": 5,
+      "question": "What property adjusts the vertical spacing between lines of text?",
+      "choices": [
+        "text-spacing",
+        "font-weight",
+        "line-height",
+        "letter-spacing"
+      ],
+      "correctAnswer": 2,
+      "explanation": "It makes paragraphs easier to read by controlling space between lines."
+    }
+  ]
+}

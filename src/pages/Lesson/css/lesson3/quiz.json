@@ -1,0 +1,66 @@
+{
+  "title": "CSS Box Model & Display Quiz",
+  "description": "Test your knowledge of CSS box model properties and display types",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does padding control?",
+      "choices": [
+        "Space inside the border",
+        "Space outside the border",
+        "Border thickness",
+        "Text alignment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Padding adds space between content and border."
+    },
+    {
+      "id": 2,
+      "question": "Which CSS property defines space outside an element's border?",
+      "choices": [
+        "border",
+        "margin",
+        "outline",
+        "gap"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Margin controls outer spacing between boxes."
+    },
+    {
+      "id": 3,
+      "question": "If you want elements side by side but still able to have width and height, use:",
+      "choices": [
+        "display: block",
+        "display: inline",
+        "display: inline-block",
+        "display: none"
+      ],
+      "correctAnswer": 2,
+      "explanation": "inline-block allows block-like control in a line."
+    },
+    {
+      "id": 4,
+      "question": "What does box-sizing: border-box; change?",
+      "choices": [
+        "Adds borders to every box",
+        "Makes padding and border included in width/height",
+        "Hides overflow",
+        "Centers the element"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It tells the browser to include padding and border in total dimensions."
+    },
+    {
+      "id": 5,
+      "question": "Which property can be used to hide an element from the layout entirely?",
+      "choices": [
+        "visibility: hidden;",
+        "display: none;",
+        "opacity: 0;",
+        "overflow: hidden;"
+      ],
+      "correctAnswer": 1,
+      "explanation": "display: none; removes the element from layout flow."
+    }
+  ]
+}

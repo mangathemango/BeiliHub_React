@@ -1,0 +1,66 @@
+{
+  "title": "HTML Semantic Elements Quiz",
+  "description": "Test your knowledge of semantic HTML and meaningful markup",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What's the main benefit of using semantic HTML?",
+      "choices": [
+        "It looks cooler",
+        "It makes the website load faster",
+        "It gives meaning to content, helping accessibility & SEO",
+        "It changes the color of elements"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Semantic HTML provides meaning to content, making it more accessible to screen readers and better understood by search engines."
+    },
+    {
+      "id": 2,
+      "question": "Which tag is used for the primary page content?",
+      "choices": [
+        "<main>",
+        "<body>",
+        "<section>",
+        "<article>"
+      ],
+      "correctAnswer": 0,
+      "explanation": "<main> represents the dominant content of the document body, excluding headers, footers, and navigation."
+    },
+    {
+      "id": 3,
+      "question": "Which element should be unique (only one per page)?",
+      "choices": [
+        "<header>",
+        "<main>",
+        "<section>",
+        "<footer>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "There should only be one <main> element per page as it represents the primary content area."
+    },
+    {
+      "id": 4,
+      "question": "What's the difference between <section> and <article>?",
+      "choices": [
+        "<section> is only for sidebars",
+        "<article> is a self-contained piece; <section> is for grouping content",
+        "<article> is only for blogs",
+        "No difference, they're the same"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<article> represents standalone, self-contained content that could be distributed independently, while <section> is for grouping thematically related content."
+    },
+    {
+      "id": 5,
+      "question": "Which element is best for navigation menus?",
+      "choices": [
+        "<menu>",
+        "<aside>",
+        "<nav>",
+        "<footer>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "<nav> represents a section of navigation links, making it the semantic choice for menus and navigation areas."
+    }
+  ]
+}

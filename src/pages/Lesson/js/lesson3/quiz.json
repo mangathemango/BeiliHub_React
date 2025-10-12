@@ -1,0 +1,66 @@
+{
+  "title": "Conditionals & Loops Quiz",
+  "description": "Test your knowledge of JavaScript conditionals and loops",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does an if statement do?",
+      "choices": [
+        "Runs code a fixed number of times",
+        "Checks a condition and runs code if it's true",
+        "Creates a new variable",
+        "Loops forever"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It controls decision-making."
+    },
+    {
+      "id": 2,
+      "question": "How many times does this loop run?\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}",
+      "choices": [
+        "2",
+        "3",
+        "4",
+        "Infinite"
+      ],
+      "correctAnswer": 1,
+      "explanation": "i takes values 0, 1, 2 before stopping."
+    },
+    {
+      "id": 3,
+      "question": "What does break do inside a loop?",
+      "choices": [
+        "Skips one iteration",
+        "Exits the loop completely",
+        "Restarts the loop",
+        "Does nothing"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It stops the loop immediately."
+    },
+    {
+      "id": 4,
+      "question": "What happens if a while loop's condition is always true?",
+      "choices": [
+        "The loop won't run",
+        "It will run once",
+        "It will run forever",
+        "It throws an error"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Called an infinite loop."
+    },
+    {
+      "id": 5,
+      "question": "What does Math.floor(Math.random() * 10) + 1 do?",
+      "choices": [
+        "Returns a decimal between 0–10",
+        "Returns a whole number between 1–10",
+        "Always returns 10",
+        "Generates a negative number"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Math.random() gives 0–0.999, multiplied and floored."
+    }
+  ]
+}

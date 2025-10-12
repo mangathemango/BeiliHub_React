@@ -1,0 +1,66 @@
+{
+  "title": "HTML Lists & Tables Quiz",
+  "description": "Test your knowledge of HTML lists and table structures",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which element is used to define a table row?",
+      "choices": [
+        "<td>",
+        "<tr>",
+        "<th>",
+        "<table>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<tr> = table row."
+    },
+    {
+      "id": 2,
+      "question": "Which element creates a bullet-point list?",
+      "choices": [
+        "<ol>",
+        "<ul>",
+        "<li>",
+        "<dl>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<ul> = unordered list."
+    },
+    {
+      "id": 3,
+      "question": "What's the difference between <td> and <th>?",
+      "choices": [
+        "<td> is bold, <th> is plain",
+        "<th> is for headers, <td> is for normal cells",
+        "They're interchangeable",
+        "<td> = table definition"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Headers vs data."
+    },
+    {
+      "id": 4,
+      "question": "Which attribute merges table cells horizontally?",
+      "choices": [
+        "colspan",
+        "rowspan",
+        "merge",
+        "span"
+      ],
+      "correctAnswer": 0,
+      "explanation": "\"col\" = columns."
+    },
+    {
+      "id": 5,
+      "question": "Which list type is best for definitions like \"HTML = language of the web\"?",
+      "choices": [
+        "<ol>",
+        "<ul>",
+        "<dl>",
+        "<li>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "<dl> = description list."
+    }
+  ]
+}

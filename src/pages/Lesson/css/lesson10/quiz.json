@@ -1,0 +1,66 @@
+{
+  "title": "CSS Advanced Styling Quiz",
+  "description": "Test your knowledge of CSS Variables, calc(), clamp(), and modern CSS functions",
+  "questions": [
+    {
+      "id": 1,
+      "question": "How do you reference a CSS variable?",
+      "choices": [
+        "color: --primary-color;",
+        "color: var(--primary-color);",
+        "color: $primary-color;",
+        "color: primary-color;"
+      ],
+      "correctAnswer": 1,
+      "explanation": "color: var(--primary-color); — var() retrieves the value of a CSS variable."
+    },
+    {
+      "id": 2,
+      "question": "What does calc() allow you to do?",
+      "choices": [
+        "Combine different units in one calculation",
+        "Automatically scale font sizes",
+        "Clamp values between min and max",
+        "Create keyframes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Combine different units in one calculation — e.g., calc(100% - 40px)."
+    },
+    {
+      "id": 3,
+      "question": "What is the purpose of clamp()?",
+      "choices": [
+        "Perform calculations",
+        "Constrain a value between a minimum and maximum while still scaling",
+        "Define variables",
+        "Add hover effects"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Constrain a value between a minimum and maximum while still scaling — Useful for responsive typography or widths."
+    },
+    {
+      "id": 4,
+      "question": "How do you apply a dark theme using CSS variables?",
+      "choices": [
+        "Change each element's color manually",
+        "Override the variables in a parent class (like .dark)",
+        "Use !important for all colors",
+        "Only with JavaScript inline styles"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Override the variables in a parent class (like .dark) — Updates all elements using those variables."
+    },
+    {
+      "id": 5,
+      "question": "Why use CSS variables for theme switching?",
+      "choices": [
+        "It allows updating multiple styles dynamically in one place",
+        "To make the site load faster",
+        "Only works with Flexbox",
+        "To animate elements"
+      ],
+      "correctAnswer": 0,
+      "explanation": "It allows updating multiple styles dynamically in one place — Makes themes maintainable and scalable."
+    }
+  ]
+}

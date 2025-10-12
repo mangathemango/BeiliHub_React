@@ -1,0 +1,66 @@
+{
+  "title": "CSS Flexbox Quiz",
+  "description": "Test your knowledge of CSS Flexbox layout properties and behavior",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What property makes an element a Flexbox container?",
+      "choices": [
+        "display: flex",
+        "justify-content",
+        "align-items",
+        "flex-direction"
+      ],
+      "correctAnswer": 0,
+      "explanation": "display: flex — This property turns a container into a Flexbox, allowing its direct children to become flex items that respond to alignment, spacing, and direction rules."
+    },
+    {
+      "id": 2,
+      "question": "Which property controls horizontal alignment in a flex row?",
+      "choices": [
+        "align-items",
+        "justify-content",
+        "text-align",
+        "float"
+      ],
+      "correctAnswer": 1,
+      "explanation": "justify-content — In a flex container with flex-direction: row, justify-content determines how the items are spaced horizontally along the main axis."
+    },
+    {
+      "id": 3,
+      "question": "To make items stack vertically, you use:",
+      "choices": [
+        "flex-direction: column;",
+        "display: block;",
+        "justify-items: column;",
+        "grid-template-rows"
+      ],
+      "correctAnswer": 0,
+      "explanation": "flex-direction: column — This changes the main axis from horizontal to vertical, making items stack one on top of the other."
+    },
+    {
+      "id": 4,
+      "question": "What does align-items: center; do?",
+      "choices": [
+        "Vertically aligns items along the cross-axis",
+        "Centers text horizontally",
+        "Adds padding",
+        "Wraps items"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Vertically aligns items along the cross-axis — In a row flex container, the cross-axis is vertical, so this centers all items vertically within the container."
+    },
+    {
+      "id": 5,
+      "question": "What property allows flex items to move to the next line?",
+      "choices": [
+        "flex-wrap",
+        "overflow: auto",
+        "wrap-items",
+        "display: grid"
+      ],
+      "correctAnswer": 0,
+      "explanation": "flex-wrap — This property allows items that exceed the container's width to wrap onto a new line instead of overflowing."
+    }
+  ]
+}

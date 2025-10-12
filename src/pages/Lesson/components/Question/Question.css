@@ -74,10 +74,6 @@
     padding: 2px;
     background: linear-gradient(90deg, var(--accent1), var(--accent2));
     border-radius: 8px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
     z-index: -1;
 }
 
@@ -94,4 +90,168 @@
     position: absolute;
     left: 5px;
     top: 5px;
+}
+
+/* Flexbox container for navigation */
+.question-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+/* Side navigation buttons */
+.side-btn {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white-6);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.side-btn:hover:not(:disabled) {
+    background-color: var(--white-20);
+    transform: scale(1.1);
+}
+
+.side-btn:disabled {
+    background-color: var(--white-6);
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    font-size: 16px;
+    width: 80px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    transform: scale(1.1);
+}
+
+/* Inline Submit Button */
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.submit-button-container.visible {
+    max-height: 80px;
+    opacity: 1;
+}
+
+.submit-btn-inline {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.submit-btn-inline:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Center the question navigation */
+.question-navigation {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: white;
+    font-size: 1.1rem;
+}
+
+/* Question Indicators */
+.question-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--muted-6);
+    border: 2px var(--white-6) solid;
+    transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+    background-color: rgb(90, 10, 218);
+    border: 2px solid rgb(90, 10, 218);
+    box-shadow: 0 0 8px rgb(90, 10, 218);
+    transform: scale(1.2);
+}
+
+/* External Submit Button Container */
+.external-submit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.external-submit-container.visible {
+    max-height: 80px;
+    opacity: 1;
+}
+
+.submit-btn-external {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 18px 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.submit-btn-external:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
 }

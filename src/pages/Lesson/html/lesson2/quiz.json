@@ -1,0 +1,66 @@
+{
+  "title": "HTML Text Elements Quiz",
+  "description": "Test your knowledge of HTML text formatting and semantic elements",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What's the main difference between <strong> and <b>?",
+      "choices": [
+        "<b> makes text bigger",
+        "<strong> adds semantic importance",
+        "<b> is for block elements",
+        "They're identical"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<strong> conveys importance, not just bold style."
+    },
+    {
+      "id": 2,
+      "question": "Which tag should you use for a long quotation?",
+      "choices": [
+        "<q>",
+        "<blockquote>",
+        "<cite>",
+        "<quote>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<blockquote> is used for longer quotations that are displayed as a separate block of text."
+    },
+    {
+      "id": 3,
+      "question": "Which of these is an inline element?",
+      "choices": [
+        "<p>",
+        "<h2>",
+        "<em>",
+        "<blockquote>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "<em> is an inline element that emphasizes text without breaking the flow of content."
+    },
+    {
+      "id": 4,
+      "question": "How many heading levels exist in HTML?",
+      "choices": [
+        "3",
+        "5",
+        "6",
+        "Unlimited"
+      ],
+      "correctAnswer": 2,
+      "explanation": "HTML has 6 heading levels: <h1> through <h6>, where <h1> is the largest and <h6> is the smallest."
+    },
+    {
+      "id": 5,
+      "question": "What does <hr> do?",
+      "choices": [
+        "Adds a horizontal line",
+        "Creates a paragraph break",
+        "Adds bold text",
+        "Ends the document"
+      ],
+      "correctAnswer": 0,
+      "explanation": "<hr> creates a horizontal rule (line) that separates content sections."
+    }
+  ]
+}

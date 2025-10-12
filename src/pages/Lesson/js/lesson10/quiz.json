@@ -1,0 +1,66 @@
+{
+  "title": "Mini Project Combo Quiz",
+  "description": "Test your knowledge of JavaScript concepts used in real projects",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which method updates the content of a div?",
+      "choices": [
+        "createElement()",
+        ".innerHTML",
+        "appendChild()",
+        ".style"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Replaces the inner HTML of the element."
+    },
+    {
+      "id": 2,
+      "question": "What is the purpose of async before a function?",
+      "choices": [
+        "Runs code faster",
+        "Allows the use of await inside the function",
+        "Makes the function synchronous",
+        "Deletes old code"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Allows the use of await inside the function."
+    },
+    {
+      "id": 3,
+      "question": "Why do we use await before fetch?",
+      "choices": [
+        "To stop the page",
+        "To wait until the API response arrives before continuing",
+        "To load CSS",
+        "To prevent clicks"
+      ],
+      "correctAnswer": 1,
+      "explanation": "To wait until the API response arrives before continuing."
+    },
+    {
+      "id": 4,
+      "question": "How do you safely handle a failed API call?",
+      "choices": [
+        "Ignore it",
+        "Use try/catch",
+        "Reload the page",
+        "Use console.warn() only"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Use try/catch for error handling."
+    },
+    {
+      "id": 5,
+      "question": "Which ES6 feature simplifies accessing nested data in API response?",
+      "choices": [
+        "Loops",
+        "Destructuring",
+        "Template literals",
+        "Arrow functions"
+      ],
+      "correctAnswer": 1,
+      "explanation": "e.g., const { main: { temp } } = data"
+    }
+  ]
+}

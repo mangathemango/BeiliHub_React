@@ -1,0 +1,66 @@
+{
+  "title": "HTML Div & Span Quiz",
+  "description": "Test your knowledge of HTML generic containers and semantic structure",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the main difference between <div> and <span>?",
+      "choices": [
+        "<div> is for images, <span> is for videos",
+        "<div> is block-level, <span> is inline",
+        "<div> makes text bold, <span> makes text italic",
+        "No difference"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<div> starts on a new line (block-level), <span> stays inline."
+    },
+    {
+      "id": 2,
+      "question": "Which tag would you use to highlight just one word in a paragraph?",
+      "choices": [
+        "<div>",
+        "<span>",
+        "<section>",
+        "<article>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<span> wraps inline content without breaking the flow."
+    },
+    {
+      "id": 3,
+      "question": "Which of the following is true about <div>?",
+      "choices": [
+        "It has semantic meaning",
+        "It groups content but has no meaning by itself",
+        "It automatically adds borders",
+        "It is inline"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<div> is structural, not semantic."
+    },
+    {
+      "id": 4,
+      "question": "Why might <div> and <span> be considered \"generic\" containers?",
+      "choices": [
+        "Because they can be used anywhere but don't add meaning",
+        "Because they change the language",
+        "Because they are only for images",
+        "Because browsers don't support them"
+      ],
+      "correctAnswer": 0,
+      "explanation": "They don't carry semantic meaning — just containers for structure or styling."
+    },
+    {
+      "id": 5,
+      "question": "Which is the best practice today?",
+      "choices": [
+        "Only use <div> and <span> everywhere",
+        "Use semantic tags when possible, and <div>/<span> when needed",
+        "Never use <div>",
+        "Replace <span> with <h1>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "<div>/<span> are powerful, but semantic HTML improves accessibility and SEO."
+    }
+  ]
+}

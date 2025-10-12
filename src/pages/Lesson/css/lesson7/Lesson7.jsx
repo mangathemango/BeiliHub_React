@@ -1,9 +1,10 @@
 import "./Lesson7.css"
-                    
+import Question from "../../components/Question/Question"
+import quizData from "./quiz.json"
+
 const Lesson7 = () => {
-    return <div>
-        <p>This is lesson 7 from css</p>
-        <p>This lesson is probably not done yet</p>
+    return <div style={{ height: "400px" }}>
+        <Question quizData={quizData}></Question>
     </div>
 }
 

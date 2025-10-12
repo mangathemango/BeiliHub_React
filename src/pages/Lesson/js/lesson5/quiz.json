@@ -1,0 +1,66 @@
+{
+  "title": "Advanced DOM Quiz",
+  "description": "Test your knowledge of advanced JavaScript DOM manipulation",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does document.createElement(\"p\") do?",
+      "choices": [
+        "Finds a <p> element",
+        "Creates a new <p> element in memory",
+        "Deletes a paragraph",
+        "Logs all <p> elements"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It's not visible until appended."
+    },
+    {
+      "id": 2,
+      "question": "What must you do after creating an element to display it?",
+      "choices": [
+        "Use .remove()",
+        "Use .appendChild() on a parent element",
+        "Call .querySelector()",
+        "Assign it to a variable"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Adds it to the DOM tree."
+    },
+    {
+      "id": 3,
+      "question": "How do you delete an element from the DOM?",
+      "choices": [
+        "hide()",
+        "element.remove()",
+        "element = null",
+        "delete element"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Removes that element completely from the document."
+    },
+    {
+      "id": 4,
+      "question": "What happens if you add an event listener to a dynamically created element?",
+      "choices": [
+        "It works just like any other element",
+        "It won't trigger",
+        "It must be attached before creation",
+        "It only works on buttons"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Event listeners can be attached after creation."
+    },
+    {
+      "id": 5,
+      "question": "Why use trim() on input text?",
+      "choices": [
+        "Adds spaces",
+        "Removes extra spaces from both ends",
+        "Converts to lowercase",
+        "Deletes the string"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Ensures you don't add empty tasks accidentally."
+    }
+  ]
+}

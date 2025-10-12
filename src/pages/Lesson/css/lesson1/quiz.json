@@ -1,0 +1,66 @@
+{
+  "title": "CSS Introduction & Selectors Quiz",
+  "description": "Test your knowledge of CSS fundamentals and selector types",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which CSS method is best for large websites?",
+      "choices": [
+        "Inline",
+        "Internal",
+        "External",
+        "None"
+      ],
+      "correctAnswer": 2,
+      "explanation": "External stylesheets are modular and can be reused across pages — ideal for scalability."
+    },
+    {
+      "id": 2,
+      "question": "What does the . in .highlight represent?",
+      "choices": [
+        "An ID selector",
+        "A class selector",
+        "An element selector",
+        "A pseudo-class"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The . syntax targets class names in CSS."
+    },
+    {
+      "id": 3,
+      "question": "Which of the following selectors is most specific?",
+      "choices": [
+        "p",
+        ".text",
+        "#main",
+        "h1"
+      ],
+      "correctAnswer": 2,
+      "explanation": "ID selectors override class and element selectors when there's a conflict."
+    },
+    {
+      "id": 4,
+      "question": "What does \"cascading\" in CSS mean?",
+      "choices": [
+        "Styles fall from top to bottom visually",
+        "Styles can override others based on priority",
+        "Styles scroll down with the page",
+        "It has to do with gradient colors"
+      ],
+      "correctAnswer": 1,
+      "explanation": "CSS applies rules in order of specificity and importance — hence \"cascading.\""
+    },
+    {
+      "id": 5,
+      "question": "Which HTML tag is used to link an external stylesheet?",
+      "choices": [
+        "<style>",
+        "<css>",
+        "<link>",
+        "<script>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The <link> tag connects external stylesheets to your HTML document."
+    }
+  ]
+}

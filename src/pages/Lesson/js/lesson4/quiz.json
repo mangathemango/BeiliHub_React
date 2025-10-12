@@ -1,0 +1,66 @@
+{
+  "title": "DOM Basics Quiz",
+  "description": "Test your knowledge of JavaScript DOM manipulation",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does document.querySelector(\"#title\") do?",
+      "choices": [
+        "Creates a new element",
+        "Selects the element with id=\"title\"",
+        "Changes the text",
+        "Deletes the element"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The # prefix targets an element by ID."
+    },
+    {
+      "id": 2,
+      "question": "What does .innerText control?",
+      "choices": [
+        "HTML structure",
+        "The visible text inside an element",
+        "CSS styles",
+        "Event types"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It updates what the user sees."
+    },
+    {
+      "id": 3,
+      "question": "How do you change the color of an element to red?",
+      "choices": [
+        "element.style.color = \"red\";",
+        "element.color(\"red\");",
+        "setColor(red);",
+        "element.fontColor = \"red\";"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Directly changes the inline style."
+    },
+    {
+      "id": 4,
+      "question": "Which method listens for user interactions like clicks?",
+      "choices": [
+        "addClick()",
+        "addEventListener()",
+        "runEvent()",
+        "onClickNow()"
+      ],
+      "correctAnswer": 1,
+      "explanation": "It attaches a function to run when an event occurs."
+    },
+    {
+      "id": 5,
+      "question": "If you want to hide an element using JS, which property works best?",
+      "choices": [
+        "display: block",
+        "visibility: hidden",
+        "font-weight: hidden",
+        "z-index: 0"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hides the element but keeps its space."
+    }
+  ]
+}

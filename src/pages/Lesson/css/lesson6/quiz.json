@@ -1,0 +1,66 @@
+{
+  "title": "CSS Grid Quiz",
+  "description": "Test your knowledge of CSS Grid layout system and properties",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which property sets the number of columns in a grid?",
+      "choices": [
+        "grid-template-rows",
+        "grid-template-columns",
+        "gap",
+        "flex-direction"
+      ],
+      "correctAnswer": 1,
+      "explanation": "grid-template-columns — This defines the column structure of the grid container."
+    },
+    {
+      "id": 2,
+      "question": "How do you make an item span multiple columns?",
+      "choices": [
+        "grid-row: span 2",
+        "grid-column: span 2",
+        "flex-wrap: wrap",
+        "justify-content: space-between"
+      ],
+      "correctAnswer": 1,
+      "explanation": "grid-column: span 2 — This allows the grid item to occupy multiple columns."
+    },
+    {
+      "id": 3,
+      "question": "Which property sets spacing between grid rows and columns?",
+      "choices": [
+        "margin",
+        "padding",
+        "gap",
+        "align-items"
+      ],
+      "correctAnswer": 2,
+      "explanation": "gap — The gap property controls spacing between both rows and columns in a grid."
+    },
+    {
+      "id": 4,
+      "question": "What does repeat(auto-fit, minmax(150px, 1fr)) do?",
+      "choices": [
+        "Fixes all columns at 150px",
+        "Automatically creates as many columns as fit, each at least 150px wide, and distributes extra space evenly",
+        "Creates a single column with flexible height",
+        "Only affects rows"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Automatically creates as many columns as fit, each at least 150px wide, and distributes extra space evenly — Perfect for responsive layouts."
+    },
+    {
+      "id": 5,
+      "question": "Why use display: grid instead of display: flex for a photo gallery?",
+      "choices": [
+        "Grid is easier to animate",
+        "Grid handles both rows and columns simultaneously",
+        "Flexbox cannot style images",
+        "Grid automatically loads images faster"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Grid handles both rows and columns simultaneously — This makes creating 2D layouts like galleries simpler than Flexbox, which is mostly 1D."
+    }
+  ]
+}

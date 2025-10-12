@@ -1,0 +1,66 @@
+{
+  "title": "Fetch API & Async Quiz",
+  "description": "Test your knowledge of JavaScript asynchronous programming and Fetch API",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does fetch() return?",
+      "choices": [
+        "JSON object",
+        "Promise",
+        "Array",
+        "String"
+      ],
+      "correctAnswer": 1,
+      "explanation": "You must resolve it to get data."
+    },
+    {
+      "id": 2,
+      "question": "Why do we use .json() on the response?",
+      "choices": [
+        "To download files",
+        "To convert raw response into a JavaScript object",
+        "To beautify the data",
+        "To close the request"
+      ],
+      "correctAnswer": 1,
+      "explanation": "To convert raw response into a JavaScript object."
+    },
+    {
+      "id": 3,
+      "question": "What does await do inside an async function?",
+      "choices": [
+        "Delays code for 1 second",
+        "Waits for a Promise to finish before continuing",
+        "Repeats code",
+        "Ends the function early"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Waits for a Promise to finish before continuing."
+    },
+    {
+      "id": 4,
+      "question": "Where should you use try...catch?",
+      "choices": [
+        "Inside loops",
+        "Around code that may fail (like fetch calls)",
+        "Only in CSS",
+        "To speed up performance"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Around code that may fail (like fetch calls)."
+    },
+    {
+      "id": 5,
+      "question": "If the network fails during fetch, what happens?",
+      "choices": [
+        "The browser reloads",
+        "The Promise rejects, and the catch block runs",
+        "The function stops silently",
+        "Nothing happens"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Promise rejects, and the catch block runs."
+    }
+  ]
+}
