@@ -1,9 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 // Lesson wrapper component for DescriptionBlock with interactive features
-const Lesson = ({ children, onHighlight, codeEditorRef }) => {
-    const [hoveredElement, setHoveredElement] = useState(null);
-
+const Lesson = ({ children, onHighlight, codeEditorRef, onCodeChange }) => {
     // Handle highlighting code elements in the editor
     const handleHighlight = useCallback((target, action = 'highlight') => {
         if (onHighlight) {
@@ -11,60 +9,49 @@ const Lesson = ({ children, onHighlight, codeEditorRef }) => {
         }
     }, [onHighlight]);
 
-    // Handle HTML/CSS preview on hover
-    const handleCodePreview = useCallback((code, language) => {
-        console.log('Code preview triggered:', language, code.substring(0, 50) + '...');
-        if (language === 'html' || language === 'css') {
-            setHoveredElement({ code, language });
-        }
-    }, []);
+    // Recursively clone children and inject interactive props
+    const injectPropsRecursively = (children) => {
+        return React.Children.map(children, child => {
+            if (React.isValidElement(child)) {
+                // Check if this is an InteractiveCodeBlock or similar component that needs props
+                const isInteractiveCodeBlock = child.type?.name === 'InteractiveCodeBlock' ||
+                    child.type?.displayName === 'InteractiveCodeBlock';
+                const needsProps = isInteractiveCodeBlock || typeof child.type === 'function';
 
-    const handleCodePreviewEnd = useCallback(() => {
-        console.log('Code preview ended');
-        setHoveredElement(null);
-    }, []);
+                let clonedChild = child;
 
-    // Clone children and inject interactive props
-    const enhancedChildren = React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-            // Pass down interactive props to all components
-            return React.cloneElement(child, {
-                onHighlight: handleHighlight,
-                onCodePreview: handleCodePreview,
-                onCodePreviewEnd: handleCodePreviewEnd,
-                codeEditorRef,
-                ...child.props
-            });
-        }
-        return child;
-    });
+                // If it needs props, inject them
+                if (needsProps) {
+                    if (isInteractiveCodeBlock) {
+                        console.log('Found InteractiveCodeBlock, injecting onCodeChange prop');
+                    }
+                    clonedChild = React.cloneElement(child, {
+                        onHighlight: handleHighlight,
+                        onCodeChange,
+                        codeEditorRef,
+                        ...child.props
+                    });
+                }
+
+                // If the child has children, recursively process them too
+                if (child.props?.children) {
+                    clonedChild = React.cloneElement(clonedChild, {
+                        ...clonedChild.props,
+                        children: injectPropsRecursively(child.props.children)
+                    });
+                }
+
+                return clonedChild;
+            }
+            return child;
+        });
+    };
+
+    const enhancedChildren = injectPropsRecursively(children);
 
     return (
-        <div className="lesson-container" data-lesson style={{ position: 'relative' }}>
+        <div className="lesson-container" data-lesson>
             {enhancedChildren}
-
-            {/* Floating preview for HTML/CSS */}
-            {hoveredElement && (
-                <div className="code-preview-tooltip">
-                    <div className="preview-header">
-                        <span className="language-tag">{hoveredElement.language}</span>
-                        <span>Preview</span>
-                    </div>
-                    <div className="preview-content">
-                        {hoveredElement.language === 'html' ? (
-                            <div
-                                className="html-preview"
-                                dangerouslySetInnerHTML={{ __html: hoveredElement.code }}
-                            />
-                        ) : (
-                            <div className="css-preview">
-                                <style>{hoveredElement.code}</style>
-                                <div className="sample-element">Sample Element</div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useImperativeHandle, forwardRef } from 'react';
 import './CodeBlock.css';
 
-const CodeBlock = ({
+const CodeBlock = forwardRef(({
     initialCode = '',
     language = 'html',
     onCodeChange,
     onSubmit,
     children
-}) => {
+}, ref) => {
     // Simple JSX to string converter (for unsupported elements)
     const jsxToString = (element) => {
         if (typeof element === 'string') return element;
@@ -330,6 +330,11 @@ const CodeBlock = ({
         }
     };
 
+    // Expose methods to parent components through ref
+    useImperativeHandle(ref, () => ({
+        getContent: getFullCode
+    }), [getFullCode]);
+
     return (
         <div className="code-block">
             <div className="panel-header">
@@ -351,6 +356,8 @@ const CodeBlock = ({
             </div>
         </div>
     );
-};
+});
+
+CodeBlock.displayName = 'CodeBlock';
 
 export default CodeBlock;

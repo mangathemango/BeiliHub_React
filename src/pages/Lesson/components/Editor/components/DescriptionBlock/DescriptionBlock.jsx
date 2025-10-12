@@ -90,6 +90,7 @@ const DescriptionBlock = ({
                                 ? React.cloneElement(lessonChild, {
                                     onHighlight: handleHighlight,
                                     codeEditorRef,
+                                    onCodeChange,
                                     ...lessonChild.props
                                 })
                                 : <div className="empty-tab">No lesson content yet.</div>
@@ -102,6 +103,7 @@ const DescriptionBlock = ({
                                 ? React.cloneElement(taskChild, {
                                     currentCode,
                                     onCustomizationChange: handleCustomizationChange,
+                                    onCodeChange,
                                     ...taskChild.props
                                 })
                                 : <div className="empty-tab">No task for this lesson yet.</div>
@@ -154,5 +156,7 @@ const DescriptionBlock = ({
         </div>
     );
 };
+
+DescriptionBlock.displayName = 'DescriptionBlock';
 
 export default DescriptionBlock;

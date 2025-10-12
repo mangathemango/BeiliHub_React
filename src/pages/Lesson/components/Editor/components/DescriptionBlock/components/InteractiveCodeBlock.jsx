@@ -5,8 +5,8 @@ const InteractiveCodeBlock = ({
     children,
     runnable = false,
     hoverable = false,
-    onCodePreview,
-    onCodePreviewEnd
+    onCodeChange,  // This will update the main preview
+    codeEditorRef  // Reference to the CodeBlock to get current content
 }) => {
     const [output, setOutput] = useState('');
     const [isRunning, setIsRunning] = useState(false);
@@ -65,18 +65,24 @@ const InteractiveCodeBlock = ({
         }
     };
 
-    // Handle hover preview for HTML/CSS
+    // Handle hover preview for HTML/CSS - update main preview
     const handleMouseEnter = () => {
-        console.log('Mouse enter on code block:', language, hoverable, !!onCodePreview);
-        if (hoverable && (language === 'html' || language === 'css')) {
-            onCodePreview?.(code, language);
+        console.log('Mouse enter on code block:', language, hoverable);
+        if (hoverable && (language === 'html' || language === 'css') && onCodeChange) {
+            // Update the main preview with this code
+            console.log('Updating preview with hovered code:', code.substring(0, 50) + '...');
+            onCodeChange(code);
         }
     };
 
     const handleMouseLeave = () => {
-        console.log('Mouse leave on code block:', hoverable, !!onCodePreviewEnd);
-        if (hoverable) {
-            onCodePreviewEnd?.();
+        console.log('Mouse leave on code block:', hoverable);
+        if (hoverable && (language === 'html' || language === 'css') && onCodeChange && codeEditorRef?.current) {
+            // Get the current content from the CodeBlock and restore it
+            const currentCodeBlockContent = codeEditorRef.current.getContent ?
+                codeEditorRef.current.getContent() : '';
+            console.log('Restoring CodeBlock content:', currentCodeBlockContent.substring(0, 50) + '...');
+            onCodeChange(currentCodeBlockContent);
         }
     };
 

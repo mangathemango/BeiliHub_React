@@ -255,4 +255,6 @@ const PreviewBlock = ({
     );
 };
 
+PreviewBlock.displayName = 'PreviewBlock';
+
 export default PreviewBlock;
