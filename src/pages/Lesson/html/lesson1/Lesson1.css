@@ -4,4 +4,12 @@
     overflow: hidden;
 }
 
+/* Exercise component integration */
+.quiz-content .exercise-container {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
 /* Any lesson-specific overrides can go here */

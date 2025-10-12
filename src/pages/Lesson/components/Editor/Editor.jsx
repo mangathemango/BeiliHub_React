@@ -13,10 +13,11 @@ const Editor = ({ children }) => {
     // State for managing code and preview
     const [currentCode, setCurrentCode] = useState('');
     const codeEditorRef = useRef(null);
+    const taskRef = useRef(null);
 
     // Get initial code from CodeBlock children
     React.useEffect(() => {
-        const codeBlockChild = React.Children.toArray(children).find(child => 
+        const codeBlockChild = React.Children.toArray(children).find(child =>
             child.type?.name === 'CodeBlock' || child.type?.displayName === 'CodeBlock'
         );
         if (codeBlockChild && codeBlockChild.props.children) {
@@ -83,6 +84,14 @@ const Editor = ({ children }) => {
         console.log(newCode);
     }, []);
 
+    // Handle code submission from CodeBlock
+    const handleCodeSubmit = useCallback(() => {
+        // Find the Task component and trigger its validation
+        if (taskRef.current && taskRef.current.handleSubmit) {
+            taskRef.current.handleSubmit();
+        }
+    }, []);
+
     React.useEffect(() => {
         if (isResizing) {
             document.addEventListener('mousemove', handleMouseMove);
@@ -106,15 +115,16 @@ const Editor = ({ children }) => {
                     className="editor-panel code-panel"
                     style={{ height: `${layout.codeHeight}%` }}
                 >
-                    {React.Children.toArray(children).find(child => 
+                    {React.Children.toArray(children).find(child =>
                         child.type?.name === 'CodeBlock' || child.type?.displayName === 'CodeBlock'
                     ) &&
                         React.cloneElement(
-                            React.Children.toArray(children).find(child => 
+                            React.Children.toArray(children).find(child =>
                                 child.type?.name === 'CodeBlock' || child.type?.displayName === 'CodeBlock'
                             ),
                             {
                                 onCodeChange: handleCodeChange,
+                                onSubmit: handleCodeSubmit,
                                 ref: codeEditorRef
                             }
                         )
@@ -132,17 +142,18 @@ const Editor = ({ children }) => {
                     className="editor-panel description-panel"
                     style={{ height: `${100 - layout.codeHeight}%` }}
                 >
-                    {React.Children.toArray(children).find(child => 
+                    {React.Children.toArray(children).find(child =>
                         child.type?.name === 'DescriptionBlock' || child.type?.displayName === 'DescriptionBlock'
                     ) &&
                         React.cloneElement(
-                            React.Children.toArray(children).find(child => 
+                            React.Children.toArray(children).find(child =>
                                 child.type?.name === 'DescriptionBlock' || child.type?.displayName === 'DescriptionBlock'
                             ),
                             {
                                 codeEditorRef,
                                 currentCode,
-                                onCodeChange: handleCodeChange
+                                onCodeChange: handleCodeChange,
+                                taskRef
                             }
                         )
                     }
@@ -160,11 +171,11 @@ const Editor = ({ children }) => {
                 className="editor-panel preview-panel"
                 style={{ width: `${100 - layout.leftWidth}%` }}
             >
-                {React.Children.toArray(children).find(child => 
+                {React.Children.toArray(children).find(child =>
                     child.type?.name === 'PreviewBlock' || child.type?.displayName === 'PreviewBlock'
                 ) ?
                     React.cloneElement(
-                        React.Children.toArray(children).find(child => 
+                        React.Children.toArray(children).find(child =>
                             child.type?.name === 'PreviewBlock' || child.type?.displayName === 'PreviewBlock'
                         ),
                         {

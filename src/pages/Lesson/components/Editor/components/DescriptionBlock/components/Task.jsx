@@ -1,137 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useImperativeHandle, forwardRef } from 'react';
+import { createPortal } from 'react-dom';
 
 // Task component - defines learning tasks with validation and customization
-const Task = ({
-    children,
+const Task = forwardRef(({
     objective,
     requirements = [],
+    validations = [], // New prop: array of {requirement, validator} objects
     hints = [],
     className = '',
-    currentCode = '',
-    onCustomizationChange
-}) => {
-    const [validationResult, setValidationResult] = useState({});
-    const [customizationOptions, setCustomizationOptions] = useState({
-        themeColor: '#7f00ff',
-        fontFamily: 'Arial',
-        layout: 'standard'
-    });
+    currentCode = ''
+}, ref) => {
+    const [validationResults, setValidationResults] = useState({});
+    const [showCelebration, setShowCelebration] = useState(false);
 
-    // Validate HTML structure
-    const validateHTML = (code) => {
-        const validations = {};
 
-        // Basic HTML structure validation
-        const hasDoctype = /<!DOCTYPE\s+html>/i.test(code);
-        const hasHtmlTag = /<html[^>]*>/i.test(code);
-        const hasHeadTag = /<head[^>]*>[\s\S]*<\/head>/i.test(code);
-        const hasBodyTag = /<body[^>]*>[\s\S]*<\/body>/i.test(code);
 
-        validations['html-structure'] = hasDoctype && hasHtmlTag && hasHeadTag && hasBodyTag;
+    // Handle task submission with validation
+    const handleSubmit = useCallback(async () => {
+        if (!currentCode || validations.length === 0) return;
 
-        // Check for semantic tags
-        const hasSemanticTags = /<(header|main|section|article|aside|footer|nav)[^>]*>/i.test(code);
-        validations['semantic-html'] = hasSemanticTags;
+        // Add a small delay for better UX
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-        return validations;
-    };
+        const results = {};
+        let allValid = true;
 
-    // Validate CSS
-    const validateCSS = (code) => {
-        const validations = {};
+        validations.forEach((validation, index) => {
+            try {
+                // Create a temporary DOM parser to test the code
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(currentCode, 'text/html');
 
-        // Basic CSS validation
-        const hasSelectors = /[.#]?[a-zA-Z][a-zA-Z0-9-_]*\s*{/.test(code);
-        const hasProperties = /[a-zA-Z-]+\s*:\s*[^;]+;/.test(code);
+                // Pass the parsed document to the validator function
+                const isValid = validation.validator(doc, currentCode);
+                results[`validation-${index}`] = Boolean(isValid);
 
-        validations['css-styling'] = hasSelectors && hasProperties;
-
-        // Check for responsive design
-        const hasMediaQueries = /@media\s*\([^)]+\)/.test(code);
-        validations['responsive'] = hasMediaQueries;
-
-        // Check for flexbox or grid
-        const hasModernLayout = /(display\s*:\s*(flex|grid))|(grid-template)|(flex-direction)/i.test(code);
-        validations['modern-layout'] = hasModernLayout;
-
-        return validations;
-    };
-
-    // Validate JavaScript
-    const validateJS = (code) => {
-        const validations = {};
-
-        try {
-            // Basic syntax check
-            if (code.trim()) {
-                new Function(code);
-                validations['js-syntax'] = true;
+                if (!isValid) allValid = false;
+            } catch (error) {
+                console.error('Validation error:', error);
+                results[`validation-${index}`] = false;
+                allValid = false;
             }
-        } catch {
-            validations['js-syntax'] = false;
+        });
+
+        setValidationResults(results);
+
+        // Show celebration if everything is correct! 🎉
+        if (allValid) {
+            setShowCelebration(true);
+            // Hide celebration after 3 seconds
+            setTimeout(() => setShowCelebration(false), 3000);
         }
+    }, [currentCode, validations]);
 
-        return validations;
-    };
-
-    // Run validation when code changes
-    useEffect(() => {
-        if (currentCode) {
-            const htmlValidation = validateHTML(currentCode);
-            const cssValidation = validateCSS(currentCode);
-            const jsValidation = validateJS(currentCode);
-
-            setValidationResult({
-                ...htmlValidation,
-                ...cssValidation,
-                ...jsValidation
-            });
-        }
-    }, [currentCode]);
-
-    // Get completion percentage
-    const getCompletionPercentage = () => {
-        const validationKeys = Object.keys(validationResult);
-        if (validationKeys.length === 0) return 0;
-
-        const completedValidations = validationKeys.filter(key =>
-            validationResult[key] === true
-        ).length;
-
-        return Math.round((completedValidations / validationKeys.length) * 100);
-    };
-
-    // Handle customization changes
-    const handleCustomizationChange = (option, value) => {
-        const newOptions = {
-            ...customizationOptions,
-            [option]: value
-        };
-        setCustomizationOptions(newOptions);
-
-        // Notify parent component
-        if (onCustomizationChange) {
-            onCustomizationChange(newOptions);
-        }
-    };
+    // Expose handleSubmit to parent components through ref
+    useImperativeHandle(ref, () => ({
+        handleSubmit
+    }), [handleSubmit]);
 
     return (
         <div className={`task-container ${className}`} data-task>
-            <div className="task-header">
-                <h2>🎯 Your Task</h2>
-                {Object.keys(validationResult).length > 0 && (
-                    <div className="progress-indicator">
-                        <div className="progress-bar">
-                            <div
-                                className="progress-fill"
-                                style={{ width: `${getCompletionPercentage()}%` }}
-                            ></div>
-                        </div>
-                        <span className="progress-text">{getCompletionPercentage()}% Complete</span>
-                    </div>
-                )}
-            </div>
-
             {objective && (
                 <div className="task-objective">
                     <h3>🎯 Objective</h3>
@@ -139,12 +67,30 @@ const Task = ({
                 </div>
             )}
 
-            {requirements.length > 0 && (
+            {/* Requirements section - supports both old requirements array and new validations array */}
+            {(requirements.length > 0 || validations.length > 0) && (
                 <div className="task-requirements">
                     <h3>📋 Requirements</h3>
+                    <p className="requirements-note">
+                        Complete these requirements, then click "Submit" to validate your solution:
+                    </p>
                     <div className="requirement-list">
+                        {/* Show validations with submission-based validation status */}
+                        {validations.map((validation, index) => {
+                            const isValid = validationResults[`validation-${index}`];
+                            return (
+                                <div key={`validation-${index}`} className="requirement-item">
+                                    <span className="requirement-status">
+                                        {isValid === true ? '✅' : isValid === false ? '❌' : '⏳'}
+                                    </span>
+                                    <span>{validation.requirement}</span>
+                                </div>
+                            );
+                        })}
+
+                        {/* Show static requirements (backward compatibility) */}
                         {requirements.map((req, index) => (
-                            <div key={index} className="requirement-item">
+                            <div key={`requirement-${index}`} className="requirement-item">
                                 <span className="requirement-status">⭕</span>
                                 <span>{req}</span>
                             </div>
@@ -153,88 +99,51 @@ const Task = ({
                 </div>
             )}
 
-            {/* Live Validation Results */}
-            {Object.keys(validationResult).length > 0 && (
-                <div className="task-validation">
-                    <h3>✅ Live Validation</h3>
-                    <div className="requirement-list">
-                        {Object.entries(validationResult).map(([key, passed]) => (
-                            <div key={key} className="requirement-item">
-                                <span className="requirement-status">
-                                    {passed ? '✅' : '❌'}
-                                </span>
-                                <span className="requirement-label">
-                                    {key.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
 
-            {/* Customization Panel */}
-            <div className="customization-panel">
-                <h3>🎨 Customization Options</h3>
-                <div className="customization-options">
-                    <div className="option-group">
-                        <label>Theme Color:</label>
-                        <input
-                            type="color"
-                            value={customizationOptions.themeColor}
-                            onChange={(e) => handleCustomizationChange('themeColor', e.target.value)}
-                        />
-                    </div>
-                    <div className="option-group">
-                        <label>Font Family:</label>
-                        <select
-                            value={customizationOptions.fontFamily}
-                            onChange={(e) => handleCustomizationChange('fontFamily', e.target.value)}
-                        >
-                            <option value="Arial">Arial</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Helvetica">Helvetica</option>
-                        </select>
-                    </div>
-                    <div className="option-group">
-                        <label>Layout Style:</label>
-                        <select
-                            value={customizationOptions.layout}
-                            onChange={(e) => handleCustomizationChange('layout', e.target.value)}
-                        >
-                            <option value="standard">Standard</option>
-                            <option value="centered">Centered</option>
-                            <option value="full-width">Full Width</option>
-                            <option value="sidebar">Sidebar</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
 
             {hints.length > 0 && (
                 <div className="task-hints">
-                    <h3>� Helpful Hints</h3>
+                    <h3>💡 Helpful Hints</h3>
                     {hints.map((hint, index) => (
                         <div key={index} className="hint-item">
                             {hint}
                         </div>
                     ))}
-                    <div className="hint-item">
-                        <strong>HTML:</strong> Make sure to include proper semantic tags like &lt;header&gt;, &lt;main&gt;, &lt;section&gt;
-                    </div>
-                    <div className="hint-item">
-                        <strong>CSS:</strong> Use flexbox or grid for layout, and don't forget responsive breakpoints
-                    </div>
                 </div>
             )}
 
-            <div className="task-content">
-                {children}
-            </div>
+            {/* Celebration Animation - rendered as portal to escape container constraints */}
+            {showCelebration && createPortal(
+                <div className="celebration-overlay">
+                    <div className="celebration-content">
+                        <div className="checkmark-animation">
+                            <div className="checkmark">✅</div>
+                        </div>
+                        <div className="celebration-text">
+                            <h2>🎉 Awesome Work! 🎉</h2>
+                            <p>You've completed all the requirements!</p>
+                        </div>
+                        <div className="confetti">
+                            {Array.from({ length: 50 }).map((_, i) => (
+                                <div
+                                    key={i}
+                                    className="confetti-piece"
+                                    style={{
+                                        '--delay': `${Math.random() * 3}s`,
+                                        '--x': `${Math.random() * 100}vw`,
+                                        '--rotation': `${Math.random() * 360}deg`,
+                                        '--color': ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd'][Math.floor(Math.random() * 6)]
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>,
+                document.body
+            )}
         </div>
     );
-};
+});
 
 Task.displayName = 'Task';
 

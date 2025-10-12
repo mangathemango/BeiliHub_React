@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './DescriptionBlock.css';
+import Exercise from './components/Exercise';
 
 const DescriptionBlock = ({
     children,
@@ -8,24 +8,47 @@ const DescriptionBlock = ({
     currentCode,
     onCodeChange,
     category = 'html',
-    lessonId = '1'
+    lessonId = '1',
+    taskRef
 }) => {
     const [activeTab, setActiveTab] = useState('lesson');
     const [_customizationOptions, setCustomizationOptions] = useState({});
-    const navigate = useNavigate();
 
-    // Handle quiz navigation
-    const handleQuizRedirect = useCallback(() => {
-        navigate(`/lesson/${category}/${lessonId}/exercise`);
-    }, [navigate, category, lessonId]);
-
-    // Find children by type
+    // Find children by type (with more robust detection for forwardRef components)
     const lessonChild = React.Children.toArray(children).find(
-        child => child.type?.name === 'Lesson'
+        child => child.type?.name === 'Lesson' || child.type?.displayName === 'Lesson'
     );
     const taskChild = React.Children.toArray(children).find(
-        child => child.type?.name === 'Task'
+        child => {
+            // Check multiple ways a Task component might be identified
+            const isTask = child.type?.name === 'Task' ||
+                child.type?.displayName === 'Task' ||
+                (child.props && 'validations' in child.props && 'objective' in child.props);
+            return isTask;
+        }
     );
+
+    // Debug logging
+    console.log('DescriptionBlock children:', React.Children.toArray(children).map(child => ({
+        type: child.type?.name,
+        displayName: child.type?.displayName,
+        props: Object.keys(child.props || {}),
+        actualType: child.type
+    })));
+    console.log('Found taskChild:', taskChild ? 'YES' : 'NO');
+    console.log('All children types:', React.Children.toArray(children).map(child => child.type));
+
+    // More detailed check for Task component
+    const allChildren = React.Children.toArray(children);
+    allChildren.forEach((child, index) => {
+        console.log(`Child ${index}:`, {
+            type: child.type,
+            typeName: child.type?.name,
+            displayName: child.type?.displayName,
+            isTask: child.type?.name === 'Task' || child.type?.displayName === 'Task',
+            props: child.props
+        });
+    });
 
     // Handle highlighting elements in the code editor
     const handleHighlight = useCallback((target, action) => {
@@ -104,6 +127,7 @@ const DescriptionBlock = ({
                                     currentCode,
                                     onCustomizationChange: handleCustomizationChange,
                                     onCodeChange,
+                                    ref: taskRef,
                                     ...taskChild.props
                                 })
                                 : <div className="empty-tab">No task for this lesson yet.</div>
@@ -112,43 +136,10 @@ const DescriptionBlock = ({
                     )}
                     {activeTab === 'quiz' && (
                         <div className="quiz-content">
-                            <div className="quiz-redirect-page">
-                                <div className="quiz-intro">
-                                    <h2>🧠 Knowledge Check</h2>
-                                    <p>
-                                        Ready to test your understanding of this lesson?
-                                        Take the interactive quiz to reinforce what you've learned!
-                                    </p>
-                                    <div className="quiz-features">
-                                        <div className="feature-item">
-                                            <span className="feature-icon">📝</span>
-                                            <span>Multiple choice questions</span>
-                                        </div>
-                                        <div className="feature-item">
-                                            <span className="feature-icon">💡</span>
-                                            <span>Instant feedback</span>
-                                        </div>
-                                        <div className="feature-item">
-                                            <span className="feature-icon">📊</span>
-                                            <span>Detailed explanations</span>
-                                        </div>
-                                        <div className="feature-item">
-                                            <span className="feature-icon">🏆</span>
-                                            <span>Track your progress</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button
-                                    className="btn quiz-redirect-button large"
-                                    onClick={handleQuizRedirect}
-                                >
-                                    <span>Start Quiz</span>
-                                    <span className="btn-arrow">→</span>
-                                </button>
-                                <p className="quiz-note">
-                                    💡 <strong>Tip:</strong> Make sure you've completed the lesson and task before taking the quiz!
-                                </p>
-                            </div>
+                            <Exercise
+                                category={category}
+                                lessonId={lessonId}
+                            />
                         </div>
                     )}
                 </div>
