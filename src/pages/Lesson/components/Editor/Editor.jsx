@@ -16,7 +16,7 @@ const Editor = ({ children }) => {
 
     // Get initial code from CodeBlock children
     React.useEffect(() => {
-        const codeBlockChild = React.Children.toArray(children).find(child => 
+        const codeBlockChild = React.Children.toArray(children).find(child =>
             child.type?.name === 'CodeBlock' || child.type?.displayName === 'CodeBlock'
         );
         if (codeBlockChild && codeBlockChild.props.children) {
@@ -106,11 +106,11 @@ const Editor = ({ children }) => {
                     className="editor-panel code-panel"
                     style={{ height: `${layout.codeHeight}%` }}
                 >
-                    {React.Children.toArray(children).find(child => 
+                    {React.Children.toArray(children).find(child =>
                         child.type?.name === 'CodeBlock' || child.type?.displayName === 'CodeBlock'
                     ) &&
                         React.cloneElement(
-                            React.Children.toArray(children).find(child => 
+                            React.Children.toArray(children).find(child =>
                                 child.type?.name === 'CodeBlock' || child.type?.displayName === 'CodeBlock'
                             ),
                             {
@@ -132,11 +132,11 @@ const Editor = ({ children }) => {
                     className="editor-panel description-panel"
                     style={{ height: `${100 - layout.codeHeight}%` }}
                 >
-                    {React.Children.toArray(children).find(child => 
+                    {React.Children.toArray(children).find(child =>
                         child.type?.name === 'DescriptionBlock' || child.type?.displayName === 'DescriptionBlock'
                     ) &&
                         React.cloneElement(
-                            React.Children.toArray(children).find(child => 
+                            React.Children.toArray(children).find(child =>
                                 child.type?.name === 'DescriptionBlock' || child.type?.displayName === 'DescriptionBlock'
                             ),
                             {
@@ -160,11 +160,11 @@ const Editor = ({ children }) => {
                 className="editor-panel preview-panel"
                 style={{ width: `${100 - layout.leftWidth}%` }}
             >
-                {React.Children.toArray(children).find(child => 
+                {React.Children.toArray(children).find(child =>
                     child.type?.name === 'PreviewBlock' || child.type?.displayName === 'PreviewBlock'
                 ) ?
                     React.cloneElement(
-                        React.Children.toArray(children).find(child => 
+                        React.Children.toArray(children).find(child =>
                             child.type?.name === 'PreviewBlock' || child.type?.displayName === 'PreviewBlock'
                         ),
                         {

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './DescriptionBlock.css';
+import Exercise from './components/Exercise';
 
 const DescriptionBlock = ({
     children,
@@ -12,12 +12,6 @@ const DescriptionBlock = ({
 }) => {
     const [activeTab, setActiveTab] = useState('lesson');
     const [_customizationOptions, setCustomizationOptions] = useState({});
-    const navigate = useNavigate();
-
-    // Handle quiz navigation
-    const handleQuizRedirect = useCallback(() => {
-        navigate(`/lesson/${category}/${lessonId}/exercise`);
-    }, [navigate, category, lessonId]);
 
     // Find children by type
     const lessonChild = React.Children.toArray(children).find(
@@ -112,43 +106,10 @@ const DescriptionBlock = ({
                     )}
                     {activeTab === 'quiz' && (
                         <div className="quiz-content">
-                            <div className="quiz-redirect-page">
-                                <div className="quiz-intro">
-                                    <h2>🧠 Knowledge Check</h2>
-                                    <p>
-                                        Ready to test your understanding of this lesson?
-                                        Take the interactive quiz to reinforce what you've learned!
-                                    </p>
-                                    <div className="quiz-features">
-                                        <div className="feature-item">
-                                            <span className="feature-icon">📝</span>
-                                            <span>Multiple choice questions</span>
-                                        </div>
-                                        <div className="feature-item">
-                                            <span className="feature-icon">💡</span>
-                                            <span>Instant feedback</span>
-                                        </div>
-                                        <div className="feature-item">
-                                            <span className="feature-icon">📊</span>
-                                            <span>Detailed explanations</span>
-                                        </div>
-                                        <div className="feature-item">
-                                            <span className="feature-icon">🏆</span>
-                                            <span>Track your progress</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button
-                                    className="btn quiz-redirect-button large"
-                                    onClick={handleQuizRedirect}
-                                >
-                                    <span>Start Quiz</span>
-                                    <span className="btn-arrow">→</span>
-                                </button>
-                                <p className="quiz-note">
-                                    💡 <strong>Tip:</strong> Make sure you've completed the lesson and task before taking the quiz!
-                                </p>
-                            </div>
+                            <Exercise
+                                category={category}
+                                lessonId={lessonId}
+                            />
                         </div>
                     )}
                 </div>
