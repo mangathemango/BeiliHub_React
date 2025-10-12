@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./chose.css";
+import htmlLogo from '../../assets/HTML5.png';
+import cssLogo from '../../assets/CSS.png';
+import jsLogo from '../../assets/JS.png';
+import projectLogo from '../../assets/project.svg';
 
 const phases = [
     {
@@ -131,35 +135,54 @@ const LessonChose = () => {
         navigate(`/lesson/${phaseType}/lesson${lessonId}`);
     };
 
-    const logoUrl = "https://www.shutterstock.com/image-vector/nerd-face-emoji-clever-emoticon-glasses-1514878724";
+    // Images are now imported above
 
     return (
         <div className="lesson-chose-container">
             <h1 className="lesson-chose-title" style={{ marginBottom: '16px' }}>Lessons</h1>
             <div className="lesson-chose-main-row">
                 <div className="lesson-chose-tabs side">
-                    {tabOptions.map((tab) => (
-                        <button
-                            key={tab.type}
-                            className={`tab-btn ${tab.type} ${selectedTab === tab.type ? "selected" : ""}`}
-                            onClick={() => handleTabClick(tab.type)}
-                        >
-                            <span className="phase-logo">
-                              <img src={logoUrl} alt="logo" style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }} />
-                            </span>
-                        </button>
-                    ))}
+                                        {tabOptions.map((tab) => (
+                                                <button
+                                                        key={tab.type}
+                                                        className={`tab-btn ${tab.type} ${selectedTab === tab.type ? "selected" : ""}`}
+                                                        onClick={() => handleTabClick(tab.type)}
+                                                >
+                                                        <span className="phase-logo">
+                                                            {tab.type === "project" ? <i className="fa-solid fa-book"></i> :
+                                                            <img 
+                                                                src={
+                                                                    tab.type === 'html' ? htmlLogo :
+                                                                    tab.type === 'css' ? cssLogo :
+                                                                    tab.type === 'js' ? jsLogo :
+                                                                    tab.type === 'project' ? projectLogo : htmlLogo
+                                                                }
+                                                                alt={tab.label + " logo"}
+                                                                style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }} 
+                                                            />}
+                                                        </span>
+                                                </button>
+                                        ))}
                 </div>
                 <div className="lesson-phases-scroll">
                     <div className="lesson-phases">
                         {filteredPhases.map((phase) => (
                             <div key={phase.id} className="phase-card">
-                                <div className={`phase-header ${phase.type}`}> 
-                                    <span className="phase-logo">
-                                      <img src={logoUrl} alt="logo" style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }} />
-                                    </span>
-                                    {phase.title}
-                                </div>
+                                                                <div className={`phase-header ${phase.type}`}> 
+                                                                        <span className="phase-logo">
+                                                                            <img 
+                                                                                src={
+                                                                                    phase.type === 'html' ? htmlLogo :
+                                                                                    phase.type === 'css' ? cssLogo :
+                                                                                    phase.type === 'js' ? jsLogo :
+                                                                                    phase.type === 'project' ? projectLogo : htmlLogo
+                                                                                }
+                                                                                alt={phase.type + " logo"}
+                                                                                style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }} 
+                                                                            />
+                                                                        </span>
+                                                                        {phase.title}
+                                                                </div>
                                 <div className="phase-lessons">
                                     {phase.lessons.map((lesson) => (
                                         <div
