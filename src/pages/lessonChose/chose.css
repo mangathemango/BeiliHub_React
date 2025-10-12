@@ -48,8 +48,9 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  gap: 32px;
+  gap: 12px;
   margin-top: -12px;
+  margin-left: -80px;
 }
 
 .lesson-chose-tabs {
