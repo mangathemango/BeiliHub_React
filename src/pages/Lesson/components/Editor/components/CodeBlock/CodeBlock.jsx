@@ -18,9 +18,10 @@ const CodeBlock = forwardRef(({
     const parseChildren = () => {
         if (!children) return [{ type: 'editable', content: initialCode, id: 'main' }];
 
-        const segments = [];
-        let segmentId = 0;
-        let currentLineSegments = [];
+        try {
+            const segments = [];
+            let segmentId = 0;
+            let currentLineSegments = [];
 
         const flushCurrentLine = () => {
             if (currentLineSegments.length > 0) {
@@ -40,16 +41,21 @@ const CodeBlock = forwardRef(({
         };
 
         React.Children.forEach(children, (child) => {
+            // Skip null, undefined, or boolean children
+            if (child == null || typeof child === 'boolean') {
+                return;
+            }
+            
             if (React.isValidElement(child)) {
                 // If it's <Editable>, flush current line and add as block
                 if (child.type?.name === 'Editable' || child.type?.displayName === 'Editable') {
                     flushCurrentLine();
-                    const content = typeof child.props.children === 'string' ? child.props.children : jsxToString(child.props.children);
+                    const content = typeof child.props?.children === 'string' ? child.props.children : jsxToString(child.props?.children || '');
                     segments.push({ type: 'editable', content, id: `segment-${segmentId++}` });
                 }
                 // If it's <InlineEditable>, add to current line
                 else if (child.type?.name === 'InlineEditable' || child.type?.displayName === 'InlineEditable') {
-                    const content = typeof child.props.children === 'string' ? child.props.children : jsxToString(child.props.children);
+                    const content = typeof child.props?.children === 'string' ? child.props.children : jsxToString(child.props?.children || '');
                     currentLineSegments.push({ type: 'inline-editable', content, id: `segment-${segmentId++}` });
                 } else {
                     // Otherwise, add as readonly to current line
@@ -64,17 +70,24 @@ const CodeBlock = forwardRef(({
                     }
                     if (index < lines.length - 1) {
                         // End of line - flush current segments
-                        currentLineSegments[currentLineSegments.length - 1].content += '\n';
+                        if (currentLineSegments.length > 0) {
+                            currentLineSegments[currentLineSegments.length - 1].content += '\n';
+                        }
                         flushCurrentLine();
                     }
                 });
             }
         });
 
-        // Flush any remaining segments
-        flushCurrentLine();
+            // Flush any remaining segments
+            flushCurrentLine();
 
-        return segments.length > 0 ? segments : [{ type: 'editable', content: initialCode, id: 'main' }];
+            return segments.length > 0 ? segments : [{ type: 'editable', content: initialCode, id: 'main' }];
+        } catch (error) {
+            console.error('Error parsing CodeBlock children:', error);
+            // Return fallback content on error
+            return [{ type: 'editable', content: initialCode || '', id: 'main' }];
+        }
     };
 
     const [codeSegments, setCodeSegments] = useState(parseChildren());
@@ -195,6 +208,10 @@ const CodeBlock = forwardRef(({
         let currentLine = 1;
 
         codeSegments.forEach((segment) => {
+            // Skip invalid segments
+            if (!segment || !segment.id) {
+                return;
+            }
             // Every segment gets exactly one line number, regardless of content
             lineNumbers.push({
                 segmentId: segment.id,
@@ -206,6 +223,12 @@ const CodeBlock = forwardRef(({
     };
 
     const renderSegment = (segment) => {
+        // Safety check for undefined segments
+        if (!segment || !segment.id || !segment.type) {
+            console.warn('Invalid segment found:', segment);
+            return null;
+        }
+
         const baseClasses = `code-segment segment-${segment.type}`;
         const classes = baseClasses;
 
@@ -351,7 +374,7 @@ const CodeBlock = forwardRef(({
             </div>
             <div className="panel-content">
                 <div className="code-editor segmented unified">
-                    {codeSegments.map(renderSegment)}
+                    {codeSegments.map(renderSegment).filter(element => element !== null)}
                 </div>
             </div>
         </div>
