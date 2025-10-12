@@ -2,7 +2,7 @@
   border-color: #fff;
 }
 .lesson-phases-scroll {
-  max-height: 400px;
+  max-height: 500px;
   overflow-y: auto;
   width: 100%;
   max-width: 480px;
