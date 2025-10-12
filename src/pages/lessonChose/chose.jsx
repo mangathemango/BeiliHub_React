@@ -9,11 +9,11 @@ const phases = [
         title: "Phase 1",
         logo: "HTML",
         lessons: [
-            { id: 1, name: "HTML 1: First Page" },
-            { id: 2, name: "HTML 2: Text Formatting" },
-            { id: 3, name: "HTML 3: Links & Navigation" },
-            { id: 4, name: "HTML 4: Images & Media" },
-            { id: 5, name: "HTML 5: Lists & Tables" },
+            { id: 1, name: "HTML 1: placeholder" },
+            { id: 2, name: "HTML 2: placeholder" },
+            { id: 3, name: "HTML 3: placeholder" },
+            { id: 4, name: "HTML 4: placeholder" },
+            { id: 5, name: "HTML 5: placeholder" },
         ],
     },
     {
@@ -22,41 +22,97 @@ const phases = [
         title: "Phase 2",
         logo: "CSS",
         lessons: [
-            { id: 1, name: "CSS 1: Introduction to CSS" },
-            { id: 2, name: "CSS 2: CSS Selectors & Properties" },
-            { id: 3, name: "CSS 3: Box Model & Layout" },
-            { id: 4, name: "CSS 4: Styling Text & Fonts" },
-            { id: 5, name: "CSS 5: Responsive Design & Media Queries" },
-        ],
-    },
-    {
-        id: "js1",
-        type: "js",
-        title: "Phase 3",
-        logo: "JS",
-        lessons: [
-            { id: 1, name: "JS 1: Introduction to JavaScript" },
-            { id: 2, name: "JS 2: Variables & Data Types" },
-            { id: 3, name: "JS 3: Functions & Control Flow" },
+            { id: 1, name: "CSS 1: placeholder" },
+            { id: 2, name: "CSS 2: placeholder" },
+            { id: 3, name: "CSS 3: placeholder" },
         ],
     },
     {
         id: "html2",
         type: "html",
-        title: "Phase 4",
+        title: "Phase 3",
         logo: "HTML",
         lessons: [
-            { id: 6, name: "HTML 6: Forms Basics" },
-            { id: 7, name: "HTML 7: Semantic HTML" },
+            { id: 6, name: "HTML 6: placeholder" },
+            { id: 7, name: "HTML 7: placeholder" },
+        ],
+    },
+    {
+        id: "css2",
+        type: "css",
+        title: "Phase 4",
+        logo: "CSS",
+        lessons: [
+            { id: 4, name: "CSS 4: placeholder" },
+            { id: 5, name: "CSS 5: placeholder" },
+            { id: 6, name: "CSS 6: placeholder" },
+            { id: 7, name: "CSS 7: placeholder" },
+        ],
+    },
+    {
+        id: "js1",
+        type: "js",
+        title: "Phase 5",
+        logo: "JS",
+        lessons: [
+            { id: 1, name: "JS 1: placeholder" },
+            { id: 2, name: "JS 2: placeholder" },
+            { id: 3, name: "JS 3: placeholder" },
+            { id: 4, name: "JS 4: placeholder" },
+            { id: 5, name: "JS 5: placeholder" },
+        ],
+    },
+    {
+        id: "html3",
+        type: "html",
+        title: "Phase 6",
+        logo: "HTML",
+        lessons: [
+            { id: 8, name: "HTML 8: placeholder" },
+            { id: 9, name: "HTML 9: placeholder" },
+            { id: 10, name: "HTML 10: placeholder" },
+        ],
+    },
+    {
+        id: "css3",
+        type: "css",
+        title: "Phase 7",
+        logo: "CSS",
+        lessons: [
+            { id: 8, name: "CSS 8: placeholder" },
+            { id: 9, name: "CSS 9: placeholder" },
+            { id: 10, name: "CSS 10: placeholder" },
+        ],
+    },
+    {
+        id: "js2",
+        type: "js",
+        title: "Phase 8",
+        logo: "JS",
+        lessons: [
+            { id: 6, name: "JS 6: placeholder" },
+            { id: 7, name: "JS 7: placeholder" },
+            { id: 8, name: "JS 8: placeholder" },
+            { id: 9, name: "JS 9: placeholder" },
+            { id: 10, name: "JS 10: placeholder" },
+        ],
+    },
+    {
+        id: "final",
+        type: "project",
+        title: "Final Project",
+        logo: "HTML",
+        lessons: [
+            { id: 1, name: "Portfolio site with interactive features." },
         ],
     },
 ];
 
-const logoUrl = "https://www.shutterstock.com/image-vector/nerd-face-emoji-clever-emoticon-glasses-1514878724";
 const tabOptions = [
     { type: "html", label: "HTML" },
     { type: "css", label: "CSS" },
     { type: "js", label: "JS" },
+    { type: "project", label: "Final Project" }
 ];
 
 const LessonChose = () => {
@@ -72,9 +128,10 @@ const LessonChose = () => {
         : phases;
 
     const handleLessonClick = (phaseType, lessonId) => {
-        // Example navigation, adjust route as needed
         navigate(`/lesson/${phaseType}/lesson${lessonId}`);
     };
+
+    const logoUrl = "https://www.shutterstock.com/image-vector/nerd-face-emoji-clever-emoticon-glasses-1514878724";
 
     return (
         <div className="lesson-chose-container">
@@ -107,7 +164,7 @@ const LessonChose = () => {
                                     {phase.lessons.map((lesson) => (
                                         <div
                                             key={lesson.id}
-                                            className={`lesson-box ${phase.type}`}
+                                            className={`lesson-box ${phase.type === 'project' ? 'project' : phase.type}`}
                                             onClick={() => handleLessonClick(phase.type, lesson.id)}
                                         >
                                             {lesson.name}
@@ -124,3 +181,4 @@ const LessonChose = () => {
 };
 
 export default LessonChose;
+

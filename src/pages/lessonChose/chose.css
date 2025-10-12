@@ -1,3 +1,6 @@
+.lesson-box.project:hover {
+  border-color: #fff;
+}
 .lesson-phases-scroll {
   max-height: 400px;
   overflow-y: auto;
@@ -76,7 +79,7 @@
 }
 
 .tab-btn.selected {
-  background: linear-gradient(90deg, #ff6a3d, #ffb347);
+  background: linear-gradient(90deg, #f8fafc, #e2e8f0);
   color: #232b3e;
 }
 
@@ -131,6 +134,12 @@
   color: #232b3e;
 }
 
+.phase-header.project {
+  background: linear-gradient(90deg, #f8fafc, #e2e8f0);
+  color: #232b3e;
+  border: 2px solid #e2e8f0;
+}
+
 .phase-lessons {
   background: #232b3e;
   padding: 0 24px 18px 24px;
@@ -150,6 +159,7 @@
   border: 2px solid #353c4a;
   text-align: left;
   margin-top: 8px;
+  min-width: 400px;
 }
 .lesson-box:hover {
   background: #2e3650;
