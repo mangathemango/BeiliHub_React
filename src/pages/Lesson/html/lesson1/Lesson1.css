@@ -1,0 +1,7 @@
+/* Lesson1 specific styles */
+.lesson1-container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Any lesson-specific overrides can go here */

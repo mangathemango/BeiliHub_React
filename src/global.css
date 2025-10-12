@@ -40,7 +40,7 @@ body {
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 28px;
+    padding: 10px;
 }
 
 .muted {
@@ -67,6 +67,7 @@ body {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.06);
     color: var(--white);
+    white-space: nowrap;
 }
 
 .btn.primary {
