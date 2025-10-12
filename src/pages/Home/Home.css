@@ -97,6 +97,18 @@
     box-shadow: 0 12px 30px rgba(0,0,0,0.6);
     background: rgba(255,255,255,0.02);
     padding:6px;
+    position:relative;
+    overflow:hidden;
+  }
+  
+  /* ensure logo images fill the tile area and keep aspect ratio */
+  .logo-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    user-select: none;
   }
   
   /* FEATURES */
