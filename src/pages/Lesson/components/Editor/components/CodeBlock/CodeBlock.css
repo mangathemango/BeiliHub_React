@@ -19,7 +19,9 @@
     line-height: 1.5;
     background: var(--bg-secondary);
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    tab-size: 2;
 }
 
 .line-numbers {
@@ -44,7 +46,8 @@
 .code-input-container {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .code-textarea {
@@ -67,6 +70,8 @@
     white-space: pre;
     overflow-wrap: normal;
     overflow-x: auto;
+    overflow-y: hidden;
+    tab-size: 2;
 }
 
 .syntax-highlight {
@@ -80,8 +85,10 @@
     white-space: pre;
     overflow-wrap: normal;
     overflow-x: auto;
+    overflow-y: hidden;
     color: var(--white);
     z-index: 1;
+    tab-size: 2;
 }
 
 /* Syntax highlighting colors */
@@ -162,25 +169,40 @@
 
 /* Custom scrollbar for code editor */
 .code-textarea::-webkit-scrollbar,
-.syntax-highlight::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+.syntax-highlight::-webkit-scrollbar,
+.code-editor::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
 .code-textarea::-webkit-scrollbar-track,
-.syntax-highlight::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+.syntax-highlight::-webkit-scrollbar-track,
+.code-editor::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin: 2px;
 }
 
 .code-textarea::-webkit-scrollbar-thumb,
-.syntax-highlight::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+.syntax-highlight::-webkit-scrollbar-thumb,
+.code-editor::-webkit-scrollbar-thumb {
+    background: var(--white-6);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .code-textarea::-webkit-scrollbar-thumb:hover,
-.syntax-highlight::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+.syntax-highlight::-webkit-scrollbar-thumb:hover,
+.code-editor::-webkit-scrollbar-thumb:hover {
+    background: var(--white-6);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.code-textarea::-webkit-scrollbar-corner,
+.syntax-highlight::-webkit-scrollbar-corner,
+.code-editor::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /* Button states */
@@ -219,7 +241,8 @@
     background: var(--bg-secondary);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 /* Code line container - unified appearance */
@@ -232,6 +255,9 @@
     line-height: 1.5;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.2s ease;
+    white-space: nowrap;
+    min-width: max-content;
+    tab-size: 2;
 }
 
 .code-line-container:last-child {
@@ -336,6 +362,8 @@
     flex: 1;
     position: relative;
     padding: 0 16px;
+    min-width: max-content;
+    overflow: visible;
 }
 
 .editable-content {
@@ -353,8 +381,10 @@
     position: relative;
     z-index: 2;
     white-space: pre;
-    overflow: hidden;
+    overflow: visible;
     min-height: 17px;
+    min-width: max-content;
+    tab-size: 2;
 }
 
 .syntax-overlay {
@@ -366,6 +396,7 @@
     padding: 2px 0;
     pointer-events: none;
     white-space: pre;
+    overflow: visible;
     color: var(--white);
     z-index: 1;
     margin: 0;
@@ -373,6 +404,8 @@
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    min-width: max-content;
+    tab-size: 2;
 }
 
 .syntax-overlay code {
@@ -413,16 +446,20 @@
     padding: 2px 16px;
     display: flex;
     align-items: baseline;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     white-space: pre;
+    overflow: visible;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    min-width: max-content;
+    tab-size: 2;
 }
 
 .inline-readonly-content {
     display: inline;
     white-space: pre;
+    tab-size: 2;
 }
 
 .inline-editable-wrapper {
@@ -444,12 +481,11 @@
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    padding: 2px 4px;
+    padding: 0px 4px;
     position: relative;
     z-index: 2;
     white-space: nowrap;
     min-width: 4ch;
-    max-width: 30ch;
     vertical-align: baseline;
     height: auto;
     box-sizing: border-box;
