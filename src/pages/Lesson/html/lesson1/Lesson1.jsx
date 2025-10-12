@@ -24,7 +24,7 @@ const Lesson1 = () => {
 </html>`}
             </CodeBlock>
 
-            <DescriptionBlock>
+            <DescriptionBlock category="html" lessonId="1">
                 <Lesson>
                     <h1>HTML Lesson 1 – Your First Webpage</h1>
 
