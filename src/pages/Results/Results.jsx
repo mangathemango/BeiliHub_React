@@ -124,7 +124,7 @@ const Results = () => {
                         Retake Quiz
                     </button>
                     <button className="btn btn-primary" onClick={handleBackToCourses}>
-                        Back to Courses
+                        Back to Lesson
                     </button>
                 </div>
             </div>
