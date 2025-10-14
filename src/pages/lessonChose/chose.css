@@ -39,6 +39,7 @@
   font-weight: 700;
   text-align: center;
   margin-bottom: 16px;
+  margin-left: 4px;
 }
 
 .lesson-chose-main-row {
@@ -48,7 +49,7 @@
   justify-content: center;
   gap: 12px;
   margin-top: -12px;
-  margin-left: -65px;
+  margin-left: -45px;
 }
 
 .lesson-chose-tabs {
