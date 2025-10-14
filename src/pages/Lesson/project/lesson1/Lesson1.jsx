@@ -1,5 +1,5 @@
 import React from "react";
-import "./Lesson10.css";
+import "./Lesson1.css";
 import Editor from "../../components/Editor/editor";
 import { CodeBlock, DescriptionBlock, PreviewBlock } from "../../components/Editor";
 import { InlineEditable } from "../../components/Editor/components/CodeBlock/components";
@@ -8,7 +8,7 @@ import InteractiveCodeBlock from "../../components/Editor/components/Description
 import HighlightTrigger from "../../components/Editor/components/DescriptionBlock/components/HighlightTrigger";
 import Exercise from "../../components/Editor/components/DescriptionBlock/components/Exercise";
 
-const Lesson10 = () => {
+const Lesson1 = () => {
     return (
         <Editor>
             <CodeBlock>
@@ -761,4 +761,4 @@ weatherDiv.innerHTML = \`
     );
 };
 
-export default Lesson10;
+export default Lesson1;
