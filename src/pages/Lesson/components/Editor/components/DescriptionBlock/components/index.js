@@ -8,8 +8,6 @@ export { default as Quiz } from './Quiz.jsx';
 
 // Export wrapper components for DescriptionBlock tabs
 export { default as Lesson } from './Lesson.jsx';
-export { default as TaskWrapper } from './TaskWrapper.jsx';
-export { default as QuizWrapper } from './QuizWrapper.jsx';
 
 // Export new interactive components
 export { default as InteractiveCodeBlock } from './InteractiveCodeBlock.jsx';
