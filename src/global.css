@@ -36,6 +36,15 @@ body {
     overflow-x: hidden;
 }
 
+#root {
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow-y: scroll;
+    scrollbar-color: var(--accent1) transparent;
+    position: absolute;
+    z-index: 2;
+}
+
 /* Shared utility classes */
 .container {
     max-width: var(--max-width);
