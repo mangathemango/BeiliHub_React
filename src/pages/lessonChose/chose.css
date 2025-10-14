@@ -114,15 +114,15 @@
 /* Removed - moved to bottom with dropdown functionality */
 .phase-header.html {
   background: linear-gradient(90deg, #ff6a3d, #ffb347);
-  color: #fff;
+  color: white-6;
 }
 .phase-header.css {
   background: linear-gradient(90deg, #6a3dff, #a259ff);
-  color: #fff;
+  color: white-6;
 }
 .phase-header.js {
   background: linear-gradient(90deg, #ffd700,#ffe156);
-  color: #232b3e;
+  color: white-6;
 }
 
 .phase-header.project {
@@ -140,7 +140,7 @@
 }
 .lesson-box {
   background: #232b3e;
-  color: #fff;
+  color: white-6;
   border-radius: 8px;
   padding: 12px 18px;
   font-size: 1.05rem;
