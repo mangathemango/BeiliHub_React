@@ -16,7 +16,7 @@ export default function Home() {
 
   // Navigate straight to the CSS lesson folder inside Lesson
   const goToCssLesson = () => {
-    navigate('/lesson-chose/'); // adjust path casing if your router uses lowercase
+    navigate('/lesson-chose'); // adjust path casing if your router uses lowercase
   };
 
   return (
