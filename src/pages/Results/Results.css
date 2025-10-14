@@ -169,7 +169,7 @@
 .user-answer.incorrect {
     background-color: rgba(244, 67, 54, 0.2);
     border-left: 4px solid #F44336;
-    color: #FFAB91;
+    color: #ffffff;
 }
 
 .correct-answer {
@@ -198,22 +198,22 @@
 }
 
 .correct-answer-box {
-    background-color: rgba(76, 175, 80, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 15px;
     border-radius: 8px;
     border: 1px solid rgba(76, 175, 80, 0.2);
-    border-left: 4px solid #4CAF50;
+    border-left: 4px solid #ffffff;
 }
 
 .correct-answer-box strong {
-    color: #4CAF50;
+    color: #ffffff;
     display: block;
     margin-bottom: 8px;
     font-size: 0.95rem;
 }
 
 .correct-answer-box p {
-    color: #C8E6C9;
+    color: #ffffff;
     margin: 0;
     line-height: 1.5;
     font-weight: 500;
