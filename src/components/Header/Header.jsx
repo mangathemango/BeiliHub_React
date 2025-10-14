@@ -18,7 +18,7 @@ const Header = () => {
 
                 <nav className="main-nav" aria-label="Main Navigation">
                     <Link to="/" className={isActive('/')}>Home</Link>
-                    <Link to="/lesson-chose" className={isActive('/lesson-chose')}>Courses</Link>
+                    <Link to="/lesson-chose" className={isActive('/lesson-chose')}>Lessons</Link>
                     <Link to="/about" className={isActive('/about')}>About</Link>
                 </nav>
             </div>
