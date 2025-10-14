@@ -87,10 +87,10 @@
   background: linear-gradient(90deg, #ff6a3d, #ffb347);
 }
 .tab-btn.css.selected {
-  background: linear-gradient(90deg, #a259ff, #6a3dff);
+  background: linear-gradient(90deg, #6a3dff, #a259ff);
 }
 .tab-btn.js.selected {
-  background: linear-gradient(90deg, #ffe156, #ffd700);
+  background: linear-gradient(90deg, #ffd700,#ffe156);
   color: #232b3e;
 }
 
@@ -117,11 +117,11 @@
   color: #fff;
 }
 .phase-header.css {
-  background: linear-gradient(90deg, #a259ff, #6a3dff);
+  background: linear-gradient(90deg, #6a3dff, #a259ff);
   color: #fff;
 }
 .phase-header.js {
-  background: linear-gradient(90deg, #ffe156, #ffd700);
+  background: linear-gradient(90deg, #ffd700,#ffe156);
   color: #232b3e;
 }
 
