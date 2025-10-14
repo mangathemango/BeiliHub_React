@@ -70,6 +70,10 @@ export default function Question({ quizData }) {
 
     return (
         <>
+            <div className="header">
+                <h1 className="quiz-title">Quiz</h1>
+                <p className="quiz-description">{quizData.title}</p>
+            </div>
             <div className="question-container">
                 <button 
                     className="nav-btn prev-btn side-btn" 
