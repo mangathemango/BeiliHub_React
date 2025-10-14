@@ -5,11 +5,6 @@ import CourseCard from '../../components/CourseCard/CourseCard';
 import Modal from '../../components/Modal/Modal';
 import './Home.css';
 
-// Correct relative imports from src/assets (two levels up from src/pages/Home)
-import HtmlPng from '../../assets/HTML5.png';
-import CssPng from '../../assets/CSS.png';
-import JsPng from '../../assets/JS.png';
-
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -59,15 +54,15 @@ export default function Home() {
           <div className="hero-right" aria-hidden="false" role="region" aria-label="Technologies">
             <div className="logo-card">
               <div className="logo-tile html" title="HTML5" aria-hidden="true">
-                < img src={HtmlPng} alt="HTML5 logo" loading="lazy" />
+                < img src="images/icons/HTML5.png" alt="HTML5 logo" loading="lazy" />
               </div>
 
               <div className="logo-tile css" title="CSS3" aria-hidden="true">
-                < img src={CssPng} alt="CSS3 logo" loading="lazy" />
+                < img src="images/icons/CSS.png" alt="CSS3 logo" loading="lazy" />
               </div>
 
               <div className="logo-tile js" title="JavaScript" aria-hidden="true">
-                < img src={JsPng} alt="JavaScript logo" loading="lazy" />
+                < img src="images/icons/JS.png" alt="JavaScript logo" loading="lazy" />
               </div>
             </div>
           </div>
