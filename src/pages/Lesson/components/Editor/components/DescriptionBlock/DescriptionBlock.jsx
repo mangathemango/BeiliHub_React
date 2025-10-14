@@ -89,19 +89,19 @@ const DescriptionBlock = ({
                         className={`tab-btn ${activeTab === 'lesson' ? 'active' : ''}`}
                         onClick={() => setActiveTab('lesson')}
                     >
-                        📚 Lesson
+                        Lesson
                     </button>
                     <button
                         className={`tab-btn ${activeTab === 'task' ? 'active' : ''}`}
                         onClick={() => setActiveTab('task')}
                     >
-                        🎯 Task
+                        Task
                     </button>
                     <button
                         className={`tab-btn ${activeTab === 'quiz' ? 'active' : ''}`}
                         onClick={() => setActiveTab('quiz')}
                     >
-                        🧠 Quiz
+                        Quiz
                     </button>
                 </div>
             </div>
