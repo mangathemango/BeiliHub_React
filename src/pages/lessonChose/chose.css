@@ -110,16 +110,7 @@
   margin-bottom: 0;
 }
 
-.phase-header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 18px 24px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-}
+/* Removed - moved to bottom with dropdown functionality */
 .phase-header.html {
   background: linear-gradient(90deg, #ff6a3d, #ffb347);
   color: #fff;
@@ -188,6 +179,120 @@
     color: black;
 }
 
+/* Phase header with dropdown functionality */
+.phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 24px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.phase-header:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.phase-header-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.phase-title {
+  flex: 1;
+}
+
+.dropdown-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dropdown-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+.dropdown-arrow.collapsed {
+  transform: rotate(0deg);
+}
+
+.dropdown-arrow i {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Phase lessons with smooth expand/collapse */
+.phase-lessons {
+  background: #232b3e;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+  transform-origin: top;
+}
+
+.phase-lessons.expanded {
+  max-height: 1000px;
+  padding: 0 24px 18px 24px;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.phase-lessons.collapsed {
+  max-height: 0;
+  padding: 0 24px;
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+/* Lesson box animations */
+.lesson-box {
+  transform: translateY(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.phase-lessons.expanded .lesson-box {
+  animation: slideInFromTop 0.3s ease-out forwards;
+}
+
+.phase-lessons.collapsed .lesson-box {
+  animation: slideOutToTop 0.3s ease-in forwards;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
 @media (max-width: 600px) {
   .lesson-chose-title {
     font-size: 2rem;
@@ -200,7 +305,23 @@
     font-size: 1.1rem;
     padding: 12px 12px;
   }
-  .phase-lessons {
+  .phase-lessons.expanded {
     padding: 0 12px 12px 12px;
+  }
+  .phase-lessons.collapsed {
+    padding: 0 12px;
+  }
+  
+  .phase-header-content {
+    gap: 12px;
+  }
+  
+  .dropdown-arrow {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .dropdown-arrow i {
+    font-size: 12px;
   }
 }

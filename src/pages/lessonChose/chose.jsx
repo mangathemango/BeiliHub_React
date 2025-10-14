@@ -118,10 +118,18 @@ const tabOptions = [
 
 const LessonChose = () => {
     const [selectedTab, setSelectedTab] = useState(null);
+    const [expandedPhases, setExpandedPhases] = useState({});
     const navigate = useNavigate();
 
     const handleTabClick = (type) => {
         setSelectedTab((prev) => (prev === type ? null : type));
+    };
+
+    const togglePhaseExpansion = (phaseId) => {
+        setExpandedPhases(prev => ({
+            ...prev,
+            [phaseId]: !prev[phaseId]
+        }));
     };
 
     const filteredPhases = selectedTab
@@ -164,37 +172,50 @@ const LessonChose = () => {
                     </div>
                     <div className="lesson-phases-scroll">
                         <div className="lesson-phases">
-                            {filteredPhases.map((phase) => (
-                                <div key={phase.id} className="phase-card">
-                                    <div className={`phase-header ${phase.type}`}>
-                                        <span className="phase-logo">
-                                            <img
-                                                src={
-                                                    phase.type === 'html' ? "images/icons/HTML5.png" :
-
-                                                        phase.type === 'css' ? "images/icons/CSS.png" :
-                                                            phase.type === 'js' ? "images/icons/JS.png" :
-                                                                "images/icons/project.svg"
-                                                }
-                                                alt={phase.type + " logo"}
-                                                style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }}
-                                            />
-                                        </span>
-                                        {phase.title}
-                                    </div>
-                                    <div className="phase-lessons">
-                                        {phase.lessons.map((lesson) => (
-                                            <div
-                                                key={lesson.id}
-                                                className={`lesson-box ${phase.type === 'project' ? 'project' : phase.type}`}
-                                                onClick={() => handleLessonClick(phase.type, lesson.id)}
-                                            >
-                                                {lesson.name}
+                            {filteredPhases.map((phase) => {
+                                const isExpanded = expandedPhases[phase.id] !== false; // Default to expanded
+                                return (
+                                    <div key={phase.id} className="phase-card">
+                                        <div 
+                                            className={`phase-header ${phase.type}`}
+                                            onClick={() => togglePhaseExpansion(phase.id)}
+                                        >
+                                            <div className="phase-header-content">
+                                                <span className="phase-logo">
+                                                    <img
+                                                        src={
+                                                            phase.type === 'html' ? "images/icons/HTML5.png" :
+                                                                phase.type === 'css' ? "images/icons/CSS.png" :
+                                                                    phase.type === 'js' ? "images/icons/JS.png" :
+                                                                        "images/icons/project.svg"
+                                                        }
+                                                        alt={phase.type + " logo"}
+                                                        style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }}
+                                                    />
+                                                </span>
+                                                <span className="phase-title">{phase.title}</span>
                                             </div>
-                                        ))}
+                                            <div className={`dropdown-arrow ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                                                <i className="fa-solid fa-chevron-down"></i>
+                                            </div>
+                                        </div>
+                                        <div className={`phase-lessons ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                                            {phase.lessons.map((lesson) => (
+                                                <div
+                                                    key={lesson.id}
+                                                    className={`lesson-box ${phase.type === 'project' ? 'project' : phase.type}`}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleLessonClick(phase.type, lesson.id);
+                                                    }}
+                                                >
+                                                    {lesson.name}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
