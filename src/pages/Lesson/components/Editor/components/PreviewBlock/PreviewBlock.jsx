@@ -176,7 +176,7 @@ const PreviewBlock = ({
                         disabled={isLoading}
                         title="Refresh Preview"
                     >
-                        🔄
+                        <i class="fa-solid fa-rotate-right"></i>
                     </button>
                     <button
                         className="btn ghost small"
@@ -184,7 +184,7 @@ const PreviewBlock = ({
                         disabled={!previewContent || isLoading}
                         title="Open in New Tab"
                     >
-                        🔗
+                        <i class="fa-solid fa-copy"></i>
                     </button>
                     <button
                         className="btn ghost small"
@@ -192,7 +192,7 @@ const PreviewBlock = ({
                         disabled={!previewContent || isLoading}
                         title="Download HTML"
                     >
-                        💾
+                        <i class="fa-solid fa-floppy-disk"></i>
                     </button>
                 </div>
             </div>
