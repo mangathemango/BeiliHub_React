@@ -12,19 +12,19 @@
 .lesson-phases-scroll::-webkit-scrollbar {
   width: 20px;
   background: transparent;
-  border: 2px solid #232b3e;
+  border: 2px solid #a259ff;
   border-radius: 8px;
 }
 
 .lesson-phases-scroll::-webkit-scrollbar-thumb {
-  background: #232b3e;
+  background: #a259ff;
   border-radius: 8px;
 }
 
 .lesson-phases-scroll::-webkit-scrollbar-track {
   background: #181f2a;
   border-radius: 8px;
-  border: 2px solid #232b3e;
+  border: 2px solid #a259ff;
 }
 .lesson-chose-container {
   min-height: 100vh;
