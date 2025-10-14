@@ -1,6 +1,7 @@
 import Question  from "./components/Question/Question";
 import {useParams} from 'react-router-dom';
 import React, { useState } from "react";
+import CosmicBackground from "../../components/CosmicBackground/CosmicBackground";
 const Exercise = () => {
     const { category, id } = useParams();
     const [quizData, setQuizData] = useState(null);
@@ -14,9 +15,10 @@ const Exercise = () => {
         return <div>Loading quiz...</div>;
     }
     
-    return <div style={{}}>
+    return <>
+        <CosmicBackground />
         <Question quizData={quizData}></Question>
-    </div>
+    </>
 }
 
 export default Exercise;
