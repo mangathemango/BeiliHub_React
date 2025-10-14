@@ -7,7 +7,7 @@ const Results = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [expandedQuestions, setExpandedQuestions] = useState(new Set());
-    
+
     // Get results data from navigation state
     const { quizData, userAnswers, score } = location.state || {
         quizData: { title: "Quiz Results", questions: [] },
@@ -73,7 +73,7 @@ const Results = () => {
                         const userAnswer = userAnswers[index];
                         const isCorrect = userAnswer === question.correctAnswer;
                         const isExpanded = expandedQuestions.has(index);
-                        
+
                         return (
                             <div key={question.id} className="question-result">
                                 <div className="question-header">
@@ -82,7 +82,7 @@ const Results = () => {
                                         <span className={`result-indicator ${isCorrect ? 'correct' : 'incorrect'}`}>
                                             {isCorrect ? '✓' : '✗'}
                                         </span>
-                                        <button 
+                                        <button
                                             className="dropdown-toggle"
                                             onClick={() => toggleQuestionExpansion(index)}
                                         >
@@ -90,26 +90,29 @@ const Results = () => {
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <p className="question-text">{question.question}</p>
-                                
+
                                 <div className="answer-section">
                                     {userAnswer !== undefined && (
                                         <div className={`user-answer ${isCorrect ? 'correct' : 'incorrect'}`}>
                                             <strong>Your Answer:</strong> {question.choices[userAnswer]}
                                         </div>
                                     )}
-                                    
-                                    {!isCorrect && (
-                                        <div className="correct-answer">
-                                            <strong>Correct Answer:</strong> {question.choices[question.correctAnswer]}
-                                        </div>
-                                    )}
                                 </div>
 
-                                <div className={`explanation ${!isExpanded ? 'collapsed' : ''}`}>
-                                    <strong>Explanation:</strong>
-                                    <p>{question.explanation}</p>
+                                <div className={`dropdown-content ${!isExpanded ? 'collapsed' : ''}`}>
+                                    {!isCorrect && (
+                                        <div className="correct-answer-box">
+                                            <strong>Correct Answer:</strong>
+                                            <p>{question.choices[question.correctAnswer]}</p>
+                                        </div>
+                                    )}
+
+                                    <div className="explanation-box">
+                                        <strong>Explanation:</strong>
+                                        <p>{question.explanation}</p>
+                                    </div>
                                 </div>
                             </div>
                         );
