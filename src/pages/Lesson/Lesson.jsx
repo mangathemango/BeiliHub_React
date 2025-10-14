@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import React from "react"
+import CosmicBackground from "../../components/CosmicBackground/CosmicBackground";
 
 function Lesson() {
     const { category, id } = useParams();
@@ -11,6 +12,7 @@ function Lesson() {
 
     return (
         <React.Suspense fallback={<p>Loading lesson...</p>}>
+            <CosmicBackground variant="not"/>
             <LessonComponent />
         </React.Suspense>
     );
