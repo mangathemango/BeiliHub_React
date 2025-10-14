@@ -63,7 +63,7 @@ const Results = () => {
                             {score}/{totalQuestions}
                         </span>
                     </div>
-                    <p className="score-message" style={{ color: getScoreColor(percentage), textAlign: 'center' }}>
+                    <p className="score-message" style={{ color: 'white', textAlign: 'center' }}>
                         {getScoreMessage(percentage)}
                     </p>
                 </div>
