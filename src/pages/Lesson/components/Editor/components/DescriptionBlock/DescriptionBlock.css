@@ -1205,7 +1205,6 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent1), #00ff7f);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1222,7 +1221,6 @@
     left: 4px;
     right: 4px;
     bottom: 4px;
-    background: var(--bg-secondary);
     border-radius: 50%;
 }
 
