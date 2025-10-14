@@ -85,7 +85,6 @@ body {
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 28px rgba(155, 59, 255, 0.18);
   transition: transform .18s ease, box-shadow .18s ease;
   margin-top: 18px;
   font-size: 16px;
@@ -118,7 +117,6 @@ body {
   gap: 20px;
   align-items: center;
   justify-content: space-around;
-  box-shadow: var(--inset-shadow);
   border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
@@ -167,7 +165,6 @@ body {
   padding: 22px;
   min-height: 260px;
   height: 100%;
-  box-shadow: var(--inset-shadow);
   border: 1px solid rgba(255, 255, 255, 0.03);
   transition: transform .18s ease, box-shadow .18s ease;
   text-align: center;
@@ -176,7 +173,6 @@ body {
 .feature-card:focus,
 .feature-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
   outline: none;
 }
 
