@@ -80,7 +80,7 @@ export default function Question({ quizData }) {
                     onClick={handlePrevious}
                     disabled={currentQuestion === 0}
                 >
-                    ←
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
 
                 <div className="question-card">
@@ -120,7 +120,7 @@ export default function Question({ quizData }) {
                     onClick={handleNext}
                     disabled={currentQuestion === totalQuestions - 1}
                 >
-                    →
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
 

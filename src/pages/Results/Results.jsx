@@ -86,7 +86,7 @@ const Results = () => {
                                             className="dropdown-toggle"
                                             onClick={() => toggleQuestionExpansion(index)}
                                         >
-                                            {isExpanded ? '▲' : '▼'}
+                                            <i className={`fa-solid fa-chevron-${isExpanded ? 'up' : 'down'}`}></i>
                                         </button>
                                     </div>
                                 </div>
