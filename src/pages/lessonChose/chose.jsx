@@ -118,7 +118,12 @@ const tabOptions = [
 
 const LessonChose = () => {
     const [selectedTab, setSelectedTab] = useState(null);
-    const [expandedPhases, setExpandedPhases] = useState({});
+    const [expandedPhases, setExpandedPhases] = useState(
+        phases.reduce((acc, phase) => {
+            acc[phase.id] = true;
+            return acc;
+        }, {})
+    );
     const navigate = useNavigate();
 
     const handleTabClick = (type) => {
