@@ -260,6 +260,7 @@
 .external-submit-container.visible {
     max-height: 80px;
     opacity: 1;
+    overflow: visible;
 }
 
 .submit-btn-external {
