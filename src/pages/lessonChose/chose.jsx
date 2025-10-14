@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CosmicBackground from "../../components/CosmicBackground/CosmicBackground";
 import "./chose.css";
 
 const phases = [
@@ -134,68 +135,71 @@ const LessonChose = () => {
     // Images are now imported above
 
     return (
-        <div className="lesson-chose-container">
-            <h1 className="lesson-chose-title" style={{ marginBottom: '16px' }}>Lessons</h1>
-            <div className="lesson-chose-main-row">
-                <div className="lesson-chose-tabs side">
-                    {tabOptions.map((tab) => (
-                        <button
-                            key={tab.type}
-                            className={`tab-btn ${tab.type} ${selectedTab === tab.type ? "selected" : ""}`}
-                            onClick={() => handleTabClick(tab.type)}
-                        >
-                            <span className="phase-logo">
-                                {tab.type === "project" ? <i className="fa-solid fa-book"></i> :
-                                    <img
-                                        src={
-                                            tab.type === 'html' ? "images/icons/HTML5.png" :
-                                                tab.type === 'css' ? "images/icons/CSS.png" :
-                                                    tab.type === 'js' ? "images/icons/JS.png" : "images/icons/HTML5.png"
-                                        }
-                                        alt={tab.label + " logo"}
-                                        style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }}
-                                    />}
-                            </span>
-                        </button>
-                    ))}
-                </div>
-                <div className="lesson-phases-scroll">
-                    <div className="lesson-phases">
-                        {filteredPhases.map((phase) => (
-                            <div key={phase.id} className="phase-card">
-                                <div className={`phase-header ${phase.type}`}>
-                                    <span className="phase-logo">
+        <>
+            <CosmicBackground variant="full" />
+            <div className="lesson-chose-container">
+                <h1 className="lesson-chose-title" style={{ marginBottom: '16px' }}>Lessons</h1>
+                <div className="lesson-chose-main-row">
+                    <div className="lesson-chose-tabs side">
+                        {tabOptions.map((tab) => (
+                            <button
+                                key={tab.type}
+                                className={`tab-btn ${tab.type} ${selectedTab === tab.type ? "selected" : ""}`}
+                                onClick={() => handleTabClick(tab.type)}
+                            >
+                                <span className="phase-logo">
+                                    {tab.type === "project" ? <i className="fa-solid fa-book"></i> :
                                         <img
                                             src={
-                                                phase.type === 'html' ? "images/icons/HTML5.png" :
-
-                                                    phase.type === 'css' ? "images/icons/CSS.png" :
-                                                        phase.type === 'js' ? "images/icons/JS.png" :
-                                                            "images/icons/project.svg"
+                                                tab.type === 'html' ? "images/icons/HTML5.png" :
+                                                    tab.type === 'css' ? "images/icons/CSS.png" :
+                                                        tab.type === 'js' ? "images/icons/JS.png" : "images/icons/HTML5.png"
                                             }
-                                            alt={phase.type + " logo"}
+                                            alt={tab.label + " logo"}
                                             style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }}
-                                        />
-                                    </span>
-                                    {phase.title}
-                                </div>
-                                <div className="phase-lessons">
-                                    {phase.lessons.map((lesson) => (
-                                        <div
-                                            key={lesson.id}
-                                            className={`lesson-box ${phase.type === 'project' ? 'project' : phase.type}`}
-                                            onClick={() => handleLessonClick(phase.type, lesson.id)}
-                                        >
-                                            {lesson.name}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                        />}
+                                </span>
+                            </button>
                         ))}
+                    </div>
+                    <div className="lesson-phases-scroll">
+                        <div className="lesson-phases">
+                            {filteredPhases.map((phase) => (
+                                <div key={phase.id} className="phase-card">
+                                    <div className={`phase-header ${phase.type}`}>
+                                        <span className="phase-logo">
+                                            <img
+                                                src={
+                                                    phase.type === 'html' ? "images/icons/HTML5.png" :
+
+                                                        phase.type === 'css' ? "images/icons/CSS.png" :
+                                                            phase.type === 'js' ? "images/icons/JS.png" :
+                                                                "images/icons/project.svg"
+                                                }
+                                                alt={phase.type + " logo"}
+                                                style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 8 }}
+                                            />
+                                        </span>
+                                        {phase.title}
+                                    </div>
+                                    <div className="phase-lessons">
+                                        {phase.lessons.map((lesson) => (
+                                            <div
+                                                key={lesson.id}
+                                                className={`lesson-box ${phase.type === 'project' ? 'project' : phase.type}`}
+                                                onClick={() => handleLessonClick(phase.type, lesson.id)}
+                                            >
+                                                {lesson.name}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

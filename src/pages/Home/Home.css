@@ -144,12 +144,6 @@ body {
   user-select: none;
 }
 
-/* FEATURES */
-.main-content {
-  padding: 64px 28px;
-  margin-top: 12px;
-}
-
 .features-heading {
   text-align: center;
   color: var(--white);
@@ -413,10 +407,6 @@ body {
   .features-grid {
     grid-template-columns: 1fr;
     gap: 16px;
-  }
-
-  .main-content {
-    padding: 28px 18px;
   }
 
   .bottom-inner {
