@@ -10,11 +10,6 @@ export default function Home() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const navigate = useNavigate();
 
-  const openPreview = (course) => {
-    setSelectedCourse(course);
-    setModalOpen(true);
-  };
-
   const closeModal = () => {
     setModalOpen(false);
     setSelectedCourse(null);
@@ -121,17 +116,6 @@ export default function Home() {
           </article>
         </section>
       </main>
-
-      {/* BOTTOM SIGNUP BAR */}
-      <aside className="bottom-bar" role="dialog" aria-label="Sign up bar">
-        <div className="bottom-inner container">
-          <div className="bottom-text">Sign up to comment, edit, inspect and more.</div>
-          <div className="bottom-actions">
-            <button className="btn ghost">Sign up</button>
-            <button className="btn primary">Continue</button>
-          </div>
-        </div>
-      </aside>
 
       <Modal
         isOpen={modalOpen}
