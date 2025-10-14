@@ -16,6 +16,10 @@
     --glass-border: rgba(255, 255, 255, 0.06);
 }   
 
+th {
+    color: black;
+}
+
 * {
     box-sizing: border-box;
 }
