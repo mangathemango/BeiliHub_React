@@ -413,3 +413,13 @@ body {
     width: calc(100% - 36px);
   }
 }
+
+#lesson-img {
+  background-image: url("images/screenshots/lesson.png");
+  background-size: cover;
+}
+
+#editor-img {
+  background-image: url("images/screenshots/editor.png");
+  background-size: cover
+}

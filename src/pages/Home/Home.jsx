@@ -70,17 +70,8 @@ export default function Home() {
         <section className="features-grid" aria-label="Our features">
           <article className="feature-card" tabIndex="0" aria-labelledby="f1-title">
             <h3 id="f1-title" className="feature-title">Structured Roadmap</h3>
-            <div className="feature-thumb roadmap-thumb" aria-hidden="true">
-              <div className="roadmap-sim">
-                <div className="phase orange">Phase 1</div>
-                <ul className="roadmap-list">
-                  <li>HTML 1: First Page</li>
-                  <li>HTML 2: Text Formatting</li>
-                  <li>HTML 3: Links & Navigation</li>
-                  <li>HTML 4: Images & Media</li>
-                </ul>
-                <div className="phase purple">Phase 2</div>
-              </div>
+            <div className="feature-thumb roadmap-thumb" id='lesson-img' aria-hidden="true">
+
             </div>
             <p className="feature-desc">
               Follow a guided path through HTML, CSS, and JavaScript, designed to build your skills in the right order.
@@ -89,11 +80,8 @@ export default function Home() {
 
           <article className="feature-card" tabIndex="0" aria-labelledby="f2-title">
             <h3 id="f2-title" className="feature-title">Interactive Editor</h3>
-            <div className="feature-thumb editor-thumb" aria-hidden="true">
-              <div className="editor-sim">
-                <div className="code-pane"> &lt;!-- code editor --&gt; </div>
-                <div className="preview-pane"> < img alt="preview" src="" style={{opacity:0.02}} /> </div>
-              </div>
+            <div className="feature-thumb editor-thumb" id="editor-img" aria-hidden="true">
+
             </div>
             <p className="feature-desc">
               Write and test code directly in your browser with instant feedback.
