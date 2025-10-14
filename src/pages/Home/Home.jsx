@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CosmicBackground from '../../components/CosmicBackground/CosmicBackground';
-import CourseCard from '../../components/CourseCard/CourseCard';
 import Modal from '../../components/Modal/Modal';
 import './Home.css';
 
@@ -105,9 +104,9 @@ export default function Home() {
             <h3 id="f3-title" className="feature-title">Topic Filters</h3>
             <div className="feature-thumb filters-thumb" aria-hidden="true">
               <div className="filters-box">
-                <div className="filter-icon orange">👁️</div>
-                <div className="filter-icon purple">👁️</div>
-                <div className="filter-icon yellow">🚫</div>
+                <img className="filter-icon" src="images/icons/HTML5.png"></img>
+                <img className="filter-icon" src="images/icons/CSS.png"></img>
+                <img className="filter-icon" src="images/icons/JS.png" ></img>
               </div>
             </div>
             <p className="feature-desc">
