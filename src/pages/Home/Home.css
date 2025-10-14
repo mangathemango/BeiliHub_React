@@ -129,8 +129,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-  background: rgba(255, 255, 255, 0.02);
   padding: 6px;
   position: relative;
   overflow: hidden;
