@@ -35,7 +35,7 @@ const Results = () => {
     };
 
     const handleBackToCourses = () => {
-        navigate('/courses');
+        navigate(-2);
     };
 
     const toggleQuestionExpansion = (questionIndex) => {
