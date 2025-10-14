@@ -364,7 +364,7 @@ const CodeBlock = forwardRef(({
                 <h3>Code Editor</h3>
                 <div className="code-actions">
                     <button
-                        className="btn primary"
+                        className="tab-btn active"
                         onClick={handleSubmit}
                         disabled={isSubmitting}
                     >

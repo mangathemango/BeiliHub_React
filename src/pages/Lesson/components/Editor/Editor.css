@@ -79,7 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 48px;
+    max-height: 48px;
 }
 
 .panel-header h3 {

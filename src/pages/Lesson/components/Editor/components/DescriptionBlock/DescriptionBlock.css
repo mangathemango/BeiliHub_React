@@ -9,31 +9,6 @@
     overflow: hidden;
 }
 
-.description-block .panel-header {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
-    border-bottom: 1px solid var(--glass-border);
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    backdrop-filter: blur(10px);
-}
-
-.description-block .panel-header h3 {
-    color: var(--white);
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.description-block .panel-header h3::before {
-    content: "📖";
-    font-size: 1.2rem;
-}
-
 .tab-navigation {
     display: flex;
     gap: 4px;
@@ -74,7 +49,7 @@
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, var(--accent1), #9d4edd);
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
     color: var(--white);
     box-shadow:
         0 4px 12px rgba(127, 0, 255, 0.4),
@@ -843,11 +818,6 @@
 }
 
 @media (max-width: 768px) {
-    .description-block .panel-header {
-        flex-direction: column;
-        gap: 12px;
-        align-items: stretch;
-    }
 
     .tab-navigation {
         justify-content: center;
