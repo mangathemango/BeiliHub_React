@@ -4,44 +4,52 @@ A modern learning platform built with React, migrated from a static HTML/CSS/JS 
 
 ## 🚀 Features
 
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Interactive Learning**: Engaging lessons with quizzes, flashcards, and hands-on exercises
-- **Course Catalog**: Browse and filter courses by topic, difficulty, and duration
-- **Progress Tracking**: Track your learning progress with points and completion percentages
-- **Cosmic UI**: Beautiful animated backgrounds with stars, planets, and cosmic effects
-- **Modern Stack**: Built with React 18, React Router, and Vite
+**Responsive Design**: Works perfectly on desktop, tablet, and mobile
+**Interactive Editor**: Code editor with live preview, code blocks, and instant feedback
+**Lesson Navigation**: Browse lessons by HTML, CSS, JS, and project phases
+**Quizzes & Results**: Each lesson includes a quiz and results review system
+**Progress Tracking**: Track your learning progress with points and completion percentages
+**Cosmic UI**: Beautiful animated backgrounds with stars, planets, and cosmic effects
+**Modern Stack**: Built with React 18, React Router, and Vite
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18 with Hooks
-- **Routing**: React Router DOM
-- **Build Tool**: Vite
-- **Styling**: CSS with CSS Variables for theming
-- **State Management**: React useState and localStorage for persistence
+**Frontend**: React 18 with Hooks
+**Routing**: React Router DOM
+**Build Tool**: Vite
+**Styling**: CSS with CSS Variables for theming
+**State Management**: React useState and localStorage for persistence
+**Lesson System**: Dynamic import of lesson components and quizzes
 
 ## 📁 Project Structure
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── Header.jsx      # Navigation header
-│   ├── Footer.jsx      # Site footer
-│   ├── Layout.jsx      # Page layout wrapper
-│   ├── CosmicBackground.jsx  # Animated background
-│   ├── CourseCard.jsx  # Course display component
-│   └── Modal.jsx       # Modal dialogs
-├── pages/              # Page components
-│   ├── Home.jsx        # Landing page
-│   ├── About.jsx       # About us page
-│   ├── Courses.jsx     # Course catalog
-│   ├── Learn.jsx       # Interactive learning
-│   ├── Contact.jsx     # Contact form
-│   └── Login.jsx       # User authentication
-├── data/               # Static data and content
-│   └── courses.js      # Course and lesson data
-├── styles/             # Global styles
-│   └── global.css      # Main stylesheet
-└── App.jsx             # Main app component with routing
+├── components/                # Reusable UI components (Header, Layout, CosmicBackground, Modal, etc.)
+├── pages/
+│   ├── Home/                  # Landing page
+│   ├── About/                 # About us page
+│   ├── Contact/               # Contact form
+│   ├── Login/                 # User authentication
+│   ├── Results/               # Quiz results page
+│   ├── lessonChose/           # Lesson selection interface
+│   └── Lesson/
+│       ├── components/        # Editor, Question, and supporting components
+│       ├── css/               # Lesson-specific CSS files
+│       │   └── lesson10/
+│       │       ├── Lesson10.css
+│       │       ├── Lesson10.jsx
+│       │       └── quiz.json
+│       ├── js/                # JS lessons (lesson1-lesson10)
+│       ├── html/              # HTML lessons
+│       ├── project/           # Final project lesson
+│       ├── Exercise.jsx       # Quiz/exercise loader
+│       ├── Lesson.jsx         # Dynamic lesson loader
+│       └── COMPONENT_DOCS.md  # Component documentation
+├── data/                      # Static data and content
+├── global.css                 # Main stylesheet
+├── App.jsx                    # Main app component with routing
+├── main.jsx                   # React root
 ```
 
 ## 🎨 Design Features
@@ -89,11 +97,22 @@ src/
 - Demo login functionality
 - Responsive form design
 
+### Lessons & Quizzes
+- **Lesson Selection:** Choose lessons by HTML, CSS, JS, or project phase
+- **Dynamic Loading:** Lessons and quizzes are loaded dynamically by route
+- **Interactive Editor:** Each lesson features a code editor with live preview and code blocks
+- **Quiz System:** Each lesson includes a quiz (JSON-based) and a results review page
+- **Advanced CSS Lesson (Lesson 10):**
+   - Theme switcher demo (light/dark mode)
+   - Use of CSS variables, calc(), clamp(), and responsive design
+   - Interactive code blocks and preview
+   - Quiz to test understanding of advanced CSS features
+
 ## 🚀 Getting Started
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://www.github.com/mangathemango/BeiliHub_React.git
    cd BeiliHub_React
    ```
 
@@ -119,9 +138,10 @@ src/
 
 ## 🎯 Key Migration Achievements
 
-✅ **Complete HTML to React conversion** - All 10+ HTML pages converted to React components
-✅ **Responsive design preserved** - All responsive breakpoints and mobile optimizations maintained  
-✅ **Interactive features migrated** - Course filtering, search, modals, forms, and animations
+✅ **Complete HTML to React conversion** - All static pages and lessons converted to React components
+✅ **Responsive design preserved** - All responsive breakpoints and mobile optimizations maintained
+✅ **Interactive editor and preview** - Code editor with live preview for lessons
+✅ **Quiz and results system** - JSON-based quizzes and results review for each lesson
 ✅ **State management implemented** - Learning progress, points system, and user preferences
 ✅ **Routing system** - Client-side navigation with React Router
 ✅ **Modern development setup** - Hot reload, ESLint, and optimized build process
@@ -138,7 +158,25 @@ src/
 - Mobile app development
 - Advanced analytics and reporting
 
-## 📄 License
+## 🧑‍💻 How Lessons Work
+
+- Lessons are organized by category (HTML, CSS, JS, Project)
+- Each lesson is a React component loaded dynamically by route
+- Lesson pages feature:
+   - Interactive code editor and preview
+   - Step-by-step explanations and code blocks
+   - Task objectives and hints
+   - Quiz (JSON-based) and results review
+- Example: CSS Lesson 10 covers theme switching, variables, calc(), clamp(), and includes a quiz
+
+## � Try It Out
+
+1. Go to the Home page and click "Start Learning Now" to browse lessons
+2. Select a lesson to open the interactive editor and preview
+3. Complete the lesson and take the quiz
+4. View your results and explanations
+
+## �📄 License
 
 This project is part of an educational assignment for Web Development Methods and Practice course at BIT University.
 
@@ -153,3 +191,4 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
