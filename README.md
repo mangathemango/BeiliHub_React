@@ -2,6 +2,28 @@
 
 A modern learning platform built with React, migrated from a static HTML/CSS/JS website. BeiliHub offers interactive courses, project-based learning, and community features for developers and learners.
 
+## 🚀 Getting Started
+
+1. **Clone the repository (if you haven't already)**
+   ```bash
+   git clone https://www.github.com/mangathemango/BeiliHub_React.git
+   cd BeiliHub_React
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Visit `http://localhost:5173` to view the application
+
+
 ## 🚀 Features
 
 **Responsive Design**: Works perfectly on desktop, tablet, and mobile
@@ -108,26 +130,6 @@ src/
    - Interactive code blocks and preview
    - Quiz to test understanding of advanced CSS features
 
-## 🚀 Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone https://www.github.com/mangathemango/BeiliHub_React.git
-   cd BeiliHub_React
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open your browser**
-   Visit `http://localhost:5173` to view the application
 
 ## 🔧 Available Scripts
 
